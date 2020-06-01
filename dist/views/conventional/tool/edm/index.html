@@ -1,0 +1,112 @@
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>EDM</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<br style="display: none;" />
+	<div class="box">
+		<div class="header">自动化构建工具<small>(V1.0)</small></div>
+		<div class="box-content">
+			<div class="box-content-header">
+				<div class="active">流编辑</div>
+				<!--<div>位编辑</div>-->
+				<div class="look-btn">预览</div>
+			</div>
+			<div class="box-content-content">
+				<!--流编辑-->
+				<div class="flow-box">
+					<div class="flow-box-header">
+						<p class="title">EDM设置：</p>
+						<div class="row">
+							<div><label>EDM宽度：</label><input j-title="EDM宽度(px)" j-title-dir="top" class="edm-width" type="text" value="800" /></div>
+							<div><label>设计稿宽度：</label><input j-title="设计稿宽度(px)" j-title-dir="top" class="img-natural-width" type="text" value="1600" /></div>
+							<div>
+								<label>Table：</label>
+								<p class="picker" j-title="Table背景颜色" j-title-dir="top"><span class="color-show-box"><span class="color-show"></span></span><input class="table-bgcolor bgcolor" type="text" /></p>
+							</div>
+							<div>
+								<label>Color：</label>
+								<p class="picker" j-title="Lang字体颜色" j-title-dir="top"><span class="color-show-box"><span class="color-show"></span></span><input class="lang-color bgcolor" type="text" /></p>
+							</div>
+							<div><label>Lang：</label><input j-title="右上角语言类型" j-title-dir="top" class="lang-text" type="text" value="中文" /></div>
+							<div><label>src：</label><input j-title="图片src地址共同部分" j-title-dir="top" class="all-img-src" type="text" placeholder="图片src地址共同部分" value="https://imgsrv1.mailer08.net/images/dGVuYW50MjcxYWRtaW4_/WTJGdGNHRnBaMjVmTXpjPQ/"/></div>
+							<div><label>href：</label><input j-title="所有图片链接，单个编辑会覆盖此链接" j-title-dir="top" class="all-img-href" type="text" placeholder="所有图片href链接" /></div>
+							<div><label>Preheader Text:</label><input type="text" class="preheader-text" j-title="隐藏文字" j-title-dir="top" /></div>
+							<div>
+								<label>Type：<span j-title="该项表示的是链接，即点击Lang后会跳转到该项选中的页面。" j-title-dir="top" class="question-icon">?</span></label>
+								<select class="href-type" name="" j-title="链接类型" j-title-dir="top" style="width: 100%;">
+									<option value="">WHOLEEDM</option>
+									<option value="">ALTWHOLEEDM</option>
+								</select>
+							</div>
+							<div>
+								<label>语言项：</label>
+								<p class="lang-onoff onoff-box checked" j-title="是否加载语言项" j-title-dir="top"><span class="bg-onoff-checkbox"></span>加载语言项</p>
+							</div>
+							<div>
+								<label>Footer项：</label>
+								<p class="footer-onoff onoff-box" j-title="是否加载footer项" j-title-dir="top"><span class="bg-onoff-checkbox"></span>加载footer项</p>
+							</div>
+							<div>
+								<label>其他：</label>
+								<p class="other-onoff onoff-box" j-title="是否加载其他" j-title-dir="top"><span class="bg-onoff-checkbox"></span>加载其他</p>
+							</div>
+						</div>
+						<p class="title" style="display: none;">FOOTER：</p>
+						<div class="row" style="display: none;">
+							<textarea class="edm-footer"></textarea>
+						</div>
+						<p class="title">上传图片：</p>
+						<div class="row">
+							<div><label>上传图片：</label><button class="btn primary load-img-btn" j-title="上传图片按钮" j-title-dir="top">上传图片</button><input style="display: none;" type="file" multiple="multiple" id="load-img"/></div>
+							<div><label>生成EDM：</label><button class="btn primary output-edm" j-title="自动生成EDM后，可到预览项查看" j-title-dir="top">生成EDM</button></div>
+							<div><label>复制代码：</label><button class="btn primary copy-code" j-title="复制生成页面代码" j-title-dir="top">copy code</button></div>
+						</div>
+						<p class="title">效果预览：</p>
+						<div class="row">
+							<div class="load-img-box"></div>
+						</div>
+					</div>
+				</div>
+				<!--EDM 预览-->
+				<div class="look"></div>
+			</div>
+		</div>
+	</div>
+	<!--图片编辑弹窗-->
+	<div class="pop-ups">
+		<div class="pop-ups-box fadeInUp">
+			<div class="pop-ups-header shadow-bottom">
+				编辑
+				<span class="close-pop-ups">X</span>
+			</div>
+			<div class="pop-ups-content"></div>
+			<div class="pop-ups-footer">
+				<div class="btn ok primary">确定</div>
+				<div class="btn cancel danger">取消</div>
+			</div>
+		</div>
+	</div>
+
+	<!--消息类弹窗-->
+	<div class="pop-ups-info">
+		<div class="pop-ups-info-box fadeInUp">
+			<div class="pop-ups-header shadow-bottom">
+				警告
+				<span class="close-pop-ups">X</span>
+			</div>
+			<div class="pop-ups-content"></div>
+			<div class="pop-ups-footer">
+				<div class="btn ok primary">确定</div>
+				<div class="btn cancel danger">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="./dist/controller/edm/index_encrypted.js"></script>
+<script type="text/javascript" src="./dist/controller/edm/colpick.js"></script>
