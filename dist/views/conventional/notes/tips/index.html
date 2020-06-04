@@ -1,0 +1,284 @@
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>随手笔记</cite></a><span lay-separator="">/</span>
+		<a><cite>title</cite></a>
+	</div>
+</div>
+
+<style type="text/css">
+	/**
+	 * tips
+	 * *********/
+	html,body{
+		min-height: 100vh;
+	}
+	.tips {
+		position: absolute;
+		background: #000000;
+		color: #ffffff;
+		z-index: 9999;
+		transform: scale(.5);
+		/*transition: 1s;
+		transition-delay: 0.5s;
+		animation: all 1s .3s ease-out;*/
+	}
+	
+	.tips-content {
+		padding: 8px 15px;
+		font-size: 12px;
+		max-width: 160px;
+		line-height: 18px;
+	}
+	
+	.tips-dir {
+		width: 0;
+		height: 0;
+		border-width: 8px;
+		border-style: dashed;
+		border-color: transparent;
+		position: absolute;
+		transition: .5s;
+	}
+	
+	.tips-dir-l {
+		right: -8px;
+		top: 5px;
+		border-bottom-color: #000000;
+		border-bottom-style: solid;
+	}
+	
+	.tips-dir-r {
+		left: -8px;
+		top: 5px;
+		border-bottom-color: #000000;
+		border-bottom-style: solid;
+	}
+	
+	.tips-dir-t {
+		left: 5px;
+		bottom: -8px;
+		border-right-color: #000000;
+		border-right-style: solid;
+	}
+	
+	.tips-dir-b {
+		left: 5px;
+		top: -8px;
+		border-right-color: #000000;
+		border-right-style: solid;
+	}
+	.layui-btn{
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+</style>
+
+<div class="layui-fluid">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">示例演示</div>
+				<div class="layui-card-body">
+					<p style="margin-bottom: 10px;"><strong>实现原理：</strong>使用绝对定位。</p>
+					<button class="layui-btn layui-primary" j-title="上方提示" j-title-dir="top">上方提示</button>
+					<button class="layui-btn layui-primary" j-title="下方提示" j-title-dir="bottom">下方提示</button>
+					<button class="layui-btn layui-primary" j-title="左边提示" j-title-dir="left">左边提示</button>
+					<button class="layui-btn layui-primary" j-title="右边提示" j-title-dir="right">右边提示</button>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">示例code</div>
+				<div class="layui-card-body">
+					<pre lay-title="CSS" lay-skin="notepad">
+/**
+ * tips
+ * *********/
+html,body{
+	min-height: 100vh;
+}
+.tips {
+	position: absolute;
+	background: #000000;
+	color: #ffffff;
+	z-index: 9999;
+	transition: .5s;
+}
+
+.tips-content {
+	padding: 8px 15px;
+	font-size: 12px;
+	max-width: 160px;
+	line-height: 18px;
+}
+
+.tips-dir {
+	width: 0;
+	height: 0;
+	border-width: 8px;
+	border-style: dashed;
+	border-color: transparent;
+	position: absolute;
+}
+
+.tips-dir-l {
+	right: -8px;
+	top: 5px;
+	border-bottom-color: #000000;
+	border-bottom-style: solid;
+}
+
+.tips-dir-r {
+	left: -8px;
+	top: 5px;
+	border-bottom-color: #000000;
+	border-bottom-style: solid;
+}
+
+.tips-dir-t {
+	left: 5px;
+	bottom: -8px;
+	border-right-color: #000000;
+	border-right-style: solid;
+}
+
+.tips-dir-b {
+	left: 5px;
+	top: -8px;
+	border-right-color: #000000;
+	border-right-style: solid;
+}						
+					</pre>
+					<pre lay-title="JS" lay-skin="notepad">
+/**
+ * title提示框
+ * *********/
+$('body').on('mouseover','[j-title]',function(e){
+	var e = e || window.event;
+	$this = $(this);
+	var left=top=pagex=pagey=width=height=body_width=body_height=0;
+	var title = $this.attr('j-title');
+	var dir = $this.attr('j-title-dir');
+	pagex = $this.offset().left;
+	pagey = $this.offset().top;
+	width = $this.outerWidth();
+	height = $this.outerHeight();
+	body_width = $('body').width();
+	body_height = $('body').height();
+	
+	if(dir == 'top'){
+		dir = 'tips-dir-t';
+	}else if(dir == 'left'){
+		dir = 'tips-dir-l';
+	}else if(dir == 'bottom'){
+		dir = 'tips-dir-b';
+	}else{
+		dir = 'tips-dir-r';
+	}	
+	var tips = '<div class="tips"><div class="tips-content">'+ title +'<i class="tips-dir '+ dir +'"></i></div></div>'
+	$('body').append(tips);
+	if(dir == 'tips-dir-t'){
+		$('.tips').css({
+			left : pagex + 'px',
+			bottom : (body_height - pagey + 10) + 'px'
+		})
+	}else if(dir == 'tips-dir-l'){
+		$('.tips').css({
+			right : (body_width - pagex + 10) + 'px',
+			top : pagey + 'px'
+		})
+	}else if(dir == 'tips-dir-b'){
+		$('.tips').css({
+			left : pagex + 'px',
+			top : (pagey + height + 10) + 'px'
+		})
+	}else{
+		$('.tips').css({
+			left : (pagex + width + 10) + 'px',
+			top : pagey + 'px'
+		})
+	}
+	
+	$this.mouseleave(function(){
+		$('.tips').remove();
+	})
+	
+})						
+					</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	/**
+	 * title提示框
+	 * *********/
+	$('body').on('mouseover','[j-title]',function(e){
+		var e = e || window.event;
+		$this = $(this);
+		var left=top=pagex=pagey=width=height=body_width=body_height=0;
+		var title = $this.attr('j-title');
+		var dir = $this.attr('j-title-dir');
+		pagex = $this.offset().left;
+		pagey = $this.offset().top;
+		width = $this.outerWidth();
+		height = $this.outerHeight();
+		body_width = $('body').width();
+		body_height = $('body').height();
+		
+		dir == 'top' ? dir = 'tips-dir-t' : dir == 'left' ? dir = 'tips-dir-l' : dir == 'bottom' ? dir = 'tips-dir-b' : dir = 'tips-dir-r';
+		
+		var tips = '<div class="tips"><div class="tips-content">'+ title +'<i class="tips-dir '+ dir +'"></i></div></div>';
+		
+		$('body').append(tips);
+		if(dir == 'tips-dir-t'){
+			$('.tips').css({
+				left : pagex + 'px',
+				bottom : (body_height - pagey + 10) + 'px',
+				'transform' : 'scale(1)',
+				'transition' : '1s',
+				'animation': 'all 2s 0.5s'
+			})
+		}else if(dir == 'tips-dir-l'){
+			$('.tips').css({
+				right : (body_width - pagex + 10) + 'px',
+				top : pagey + 'px'
+			})
+		}else if(dir == 'tips-dir-b'){
+			$('.tips').css({
+				left : pagex + 'px',
+				top : (pagey + height + 10) + 'px'
+			})
+		}else{
+			$('.tips').css({
+				left : (pagex + width + 10) + 'px',
+				top : pagey + 'px'
+			})
+		}
+		
+		$this.mouseleave(function(){
+			$('.tips').remove();
+		})
+		
+	})
+</script>
+<script type="text/javascript">
+	layui.use(['code','copy'], function(){
+		var copy = layui.copy;
+		layui.code({
+			elem: 'pre',
+			about: true,
+			encode: true,
+			height: "260px",
+		})
+		$('.layui-code-h3 a').click(function(){
+			var code = $(this).parents('h3').next('.layui-code-ol').text();
+			$('#copy_box').html(code);
+			copy.copy2('copy_box');
+		})
+	})
+</script>

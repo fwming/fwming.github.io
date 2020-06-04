@@ -1,0 +1,294 @@
+<div class="layui-layout layui-layout-admin">
+	<!-- 头部区域 -->
+	<div class="layui-header">
+		<!--头部左侧-->
+		<ul class="layui-nav layui-layout-left">
+			<li class="layui-nav-item layadmin-flexible" lay-unselect="">
+				<a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+					<i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+				</a>
+			</li>
+			<li class="layui-nav-item layui-this layui-hide-xs" data-module="routine_management">
+				<a href="javascript:;">
+					<i class="layui-icon layui-icon-app"></i> 常规管理
+				</a>
+			</li>
+			<li class="layui-nav-item layui-hide-xs" data-module="setting_manegement">
+				<a href="javascript:;">
+					<i class="fa fa-shield"></i> 权限管理
+				</a>
+			</li>
+			
+			<li class="layui-nav-item layui-hide-sm">
+				<a href="javascript:;">
+					<i class="layui-icon layui-icon-more-vertical"></i> 选择模块
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child layui-anim layui-anim-upbit">
+					<dd>
+						<a href="javascript:;" data-module="routine_management">
+							<i class="layui-icon layui-icon-app"></i> 常规管理
+						</a>
+					</dd>
+					<dd>
+						<a href="javascript:;" data-module="setting_manegement">
+							<i class="fa fa-shield"></i> 权限管理
+						</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<!--头部右侧-->
+		<ul class="layui-nav layui-layout-right">
+			<li class="layui-nav-item" lay-unselect="">
+				<a href="javascript:;" layadmin-event="refresh" title="刷新">
+					<i class="layui-icon layui-icon-refresh-3"></i>
+				</a>
+			</li>
+			<li class="layui-nav-item layui-hide-xs" lay-unselect="" title="全屏">
+				<a href="javascript:;" layadmin-event="fullscreen">
+					<i class="layui-icon layui-icon-screen-full"></i>
+				</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<cate>Jesper</cate>
+					<span class="layui-nav-more"></span>
+				</a>
+				<dl class="layui-nav-child layui-anim layui-anim-upbit">
+					<dd>
+						<a lay-href="template/tips/404">个人资料</a>
+					</dd>
+					<!--<dd layadmin-event="logout" style="text-align: center;">
+						<a>退出</a>
+					</dd>-->
+				</dl>
+			</li>
+			<!--<li class="layui-nav-item layui-hide-xs" lay-unselect="">
+				<a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+			</li>-->
+			<li class="layui-nav-item layui-show-xs-inline-block" lay-unselect="">
+				<a href="javascript:;"><i class="layui-icon layui-icon-more-vertical"></i></a>
+			</li>
+		</ul>
+	</div>
+
+	<!--左侧菜单区域-->
+	<div class="layui-side layui-side-menu">
+		<div class="layui-side-scroll">
+			<!--logo-->
+			<div class="layui-logo" lay-href="./">
+				<span>Jesper Admin</span>
+			</div>
+
+			<!--常规管理-->
+			<ul class="layui-nav layui-nav-tree" lay-shrink="all" id="routine_management">
+				<!--<li data-name="template" class="layui-nav-item">
+					<a href="javascript:;" lay-tips="个人资料" lay-direction="2">
+						<i class="fa fa-diamond"></i>
+						<cite>个人资料</cite>
+						<span class="layui-nav-more"></span></a>
+					<dl class="layui-nav-child">
+						<dd class="">
+							<a lay-href="conventional/personal/personalpage">个人主页</a>
+						</dd>
+					</dl>
+				</li>-->
+				<li data-name="template" class="layui-nav-item">
+					<a href="javascript:;" lay-tips="实用工具" lay-direction="2">
+						<i class="fa fa-legal"></i>
+						<cite>实用工具</cite>
+						<span class="layui-nav-more"></span></a>
+					<dl class="layui-nav-child">
+						<dd class="">
+							<a lay-href="conventional/tool/edm/">EDM</a>
+						</dd>
+					</dl>
+				</li>
+				<li data-name="template" class="layui-nav-item">
+					<a href="javascript:;" lay-tips="心得笔记" lay-direction="2">
+						<i class="fa fa-pencil"></i>
+						<cite>随手笔记</cite>
+						<span class="layui-nav-more"></span></a>
+					<dl class="layui-nav-child">
+						<dd class="">
+							<a lay-href="conventional/notes/router/">router</a>
+						</dd>
+						<dd class="">
+							<a lay-href="conventional/notes/tips/">tips</a>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+			<!--权限管理-->
+			<ul class="layui-nav layui-nav-tree layui-hide" id="setting_manegement">
+				<li data-name="user" class="layui-nav-item">
+					<a href="javascript:;" lay-href="authority/user/" lay-tips="用户" lay-direction="2">
+						<i class="layui-icon layui-icon-user"></i>
+						<cite>用户</cite>
+					</a>
+				</li>
+				<li data-name="set" class="layui-nav-item">
+					<a href="javascript:;" lay-href="authority/setting/" lay-tips="设置" lay-direction="2">
+						<i class="layui-icon layui-icon-set"></i>
+						<cite>设置</cite>
+					</a>
+				</li>
+				<li data-name="get" class="layui-nav-item">
+					<a href="javascript:;" lay-href="authority/authorize/" lay-tips="授权" lay-direction="2">
+						<i class="layui-icon layui-icon-auz"></i>
+						<cite>授权</cite>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<!-- 页面标签 -->
+	<script type="text/html" template="" lay-done="layui.element.render('nav', 'layadmin-pagetabs-nav')">
+		{{# if(layui.setter.pageTabs){ }}
+		<div class="layadmin-pagetabs" id="LAY_app_tabs">
+			<div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+			<div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+			<div class="layui-icon layadmin-tabs-control layui-icon-down">
+				<ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+					<li class="layui-nav-item" lay-unselect>
+						<a href="javascript:;"></a>
+						<dl class="layui-nav-child layui-anim-fadein">
+							<dd layadmin-event="closeThisTabs">
+								<a href="javascript:;">关闭当前标签页</a>
+							</dd>
+							<dd layadmin-event="closeOtherTabs">
+								<a href="javascript:;">关闭其它标签页</a>
+							</dd>
+							<dd layadmin-event="closeAllTabs">
+								<a href="javascript:;">关闭全部标签页</a>
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+			<div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+				<ul class="layui-tab-title" id="LAY_app_tabsheader">
+					<li lay-id="/"><i class="layui-icon layui-icon-home"></i></li>
+				</ul>
+			</div>
+		</div>
+		{{# } }}
+	</script>
+	
+	<!--内容区域-->
+	<div class="layui-body" id="LAY_app_body">
+		<div class="layadmin-tabsbody-item layui-show"></div>
+	</div>
+	
+	<!-- 辅助元素，一般用于移动设备下遮罩 -->
+	<!--<div class="layadmin-body-shade" layadmin-event="shade"></div>-->
+	<!--脚部固定区域-->
+	<!--<div class="layui-footer">© 2020 底部固定栏</div>-->
+	
+	<!--<div class="sk-rotating-plane"></div>
+	<canvas class="particles-js-canvas-el" width="656" height="937" style="width: 100%; height: 100%;"></canvas>-->
+
+	<!--存放要复制的code-->
+	<textarea id="copy_box" style="width:1px;min-width: 1px;height:0;opacity: 0;"></textarea>
+
+</div>
+
+<script type="text/javascript">
+	layui.use(['jquery'], function() {
+		var $ = layui.$,
+			copy = layui.copy;
+		
+		//header模块切换
+		$('.layui-header').on('click','[data-module]',function(){
+			var module_id = $(this).attr('data-module');
+			$('#'+module_id).removeClass('layui-hide').siblings('ul').addClass('layui-hide');
+		})
+		
+	})
+</script>
+<script type="text/javascript">
+	(function() {
+		function n(n, e, t) {
+			return n.getAttribute(e) || t
+		};
+		//返回script标签
+		function e(n) {
+			return document.getElementsByTagName(n)
+		};
+
+		function t() {
+			var t = e("script"),
+				o = t.length,//script标签个数
+				i = t[o - 1];
+			return {
+				l: o,
+				z: n(i, "zIndex", 1),
+				o: n(i, "opacity", 1),
+				c: n(i, "color", "94,2,16"),
+				n: n(i, "count", 99)
+			}
+		};
+
+		function o() {
+			a = m.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+				c = m.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+		};
+
+		function i() {
+			r.clearRect(0, 0, a, c);
+			var n, e, t, o, m, l;
+			s.forEach(function(i, x) {
+					for(i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 : 1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1, 1), e = x + 1; e < u.length; e++) n = u[e],
+						null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o, i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t / 2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y), r.lineTo(n.x, n.y), r.stroke()))
+				}),
+				x(i)
+		};
+		var a, c, u, m = document.createElement("canvas"),
+			d = t(),
+			l = "c_n" + d.l,
+			r = m.getContext("2d"),
+			x = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+			function(n) {
+				window.setTimeout(n, 1e3 / 45)
+			},
+			w = Math.random,
+			y = {
+				x: null,
+				y: null,
+				max: 2e4
+			};
+		m.id = l,
+			m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z + ";opacity:" + d.o,
+			e("body")[0].appendChild(m),
+			o(),
+			window.onresize = o,
+			window.onmousemove = function(n) {
+				n = n || window.event,
+					y.x = n.clientX,
+					y.y = n.clientY
+			},
+			window.onmouseout = function() {
+				y.x = null,
+					y.y = null
+			};
+		for(var s = [], f = 0; d.n > f; f++) {
+			var h = w() * a,
+				g = w() * c,
+				v = 2 * w() - 1,
+				p = 2 * w() - 1;
+			s.push({
+				x: h,
+				y: g,
+				xa: v,
+				ya: p,
+				max: 6e3
+			})
+		}
+		u = s.concat([y]),
+		setTimeout(function() {
+				i()
+		},100)
+	})();
+</script>
