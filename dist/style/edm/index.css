@@ -391,7 +391,7 @@ textarea{
 	width: 85%;
 	max-width: 170px;
 	float: left;
-	padding: 5px 10px 6px !important;
+	padding: 5px 10px 6px;
 	cursor: pointer;
 }
 .color-show-box{
