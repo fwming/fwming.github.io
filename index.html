@@ -41,15 +41,13 @@ var _hmt = _hmt || [];
 		<div id="LAY_app" class="layadmin-tabspage-none"></div>
 		<script src="layui/layui.all.js"></script>
 		<script>
-            window.οnlοad=function(){
-                layui.config({
-                    base: './dist/', //指定 layuiAdmin 项目路径
-                    version: '2020.3.20'
-                }).use('index', function() {
-                    var layer = layui.layer,
-                        admin = layui.admin;
-                });
-            };
+            layui.config({
+                base: './dist/', //指定 layuiAdmin 项目路径
+                version: '2020.3.20'
+            }).use('index', function() {
+                var layer = layui.layer,
+                    admin = layui.admin;
+            });
 		</script>
 	</body>
 
