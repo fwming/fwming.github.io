@@ -35,7 +35,7 @@
 							<div><label>Lang：</label><input j-title="右上角语言类型" j-title-dir="top" class="lang-text" type="text" value="中文" /></div>
 							<div><label>src：</label><input j-title="图片src地址共同部分" j-title-dir="top" class="all-img-src" type="text" placeholder="图片src地址共同部分" value="https://imgsrv1.mailer08.net/images/dGVuYW50MjcxYWRtaW4_/WTJGdGNHRnBaMjVmTXpjPQ/"/></div>
 							<div><label>href：</label><input j-title="所有图片链接，单个编辑会覆盖此链接" j-title-dir="top" class="all-img-href" type="text" placeholder="所有图片href链接" /></div>
-							<div><label>Preheader Text:</label><input type="text" class="preheader-text" j-title="隐藏文字" j-title-dir="top" /></div>
+							<div><label>Preheader Text:</label><input type="text" class="preheader-text" j-title="隐藏文字，子标题" j-title-dir="top" /></div>
 							<div>
 								<label>Type：<span j-title="该项表示的是链接，即点击Lang后会跳转到该项选中的页面。" j-title-dir="top" class="question-icon">?</span></label>
 								<select class="href-type" name="" j-title="链接类型" j-title-dir="top" style="width: 100%;">
@@ -52,13 +52,17 @@
 								<p class="footer-onoff onoff-box" j-title="是否加载footer项" j-title-dir="top"><span class="bg-onoff-checkbox"></span>加载footer项</p>
 							</div>
 							<div>
-								<label>其他：</label>
-								<p class="other-onoff onoff-box" j-title="是否加载其他" j-title-dir="top"><span class="bg-onoff-checkbox"></span>加载其他</p>
+								<label>浏览器预览：</label>
+								<p class="online-version-onoff onoff-box" j-title="配合Preheader Text使用，使用时须关闭平台的Online Version功能，存在Preheader Text时开启该功能。" j-title-dir="top"><span class="bg-onoff-checkbox"></span>是否加载预览项</p>
 							</div>
+						</div>
+						<p class="title" style="display: none;">Online Version：</p>
+						<div class="row" style="display: none;">
+							<textarea class="edm-online-version">Having trouble viewing this email? Read the <!-- *|XG:WHOLEEDM|* // --><span style="color: #888888!important; text-decoration: underline!important">online version</span><!-- *|END:XG:WHOLEEDM|* // -->.</textarea>
 						</div>
 						<p class="title" style="display: none;">FOOTER：</p>
 						<div class="row" style="display: none;">
-							<textarea class="edm-footer"></textarea>
+							<textarea class="edm-footer"><div id="footer_content" style="align: center; text-align: center; font-size: 11px; padding: 0px 0px; color: #888888; font-family: tahoma, arial, helvetica, sans-serif;">You are receiving this e-mail as your contact is in the database of . <br /> If you do not wish to receive any more messages from us, please click <a href="https://proxcrm.xgate.com/app/unsubscribe.php?tkey={$trackerKey}">Unsubscribe</a>.<br /> 閣下是 <strong>King Fook Jewellery</strong>的會員，因而獲得此資訊優惠。 如想取消訂閱，請按 <a href="http://proxcrm.xgate.com/app/unsubscribe.php?tkey={$trackerKey}">這裡</a>。<br /><br /> <span id="show_subscribed">You are subscribed as(登記電郵地址): {$emailaddress}</span><br /><br /> To ensure delivery to your inbox (not bulk or junk folders), please add&nbsp;<span><a href="mailto:unsubscribe@xgate.com "><span>unsubscribe@xgate.com</span></a>&nbsp;</span>&nbsp;to your address book. <br /> 為保證閣下可以收到此類訂閱郵件，請將&nbsp;<span><a href="mailto: unsubscribe@xgate.com">unsubscribe@xgate.com</a></span>&nbsp;加入閣下的電子郵箱通訊簿。</div></textarea>
 						</div>
 						<p class="title">上传图片：</p>
 						<div class="row">
