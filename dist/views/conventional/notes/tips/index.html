@@ -18,10 +18,7 @@
 		background: #000000;
 		color: #ffffff;
 		z-index: 9999;
-		transform: scale(.5);
-		/*transition: 1s;
-		transition-delay: 0.5s;
-		animation: all 1s .3s ease-out;*/
+        transition: .5s;
 	}
 	
 	.tips-content {
@@ -238,10 +235,7 @@ $('body').on('mouseover','[j-title]',function(e){
 		if(dir == 'tips-dir-t'){
 			$('.tips').css({
 				left : pagex + 'px',
-				bottom : (body_height - pagey + 10) + 'px',
-				'transform' : 'scale(1)',
-				'transition' : '1s',
-				'animation': 'all 2s 0.5s'
+				bottom : (body_height - pagey + 10) + 'px'
 			})
 		}else if(dir == 'tips-dir-l'){
 			$('.tips').css({
