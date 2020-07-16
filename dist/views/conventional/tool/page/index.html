@@ -1,0 +1,113 @@
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>页面工厂</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md4">
+			<div class="layui-card">
+				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">UI Builder</li>
+						<li>Responsive</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<ul>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+								<li>待定项1</li>
+							</ul>
+						</div>
+						<div class="layui-tab-item">
+							<ul>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+								<li>待定项2</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md8">
+			<div class="layui-card">
+				<div class="layui-card-header">
+					车间
+				</div>
+				<div class="layui-card-body">
+					<button class="btn" style="text-align: center;font-size: 24px;font-style: oblique; color: #ff0000;background-color: #009688;border-top-color: #ff0000;">test</button>
+					
+					<button class="btn" style="color: #00ff00;font-size: 24px;">test</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('.btn').click(function(){
+	var $this = $(this);
+	$.ajax({
+		type: "get",
+		url: "./dist/views/conventional/tool/page/edit.html",
+		async: true,
+		dataType: 'html',
+		success: function(e){
+			$('body').append(e);
+			var css = $this.attr('style');
+			setCssToPopup(css);
+			layer.open({
+				type: 1,
+				shade: 0.3,
+				maxmin: true,
+				scrollbar: false,
+				area: 'auto',
+				maxWidth: '600',
+				maxHeight: '500',
+				content: $('#edit-pop'),
+				btn: ['确定','取消'],
+				yes: function(index,layero){
+					layer.close(index);
+					$this.css(setCssToHtml());
+					var index = layer.load(0);
+					setTimeout(function(){
+						layer.close(index);
+					},2000)
+				},
+				end: function(){
+					console.log('销毁');
+					$('#edit-pop').remove();
+				}
+			})
+			
+			layui.use('form', function(){
+				var form = layui.form;
+				form.render();
+			})
+		},
+		error: function(e){
+			console.log(e);
+		}
+	})
+})
+</script>
