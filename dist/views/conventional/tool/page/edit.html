@@ -1,0 +1,1292 @@
+<style type="text/css">
+	.layui-form-label{padding: 6px 15px;}
+	.j-slide{width: calc(100% - 80px);top: 15px;z-index: 99;}
+	.j-slide+div.layui-input-block{width: 75px;float: right;margin-left: 0;margin-top: -4px;}
+	.j-slide+div.layui-input-block .layui-input, .j-slide+div.layui-input-block .layui-select, .j-slide+div.layui-input-block .layui-textarea{height: 32px;}
+	.layui-input, .layui-select, .layui-textarea{height: 32px;}
+	.layui-layer.layui-layer-page{width: 95%;}
+</style>
+
+
+<div id="edit-pop" class="layui-fluid layui-layer-wrap" style="display: none;" lay-filter="edit-box">
+	<form class="layui-form">
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">文字</li>
+				<li>布局</li>
+				<li>背景</li>
+			</ul>
+			<div class="layui-tab-content">
+				<!--文字-->
+				<div class="layui-tab-item layui-show">
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="color">文本颜色</label>
+						<div class="layui-input-block">
+							<div class="text-color" name="color" isload="false"></div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="text-indent">文本缩进</label>
+						<div class="layui-input-block">
+							<div class="text-indent j-slide" name="text-indent" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="text-align">水平对齐</label>
+						<div class="layui-input-block">
+							<select class="text-align" lay-filter="category" name="text-align" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="left">靠左</option>
+								<option value="right">靠右</option>
+								<option value="center">居中</option>
+								<option value="justify">两端对齐</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="word-spacing">文字间距</label>
+						<div class="layui-input-block">
+							<div class="word-spacing j-slide" name="word-spacing" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="letter-spacing">字母间距</label>
+						<div class="layui-input-block">
+							<div class="letter-spacing j-slide" name="letter-spacing" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="text-transform">大小写</label>
+						<div class="layui-input-block">
+							<select class="text-transform" lay-filter="category" name="text-transform" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="uppercase">大写</option>
+								<option value="lowercase">小写</option>
+								<option value="capitalize">大写字母开头</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="text-decoration">文本装饰</label>
+						<div class="layui-input-block">
+							<select class="text-decoration" lay-filter="category" name="text-decoration" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="underline">下划线</option>
+								<option value="line-through">中划线</option>
+								<option value="overline">上划线</option>
+								<option value="blink">闪烁</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="direction">文本方向</label>
+						<div class="layui-input-block">
+							<select class="direction" lay-filter="category" name="direction" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="ltr">从左至右</option>
+								<option value="rtl">从右至左</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="white-space">空白处理</label>
+						<div class="layui-input-block">
+							<select class="white-space" lay-filter="category" name="white-space" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="pre-line">合并空白保留换行</option>
+								<option value="nowrap">br换行</option>
+								<option value="pre">保留空白</option>
+								<option value="pre-wrap">保留空白保留换行</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="font-family">字体名称</label>
+						<div class="layui-input-block">
+							<input type="text" class="font-family layui-input" name="font-family" isload="false">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="font-style">字体风格</label>
+						<div class="layui-input-block">
+							<select class="font-style" lay-filter="category" name="font-style" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="italic">斜体</option>
+								<option value="oblique">倾斜</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="font-size">字体大小</label>
+						<div class="layui-input-block">
+							<div class="font-size j-slide" name="font-size" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="font-weight">字体加粗</label>
+						<div class="layui-input-block">
+							<select class="font-weight" lay-filter="category" name="font-weight" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="lighter">极细</option>
+								<option value="bold">加粗</option>
+								<option value="bolder">更粗</option>
+								<option value="100">100</option>
+								<option value="200">200</option>
+								<option value="300">300</option>
+								<option value="400">400</option>
+								<option value="500">500</option>
+								<option value="600">600</option>
+								<option value="700">700</option>
+								<option value="800">800</option>
+								<option value="900">900</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+				<!--布局-->
+				<div class="layui-tab-item">
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="width">宽度</label>
+						<div class="layui-input-block">
+							<div class="width j-slide" name="width" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="height">高度</label>
+						<div class="layui-input-block">
+							<div class="height j-slide" name="height" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="max-width">最大宽度</label>
+						<div class="layui-input-block">
+							<div class="max-width j-slide" name="max-width" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="max-height">最大高度</label>
+						<div class="layui-input-block">
+							<div class="max-height j-slide" name="max-height" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="min-width">最小宽度</label>
+						<div class="layui-input-block">
+							<div class="min-width j-slide" name="min-width" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="min-height">最小高度</label>
+						<div class="layui-input-block">
+							<div class="min-height j-slide" name="min-height" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="line-height">行高</label>
+						<div class="layui-input-block">
+							<div class="line-height j-slide" name="line-height" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="px">px</option>
+									<option value="%">百分比</option>
+									<option value="rem">rem</option>
+									<option value="em">em</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="float">浮动</label>
+						<div class="layui-input-block">
+							<select lay-filter="category" name="float" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="left">向左</option>
+								<option value="right">向右</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="position">定位</label>
+						<div class="layui-input-block">
+							<select class="position" lay-filter="category" name="position" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="absolute">绝对定位-针对父元素</option>
+								<option value="fixed">固定定位-针对浏览器</option>
+								<option value="relative">相对定位-自身</option>
+								<option value="static">顺序定位</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="top,right,bottom,left">偏移</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5">
+								<div class="layui-col-md12">
+									<p>上</p>
+									<div class="top j-slide" name="top" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>下</p>
+									<div class="bottom j-slide" name="bottom" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>左</p>
+									<div class="left j-slide" name="left" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>右</p>
+									<div class="right j-slide" name="right" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="top,right,bottom,left">内边距</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5">
+								<div class="layui-col-md12">
+									<p>上</p>
+									<div class="padding-top j-slide" name="padding-top" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>下</p>
+									<div class="padding-bottom j-slide" name="padding-bottom" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>左</p>
+									<div class="padding-left j-slide" name="padding-left" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>右</p>
+									<div class="padding-right j-slide" name="padding-right" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="top,right,bottom,left">外边距</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5">
+								<div class="layui-col-md12">
+									<p>上</p>
+									<div class="margin-top j-slide" name="margin-top" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>下</p>
+									<div class="margin-bottom j-slide" name="margin-bottom" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>左</p>
+									<div class="margin-left j-slide" name="margin-left" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>右</p>
+									<div class="margin-right j-slide" name="margin-right" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="border-style">边框样式</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5">
+								<div class="layui-col-md12">
+									<select class="border-top-style" lay-filter="category" name="border-top-style" isload="false">
+										<option selected="" value="">选择上边框</option>
+										<option value="dotted">点状</option>
+										<option value="dashed">虚线</option>
+										<option value="solid">实线</option>
+										<option value="double">双线</option>
+										<option value="groove">3D 凹槽</option>
+										<option value="ridge">3D 垄状</option>
+										<option value="inset">3D inset</option>
+										<option value="outset">3D outset </option>
+										<option value="hidden">无，兼容冲突</option>
+									</select>
+								</div>
+								<div class="layui-col-md12">
+									<div class="layui-row layui-col-space5">
+										<div class="layui-col-md6">
+											<select class="border-left-style" lay-filter="category" name="border-left-style" isload="false">
+												<option selected="" value="">左边框</option>
+												<option value="dotted">点状</option>
+												<option value="dashed">虚线</option>
+												<option value="solid">实线</option>
+												<option value="double">双线</option>
+												<option value="groove">3D 凹槽</option>
+												<option value="ridge">3D 垄状</option>
+												<option value="inset">3D inset</option>
+												<option value="outset">3D outset </option>
+												<option value="hidden">无，兼容冲突</option>
+											</select>
+										</div>
+										<div class="layui-col-md6">
+											<select class="border-right-style" lay-filter="category" name="border-right-style" isload="false">
+												<option selected="" value="">右边框</option>
+												<option value="dotted">点状</option>
+												<option value="dashed">虚线</option>
+												<option value="solid">实线</option>
+												<option value="double">双线</option>
+												<option value="groove">3D 凹槽</option>
+												<option value="ridge">3D 垄状</option>
+												<option value="inset">3D inset</option>
+												<option value="outset">3D outset </option>
+												<option value="hidden">无，兼容冲突</option>
+											</select>
+										</div>
+
+									</div>
+								</div>
+								<div class="layui-col-md12">
+									<select class="border-bottom-style" lay-filter="category" name="border-bottom-style" isload="false">
+										<option selected="" value="">选择下边框</option>
+										<option value="dotted">点状</option>
+										<option value="dashed">虚线</option>
+										<option value="solid">实线</option>
+										<option value="double">双线</option>
+										<option value="groove">3D 凹槽</option>
+										<option value="ridge">3D 垄状</option>
+										<option value="inset">3D inset</option>
+										<option value="outset">3D outset </option>
+										<option value="hidden">无，兼容冲突</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="top,right,bottom,left">边框宽度</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5">
+								<div class="layui-col-md12">
+									<p>上</p>
+									<div class="border-top-width j-slide" name="border-top-width" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>下</p>
+									<div class="border-bottom-width j-slide" name="border-bottom-width" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>左</p>
+									<div class="border-left-width j-slide" name="border-left-width" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+								<div class="layui-col-md12" style="height: 20px"></div>
+								<div class="layui-col-md12">
+									<p>右</p>
+									<div class="border-right-width j-slide" name="border-right-width" isload="false"></div>
+									<div class="layui-input-block">
+										<select lay-filter="unit">
+											<option value="px">px</option>
+											<option value="%">百分比</option>
+											<option value="rem">rem</option>
+											<option value="em">em</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="border-color">边框颜色</label>
+						<div class="layui-input-block">
+							<div class="layui-row layui-col-space5" style="text-align: center;">
+								<div class="layui-col-md12 layui-col-xs12">
+									<div class="border-top-color" name="border-top-color" isload="false"></div>
+								</div>
+								<div class="layui-col-md12 layui-col-xs12">
+									<div class="layui-row layui-col-space5">
+										<div class="layui-col-md6 layui-col-xs6">
+											<div class="border-left-color" name="border-left-color" isload="false"></div>
+										</div>
+										<div class="layui-col-md6 layui-col-xs6">
+											<div class="border-right-color" name="border-right-color" isload="false"></div>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md12 layui-col-xs12">
+									<div class="border-bottom-color" name="border-bottom-color" isload="false"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+				<!--背景-->
+				<div class="layui-tab-item">
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="background-color">背景颜色</label>
+						<div class="layui-input-block">
+							<div class="bg-color" name="background-color" isload="false"></div>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="background-repeat">背景重复</label>
+						<div class="layui-input-block">
+							<select class="background-repeat" lay-filter="category" name="background-repeat" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="repeat-x">水平重复</option>
+								<option value="repeat-y">垂直重复</option>
+								<option value="no-repeat">无</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="background-position">背景定位</label>
+						<div class="layui-input-block">
+							<select class="background-position" lay-filter="category" name="background-position" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="center center">居中</option>
+								<option value="left top">靠上靠左</option>
+								<option value="center top">靠上居中</option>
+								<option value="right top">靠下靠右</option>
+								<option value="left center">靠左居中</option>
+								<option value="right center">靠右居中</option>
+								<option value="left bottom">靠下靠左</option>
+								<option value="center bottom">靠下居中</option>
+								<option value="right bottom">靠下靠右</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="background-attachment">背景连动</label>
+						<div class="layui-input-block">
+							<select class="background-attachment" lay-filter="category" name="background-attachment" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="scroll">跟随滚动</option>
+								<option value="fixed">固定</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<hr>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="opacity">透明度</label>
+						<div class="layui-input-block">
+							<select class="opacity" lay-filter="category" name="opacity" isload="false">
+								<option selected="" value="">请选择</option>
+								<option value="0.1">0.1</option>
+								<option value="0.2">0.2</option>
+								<option value="0.3">0.3</option>
+								<option value="0.4">0.4</option>
+								<option value="0.5">0.5</option>
+								<option value="0.6">0.6</option>
+								<option value="0.7">0.7</option>
+								<option value="0.8">0.8</option>
+								<option value="0.9">0.9</option>
+								<option value="1">1</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" title="z-index">层级关系</label>
+						<div class="layui-input-block">
+							<div class="z-index j-slide" name="z-index" isload="false"></div>
+							<div class="layui-input-block">
+								<select lay-filter="unit">
+									<option value="">number</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<script type="text/javascript">
+setTimeout(function(){
+	layui.use(['form','element','slider','colorpicker'], function() {
+		var form = layui.form,
+			slider = layui.slider,
+			colorpicker = layui.colorpicker,
+			element = layui.element;
+		
+		//下拉列表属性切换
+		form.on('select(category)', function (data) {
+			if(data.value){
+				$(this).parents('.layui-form-select').prev('select').attr('isload',true).attr('attr-value',data.value);
+			}else{
+				$(this).parents('.layui-form-select').prev('select').attr('isload',false).attr('attr-value','');
+			}
+		});
+		//单位切换
+		form.on('select(unit)', function (data) {
+			if(data.value){
+				var $that = $(this).parents('.layui-form-select').parent('div.layui-input-block').prev('div.j-slide');
+				$that.attr('isload',true).attr('attr-value',$that.attr('attr-value').replace(/[a-z]|%/g,'') + data.value);
+			}
+		});
+		
+		/***************
+		 * 滑块
+		 ***************/
+		//文本缩进
+		slider.render({
+			elem: '.text-indent',
+			input: true,
+			value: $('.text-indent').attr('attr-value') ? $('.text-indent').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//词组间距
+		slider.render({
+			elem: '.word-spacing',
+			input: true,
+			value: $('.word-spacing').attr('attr-value') ? $('.word-spacing').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//字母间距
+		slider.render({
+			elem: '.letter-spacing',
+			input: true,
+			value: $('.letter-spacing').attr('attr-value') ? $('.letter-spacing').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//字体大小
+		slider.render({
+			elem: '.font-size',
+			input: true,
+			value: $('.font-size').attr('attr-value') ? $('.font-size').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		
+		//宽度
+		slider.render({
+			elem: '.width',
+			input: true,
+			value: $('.width').attr('attr-value') ? $('.width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//高度
+		slider.render({
+			elem: '.height',
+			input: true,
+			value: $('.height').attr('attr-value') ? $('.height').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//最大宽度
+		slider.render({
+			elem: '.max-width',
+			input: true,
+			value: $('.max-width').attr('attr-value') ? $('.max-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//最大高度
+		slider.render({
+			elem: '.max-height',
+			input: true,
+			value: $('.max-height').attr('attr-value') ? $('.max-height').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//最小宽度
+		slider.render({
+			elem: '.min-width',
+			input: true,
+			value: $('.min-width').attr('attr-value') ? $('.min-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//最小高度
+		slider.render({
+			elem: '.min-height',
+			input: true,
+			value: $('.min-height').attr('attr-value') ? $('.min-height').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//行高
+		slider.render({
+			elem: '.line-height',
+			input: true,
+			value: $('.line-height').attr('attr-value') ? $('.line-height').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//偏移
+		//上
+		slider.render({
+			elem: '.top',
+			input: true,
+			value: $('.top').attr('attr-value') ? $('.top').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//下
+		slider.render({
+			elem: '.bottom',
+			input: true,
+			value: $('.bottom').attr('attr-value') ? $('.bottom').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//左
+		slider.render({
+			elem: '.left',
+			input: true,
+			value: $('.left').attr('attr-value') ? $('.left').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//右
+		slider.render({
+			elem: '.right',
+			input: true,
+			value: $('.right').attr('attr-value') ? $('.right').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//内边距
+		//上
+		slider.render({
+			elem: '.padding-top',
+			input: true,
+			value: $('.padding-top').attr('attr-value') ? $('.padding-top').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//下
+		slider.render({
+			elem: '.padding-bottom',
+			input: true,
+			value: $('.padding-bottom').attr('attr-value') ? $('.padding-bottom').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//左
+		slider.render({
+			elem: '.padding-left',
+			input: true,
+			value: $('.padding-left').attr('attr-value') ? $('.padding-left').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//右
+		slider.render({
+			elem: '.padding-right',
+			input: true,
+			value: $('.padding-right').attr('attr-value') ? $('.padding-right').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//外边距
+		//上
+		slider.render({
+			elem: '.margin-top',
+			input: true,
+			value: $('.padding-top').attr('attr-value') ? $('.padding-top').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//下
+		slider.render({
+			elem: '.margin-bottom',
+			input: true,
+			value: $('.margin-bottom').attr('attr-value') ? $('.margin-bottom').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//左
+		slider.render({
+			elem: '.margin-left',
+			input: true,
+			value: $('.margin-left').attr('attr-value') ? $('.margin-left').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//右
+		slider.render({
+			elem: '.margin-right',
+			input: true,
+			value: $('.margin-right').attr('attr-value') ? $('.margin-right').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//边框宽度
+		//上
+		slider.render({
+			elem: '.border-top-width',
+			input: true,
+			value: $('.border-top-width').attr('attr-value') ? $('.border-top-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//下
+		slider.render({
+			elem: '.border-bottom-width',
+			input: true,
+			value: $('.border-bottom-width').attr('attr-value') ? $('.border-bottom-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//左
+		slider.render({
+			elem: '.border-left-width',
+			input: true,
+			value: $('.border-left-width').attr('attr-value') ? $('.border-left-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//右
+		slider.render({
+			elem: '.border-right-width',
+			input: true,
+			value: $('.border-right-width').attr('attr-value') ? $('.border-right-width').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		//层级关系
+		slider.render({
+			elem: '.z-index',
+			input: true,
+			value: $('.z-index').attr('attr-value') ? $('.z-index').attr('attr-value').replace(/[a-z]|%/g,'') : '0',
+			min: -500,
+			max: 2000,
+			setTips: function(value){
+			    return value + $(this.elem).next('div').find('select option:selected').val();
+			},
+			change: function(value) {
+				$(this.elem).attr('isload',true).attr('attr-value',value);
+			}
+		});
+		
+		
+		/***************
+		 * 颜色选择器
+		 ***************/
+		//字体颜色
+		colorpicker.render({
+			elem: '.text-color',
+			color: $('.text-color').attr('attr-value') || '',
+			predefine: true,
+			colors: ['#ff4500','#1e90ff'],
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		//边框颜色
+		//上
+		colorpicker.render({
+			elem: '.border-top-color',
+			color: $('.border-top-color').attr('attr-value') || '',
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		//右
+		colorpicker.render({
+			elem: '.border-right-color',
+			color: $('.border-right-color').attr('attr-value') || '',
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		//下
+		colorpicker.render({
+			elem: '.border-bottom-color',
+			color: $('.border-bottom-color').attr('attr-value') || '',
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		//左
+		colorpicker.render({
+			elem: '.border-left-color',
+			color: $('.border-left-color').attr('attr-value') || '',
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		//背景颜色
+		colorpicker.render({
+			elem: '.bg-color',
+			color: $('.bg-color').attr('attr-value') || '',
+			done: function(color) {
+				if(color){
+					$(this.elem).attr('attr-value',color).attr('isload',true);
+				}else{
+					$(this.elem).attr('attr-value','').attr('isload',false);
+				}
+			}
+		});
+		
+	});
+},200)
+	
+	
+	
+	
+/***************
+ * 返回编辑框的样式--json对象
+ ***************/
+function setCssToHtml(){
+	var css = {};
+	$('body *[isload=true]').each(function(index, obj){
+		css[$(obj).attr('name')] = $(obj).attr('attr-value');
+	})
+	
+	console.log(css);
+	return css;
+}
+
+/***************
+ * 获取当前元素样式并渲染到编辑框
+ ***************/
+function setCssToPopup(obj){
+	var obj = styleToJson(obj);
+	console.log(obj);
+	$.each(obj, function(item){
+		if($('body *[name='+item+']').is('select')){
+			$('body *[name='+item+']').val(obj[item]);
+		}
+		
+		if($('body *[name='+item+']').hasClass('j-slide')){
+			$('body *[name='+item+']').next('div.layui-input-block').find('select').val(obj[item].replace(/[0-9]/g,''));
+		}
+		
+		$('body *[name='+item+']').attr('attr-value',obj[item]).attr('isload',true);
+		
+		
+	})
+}
+//样式转换json对象
+function styleToJson(style){
+	if(!style || style == '') {
+		return false;
+	}
+	console.log(style);
+	var css = {};
+	var arr = style.trim().split(';');
+	arr = arr.filter(function(item){
+		return item != '';
+	})
+	arr.forEach(function(item){
+		css[item.split(':')[0].trim()] = item.split(':')[1].trim();
+		
+	})
+	return css;
+}
+		
+</script>
