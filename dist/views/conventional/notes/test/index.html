@@ -1,0 +1,137 @@
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>随手笔记</cite></a><span lay-separator="">/</span>
+		<a><cite>Test</cite></a>
+	</div>
+</div>
+
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-card">
+			<div class="layui-card-header">
+				<p>测试链接</p>
+			</div>
+			<div class="layui-card-body">
+				<div class="layui-inline" style="width: calc(100% - 72px);">
+					<input class="href layui-input" type="text" value="http://api.mailer08.net/EDM/visit?tkey=41c7a78e-cbf2-4133-a60e-3a7bba293b68_864f3eeb-bb06-4ad8-1298-4468abfd7a1a&alt=false"/>
+				</div>
+				<button class="layui-btn">测试</button>
+			</div>
+		</div>
+		<div class="layui-card">
+			<div class="layui-card-header">
+				<p>测试结果</p>
+			</div>
+			<div class="layui-card-body">
+				<table id="result" lay-filter="test"></table>
+			</div>
+		</div>
+	</div>
+	
+	<div id="hideArea" style="display: none;"></div>
+</div>
+
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="detail">预览</a>
+	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/javascript">
+	layui.use(['table','layer'],function(){
+		var table = layui.table,
+			layer = layui.layer;
+		
+		table.render({
+			elem: '#result',
+			url: 'json/notes/table/data.js',
+			cols: [[
+				{field: 'id', title: 'ID', sort: true,width: 80},
+				{field: 'url', title: 'URL'},
+				{field: 'status', title: '状态', sort: true,width: 80},
+				{title: '操作', align: 'center', toolbar: '#barDemo',width: 200}
+			]],
+			id: 'testReload'
+		})
+		
+		//监听工具条 
+		table.on('tool(test)', function(obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var data = obj.data; //获得当前行数据
+			var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+			var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+		
+			if(layEvent === 'detail') { //查看
+				//do somehing
+				layer.open({
+					type: 2,
+					shadeClose: true,
+					title: obj.data.url,
+					area: ['80%','90%'],
+					content: obj.data.url,
+					maxmin: true
+				})
+				
+			} else if(layEvent === 'del') { //删除
+				layer.confirm('真的删除行么', function(index) {
+					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+					layer.close(index);
+					//向服务端发送删除指令
+				});
+			} else if(layEvent === 'edit') { //编辑
+				//do something
+				console.log('编辑');
+				//同步更新缓存对应的值
+				obj.update({
+					username: '123',
+					title: 'xxx'
+				});
+			} else if(layEvent === 'LAYTABLE_TIPS') {
+				layer.alert('Hi，头部工具栏扩展的右侧图标。');
+			}
+		});	
+		
+		
+		$('.layui-btn').click(function(){
+//			$('#hideIframe').attr('src',$('.href').val().trim());
+			
+//			$('#hideArea .main a').each(function(){
+//				console.log($(this).attr('href'));
+//			})
+			
+			$.ajax({
+				type: "get",
+				url: $('.href').val().trim(),
+				async: true,
+				success: function(e){
+					console.log(typeof(e));
+					
+//					var k = e.replace(/(\n|\r)*/g,'');
+					var h = e.replace(/<script(.|\.|\[|\]|\(|\)|\{|\}|\+|\n|\r)*<\/script>/g,'***');
+					console.log(h);
+					debugger
+					$('#hideArea').html(e);
+					$('#hideArea script').remove();
+					console.log('000');
+					setTimeout(function(){
+						$('#hideArea .main a').each(function(){
+							console.log($(this).attr('href'));
+						})
+						
+					},500)
+					
+					
+					
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+			
+		})
+	
+	})
+	
+</script>
