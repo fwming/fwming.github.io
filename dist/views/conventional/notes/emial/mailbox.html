@@ -1,0 +1,113 @@
+<div class="layui-card">
+	<div class="layui-card-header">
+		邮箱统计
+	</div>
+	<div class="layui-card-body">
+		<table id="mailbox" lay-filter="mailbox"></table>
+	</div>
+</div>
+
+<script type="text/html" id="toolbarDemo">
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-tips="添加" lay-event="add"><i class="fa fa-plus"></i></button>
+		<button class="layui-btn layui-btn-sm" lay-tips="编辑" lay-event="update"><i class="fa fa-edit"></i></button>
+		<button class="layui-btn layui-btn-danger layui-btn-sm" lay-tips="删除" lay-event="delete"><i class="fa fa-trash-o"></i></button>
+	</div>
+</script>
+
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-tips="详情" lay-event="detail"><i class="fa fa-info-circle"></i></a>
+	<a class="layui-btn layui-btn-xs" lay-tips="复制" lay-event="copy"><i class="fa fa-copy"></i></a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-tips="删除" lay-event="del"><i class="fa fa-trash-o"></i></a>
+</script>
+
+<script type="text/javascript">
+	layui.use(['table','layer','laypage','copy'], function(){
+		var table = layui.table,
+			copy = layui.copy,
+			laypage = layui.laypage,
+			layer = layui.layer;		
+		
+		table.render({
+			elem: '#mailbox',
+			url: 'json/notes/email&webform/mailbox.js',
+			title: '邮箱统计',
+			toolbar: '#toolbarDemo',
+			height: 523,
+			page: true,
+			limit: 10,
+			limits:[10,20,30,40,50],
+			cols: [[
+				{type: "checkbox",fixed: 'left'},
+				{field: 'id', title: 'ID', sort: true, width: 80},
+				{field: 'type', title: '类型', sort: true, width: 80},
+				{field: 'email', title: '邮箱号码',edit: 'text'},
+				{field: 'who', title: '负责人', sort: true, width: 100},
+				{field: 'system', title: '系统', sort: true, width: 80},
+				{title: '操作', align: 'center', toolbar: '#barDemo', width: 150}
+			]],
+			id: 'testReload',
+			//优化处理数据
+			parseData: function(res){
+				var limit = this.limit;
+				var curr = this.page.curr ? this.page.curr : 1;
+				var length = res.data.length;
+				res.data = res.data.filter(function(item,index){
+					return  limit*(curr-1) <= index  && index < limit*curr;
+				})
+				return {
+					"code": res.code, //解析接口状态
+					"msg": res.msg, //解析提示文本
+					"count": length, //解析数据长度
+					"data": res.data //解析数据列表
+				}
+			}
+		})
+		
+		
+		//监听工具条
+		table.on('tool(mailbox)', function(obj){
+			var data = obj.data;
+			var layEvent = obj.event;
+			var tr = obj.tr;
+			
+			if(layEvent === 'detail'){ //查看
+				layer.open({
+					type: 0,
+					title: obj.data.who+' / '+obj.data.type,
+					content: obj.data.email
+					
+				})
+			}else if(layEvent === 'del'){
+				layer.confirm('真的删除行么', function(index) {
+					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+					layer.close(index);
+					//向服务端发送删除指令
+				});
+			}else if(layEvent === 'copy'){
+				copy.copyFn(obj.data.email);
+			}else if(layEvent === 'LAYTABLE_TIPS') {
+				layer.alert('Hi，头部工具栏扩展的右侧图标。');
+			}
+		})
+
+		table.on('toolbar(mailbox)', function(obj) {
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event) {
+				case 'add':
+					layer.msg('暂不开放添加功能 !');
+					break;
+				case 'delete':
+					layer.msg('暂不开放删除功能 !');
+					break;
+				case 'update':
+					layer.msg('暂不开放编辑功能 !');
+					break;
+			};
+		});
+		
+		
+		
+		$('.fa').removeClass('layui-icon');
+	})
+</script>
