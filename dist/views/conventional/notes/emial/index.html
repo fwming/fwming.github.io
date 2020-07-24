@@ -1,0 +1,135 @@
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>随手笔记</cite></a><span lay-separator="">/</span>
+		<a><cite>Email & webform</cite></a>
+	</div>
+</div>
+
+<style type="text/css">
+	.search-list{
+		width: 100%;
+		max-height: 66vh;
+		overflow-y: auto;
+		margin-top: 20px;
+	}
+	.search-list li{
+		line-height: 36px;
+		cursor: pointer;
+		border-bottom: 1px solid #e1e1e1;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.search-list li:last-child{
+		border-bottom: none;
+	}
+	.search-list li a{
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding-left: 10px;
+	}
+	.page-box{
+		max-height: 86vh;
+		overflow: auto;
+	}
+	@media (max-width: 800px) {
+		.search-list{
+			max-height: 25vh;
+		}
+	}
+</style>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md3">
+			<div class="layui-card">
+				<div class="layui-card-header">
+					搜索
+				</div>
+				<div class="layui-card-body">
+					<div class="layui-inline" style="width: calc(100% - 56px);">
+						<input type="text" class="layui-input search-val" placeholder="温馨提示：输入?/*"/>
+					</div>
+					<button class="layui-btn search"><i class="fa fa-search"></i></button>
+					<ul class="search-list"></ul>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md9">
+			<div class="page-box"></div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	layui.use(['layer','element','form'], function(){
+		var layer = layui.layer,
+			element = layui.element,
+			form = layui.form;
+		
+		//地址前缀
+		var pre_url = './dist/views/conventional/';
+		$('.search-list').on('click','[j-href]',function(){
+			var e = $(this).attr('j-href');
+			$.ajax({
+				type: "get",
+				url: pre_url+analyze(e),
+				async: true,
+				success: function(e){
+					$('.page-box').html(e);
+					form.render();
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+		})
+		
+		//地址解析
+		function analyze(e){
+            //斜杠结尾
+            return e.match(/.\/$/) ? e+'index.html' : (e.match(/.(.html)$/) ? e : e+'.html');
+        }
+		
+		//搜索
+		$('.search').on('click', function(){
+			search();
+		})
+		//实时搜索
+		$('.search-val').on('input', function(){
+			search();
+		})
+		
+		function search(){
+			var result = '';
+			var search_val = $('.search-val').val().trim();
+			if(search_val){
+				$.ajax({
+					type: "get",
+					url: "./json/notes/email&webform/searchList.js",
+					async: true,
+					dataType: 'json',
+					success: function(e){
+						if('?*'.indexOf(search_val) < 0){
+							e.data = e.data.filter(function(obj){
+								return obj.title.indexOf(search_val) >= 0;
+							})
+						}
+						e.data.forEach(function(obj){
+							result += '<li class="layui-nav-item"><a j-href="'+obj.url+'">'+obj.title+'</a></li>';
+						})
+						$('.search-list').html(result);
+					},
+					error: function(e){
+						console.log(e);
+					}
+				});
+			}else{
+				$('.search-list').html('');
+			}
+		}
+	})
+	
+</script>
