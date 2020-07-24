@@ -1,0 +1,113 @@
+<div class="layui-card">
+	<div class="layui-card-header">datepicker error title</div>
+	<div class="layui-card-body">
+		<pre class="layui-code" lay-title="javascript" lay-skin="notepad">
+function checkDatepicker(obj_id, required) {
+&nbsp;&nbsp;var isPass = true;
+&nbsp;&nbsp;var id = $(":input[name='HiddenFieldID" + obj_id + "']").val();
+&nbsp;&nbsp;var checked = true;
+	
+&nbsp;&nbsp;$('#data_query_error_message_' + id).hide();
+&nbsp;&nbsp;$('#data_query_error_message_' + id).html("");
+&nbsp;&nbsp;$('#ErrMsg' + obj_id).hide();
+&nbsp;&nbsp;$('#ErrMsg' + obj_id).html("");
+&nbsp;&nbsp;var str = $('#Field' + obj_id).val();
+&nbsp;&nbsp;if(str == "" || str == null || isNaN(str)){
+&nbsp;&nbsp;&nbsp;&nbsp;checked = false;
+&nbsp;&nbsp;}
+	
+&nbsp;&nbsp;if (required && !checked) {
+&nbsp;&nbsp;&nbsp;&nbsp;$('#Field'+obj_id).addClass('errorBorder');
+&nbsp;&nbsp;&nbsp;&nbsp;isPass = false;
+&nbsp;&nbsp;&nbsp;&nbsp;if(errorMsgArr[obj_id]["emptyErrorMsg"]!=''&&errorMsgArr[obj_id]["emptyErrorMsg"]!='undefined'&&errorMsgArr[obj_id]["emptyErrorMsg"].length > 0){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if('{##get_flang}' == 'chi' || '{##get_flang}' == '' || '{##get_flang}' == 'noparam:flang') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#foli' + obj_id + '>.showOverFlow>.showOverFlow').html().search('ErrMsg'+ obj_id +'-1') == '-1'){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#foli' + obj_id + '>.showOverFlow>.showOverFlow>.showOverFlow').after('<p id="ErrMsg'+ obj_id +'-1" class="siderror" style="display: none; clear: both;">請選擇預約日期。</p>');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// document.getElementById("ErrMsg" + obj_id).innerHTML = errorMsgArr[obj_id]["emptyErrorMsg"];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = '請選擇預約時間。';
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#foli' + obj_id + '>.showOverFlow>.showOverFlow').html().search('ErrMsg'+ obj_id +'-1') == '-1'){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#foli' + obj_id + '>.showOverFlow>.showOverFlow>.showOverFlow').after('<p id="ErrMsg'+ obj_id +'-1" class="siderror" style="display: none; clear: both;">Please select a date before submitting the form.</p>');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// document.getElementById("ErrMsg" + obj_id).innerHTML = errorMsgArr[obj_id]["emptyErrorMsg"];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = 'Please select a time before submitting the form.';
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;globalErrorMessage = globalErrorMessage + "\r\n"+errorMsgArr[obj_id]["emptyErrorMsg"];
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if('{##get_flang}' == 'chi' || '{##get_flang}' == '' || '{##get_flang}' == 'noparam:flang') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#foli' + obj_id + '>.showOverFlow>.showOverFlow').html().search('ErrMsg'+ obj_id +'-1') == '-1'){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#foli' + obj_id + '>.showOverFlow>.showOverFlow>.showOverFlow').after('<p id="ErrMsg'+ obj_id +'-1" class="siderror" style="display: none; clear: both;">請選擇預約日期。</p>');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = "請選擇預約時間。";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#foli' + obj_id + '>.showOverFlow>.showOverFlow').html().search('ErrMsg'+ obj_id +'-1') == '-1'){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#foli' + obj_id + '>.showOverFlow>.showOverFlow>.showOverFlow').after('<p id="ErrMsg'+ obj_id +'-1" class="siderror" style="display: none; clear: both;">Please select a date before submitting the form.</p>');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = "Please select a time before submitting the form.";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+			
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;globalErrorMessage = globalErrorMessage + "\r\nPlease fill the text field";
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if('{##get_flang}' == 'chi' || '{##get_flang}' == '' || '{##get_flang}' == 'noparam:flang') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#Field' + obj_id).prev('div').find('input.datepicker-event').val() == $('#Field8 option:selected').text()){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').show();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').hide();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#Field' + obj_id).prev('div').find('input.datepicker-event').val() == $('#Field9 option:selected').text()){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').show();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').hide();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;if(errorDisplayWay=='UseRedBoxErrorMessageInWebform')
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).style.display = "block";
+&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("itemOnPage" + obj_id).style.display = "block";
+&nbsp;&nbsp;} else {
+
+&nbsp;&nbsp;&nbsp;&nbsp;if('{##get_flang}' == 'chi' || '{##get_flang}' == '' || '{##get_flang}' == 'noparam:flang') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#Field' + obj_id).prev('div').find('input.datepicker-event').val() == $('#Field8 option:selected').text()){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').show();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').hide();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($('#Field' + obj_id).prev('div').find('input.datepicker-event').val() == $('#Field9 option:selected').text()){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').show();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#ErrMsg'+ obj_id +'-1').hide();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;if (checked && !checkDatePickerQuota(obj_id)) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#Field' + obj_id).addClass('errorBorder');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isPass = false;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;globalErrorMessage = globalErrorMessage + "\r\nThe limit of this date " + obj_id + " is exceeded";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = "The limit of this date is exceeded";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (errorDisplayWay == 'UseRedBoxErrorMessageInWebform')
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).style.display = "block";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("itemOnPage" + obj_id).style.display = "block";
+&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).style.display = "none";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("ErrMsg" + obj_id).innerHTML = "";
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+&nbsp;&nbsp;return isPass;
+}
+		</pre>
+	</div>
+</div>
+
+<script type="text/javascript">
+	layui.use(['code'], function(){
+		
+		layui.code({
+			elem: '.layui-code',
+			about: false,
+			encode: true,
+			height: "60vh",
+		})
+	})
+</script>
