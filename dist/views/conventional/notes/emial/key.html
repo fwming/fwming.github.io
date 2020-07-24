@@ -1,0 +1,121 @@
+<style type="text/css">
+	.layui-inline{
+		margin-top: 10px;
+	}
+	#demo img{
+		display: block;
+		width: 100%;
+		cursor: pointer;
+	}
+</style>
+
+<div class="layui-card">
+	<div class="layui-card-body">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>DMS高清图片链接</legend>
+			<div class="layui-field-box">
+				<div class="layui-row layui-col-space10">
+					<div class="layui-col-sm6 layui-col-md4">
+						<input type="text" readonly="readonly" value="https://xproject.xgate.com.hk/info/pic/" class="layui-input fixed-url" />
+					</div>
+					<div class="layui-col-sm6 layui-col-md3">
+						<input type="text" class="layui-input account-number" placeholder="账号名称" />
+					</div>
+					<div class="layui-col-sm6 layui-col-md3">
+						<input type="text" class="layui-input img-name" placeholder="图片名称" />
+					</div>
+					<div class="layui-col-sm6 layui-col-md2">
+						<button class="layui-btn copy-img-url layui-bg-orange" lay-tips="复制"><i class="fa fa-copy"></i></button>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="layui-card">
+	<div class="layui-card-body">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>CRM Unsubscribe</legend>
+			<div class="layui-field-box">
+				<div class="layui-row layui-col-space10">
+					<div class="layui-col-sm10">
+						<input type="text" readonly="readonly" value="http://proxcrm.xgate.com/app/unsubscribe.php?tkey={$trackerKey}" class="layui-input unsubscribe" />
+					</div>
+					<div class="layui-col-sm2">
+						<button class="layui-btn copy-unsubscribe layui-bg-orange" lay-tips="复制"><i class="fa fa-copy"></i></button>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="layui-card">
+	<div class="layui-card-body">
+		<fieldset class="layui-elem-field layui-field-title">
+			<legend>登記電郵地址</legend>
+			<div class="layui-field-box">
+				<div class="layui-row layui-col-space10">
+					<div class="layui-col-xs6">
+						<p>DMS： <br />{$email}</p>
+					</div>
+					<div class="layui-col-xs6">
+						<p>CRM： <br />{$emailaddress}</p>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="layui-card">
+	<div class="layui-card-header">
+		BUG分析&解决
+	</div>
+	<div class="layui-card-body">
+		<div id="demo">
+			<div class="layui-row layui-col-space10">
+				<div class="layui-col-md6">
+					<div class="remark-box">
+						<img class="" src="./img/email/resetFooter.png" alt="title"/>
+						<div class="remark">重置footer的宽度为0</div>
+					</div>
+				</div>
+				<div class="layui-col-md6">
+					<img class="" src="./img/email/resetFooter.png" alt="alt"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	layui.use(['layer','copy'], function(){
+		var layer = layui.layer,
+			copy = layui.copy;
+		
+		layer.photos({
+			photos: '#demo',
+			shift: 0, //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+			tab: function(pic, layero){
+				console.log(pic);
+				console.log(layero);
+			}
+		});
+		
+		
+		//复制DMS图片链接
+		$('body').on('click','.copy-img-url',function(){
+			var code = $('.fixed-url').val() + $('.account-number').val().replace(/[\s|\/]/g,'') + '/' + $('.img-name').val().replace(/[\s|\/]/g,'');
+			copy.copyFn(code);
+		})		
+		
+		//复制copy-unsubscribe
+		$('.copy-unsubscribe').click(function(){
+			var code = $('.unsubscribe').val().trim();
+			copy.copyFn(code);
+		})
+	})
+</script>
