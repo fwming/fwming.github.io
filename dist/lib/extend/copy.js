@@ -8,7 +8,7 @@ layui.define(['layer','jquery','element'], function(e){
 			if(typeof(e) == 'string') e = document.getElementById(e);
 			e.select();
 			if(document.execCommand('copy')) {
-				layer.msg('复制代码成功！');
+				layer.msg('复制成功！');
 				return true;
 			}
 			if(e.setSelectionRange) { // 标准浏览器
@@ -17,6 +17,10 @@ layui.define(['layer','jquery','element'], function(e){
 				var range = e.createTextRange()
 				range.moveEnd("character", 0)
 			}
+		},
+        copyFn: function(e){
+			$('#copy_box').html(e);
+			obj.copy2('copy_box');
 		}
 		
 	}
