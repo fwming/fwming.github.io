@@ -1,0 +1,37 @@
+<div class="layui-card">
+	<div class="layui-card-header">
+		电话号码
+	</div>
+	<div class="layui-card-body">
+		<p>在input标签前加上以下code</p>
+		<pre class="layui-code" lay-title="html" lay-skin="notepad">
+<select id="AreaCodeField2" name="AreaCodeField2" class="field select medium typtxt col-sm-6 col-xs-12 areacode">
+&nbsp;&nbsp;<option value="852">852</option>
+&nbsp;&nbsp;<option value="86">86</option>
+</select>
+		</pre>
+		
+		<p>class="field text medium typtxt col-sm-6 col-xs-12 mobile"， mobile ==> phone</p>
+		<p>class="survey_form newform"，拿走newform</p>
+		<p>拿走以下code</p>
+		<pre class="layui-code" lay-title="html" lay-skin="notepad">
+			<div class="newform" style="display: none !important;">hidden</div>
+		</pre>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	layui.use(['layer','code'], function(){
+		var layer = layui.layer;
+		
+		layui.code({
+			elem: '.layui-code',
+			about: false,
+			encode: true,
+			height: "30vh",
+		})
+		
+		
+	})
+</script>
