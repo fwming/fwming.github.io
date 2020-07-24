@@ -271,8 +271,7 @@ $('body').on('mouseover','[j-title]',function(e){
 		})
 		$('.layui-code-h3 a').click(function(){
 			var code = $(this).parents('h3').next('.layui-code-ol').text();
-			$('#copy_box').html(code);
-			copy.copy2('copy_box');
+            copy.copyFn(code);
 		})
 	})
 </script>
