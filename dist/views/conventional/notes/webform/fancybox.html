@@ -1,0 +1,139 @@
+<div class="layui-card">
+	<div class="layui-card-header">
+		无需密码确认
+	</div>
+	<div class="layui-card-body">
+		<pre class="layui-code" lay-title="javascript" lay-skin="notepad">
+$(document).ready(function() {
+&nbsp;&nbsp;$("#submitFormBtn").on("click", function() {
+&nbsp;&nbsp;&nbsp;&nbsp;$("#redemptionConfirmBox .txt-pop").text("是否確認領取");
+&nbsp;&nbsp;&nbsp;&nbsp;$("#redemptionConfirmBox .no").val("否");
+&nbsp;&nbsp;&nbsp;&nbsp;$("#redemptionConfirmBox .yes").val("是");
+&nbsp;&nbsp;});
+});
+		</pre>
+	</div>
+</div>
+
+<div class="layui-card">
+	<div class="layui-card-header">
+		需要密码确认
+	</div>
+	<div class="layui-card-body">
+		<pre class="layui-code" lay-title="html" lay-skin="notepad">
+			<form id="formPreview" class="survey_form newform" action="https://proxcrm.xgate.com/app/index.php/webforms/form/form?encid=&lt;?php echo $_GET['encid'];?&gt;&tracker=e1b86df4-3b20-73ad-d489-cc2adaf87016" method="post">
+				<div class="btn_box">
+					<div id="submitFormBtn" class="btn" onclick="clickSave()">RMK內部專用<br />按此換領體驗裝</div>
+					<input type="hidden" name="mode" id="mode" /><input type="hidden" id="externalRequestToken" name="externalRequestToken" value="03a5a02f90475fd" /></div>
+			</form>
+		</pre>
+		<pre class="layui-code" lay-title="javascript" lay-skin="notepad">
+//初始密码
+var arr = ["RMK2020", "rmk2020"];
+
+function openFancyboxConfirm() {
+&nbsp;&nbsp;yesbtn = 'Confirm';
+&nbsp;&nbsp;nobtn = 'Cancel';
+
+&nbsp;&nbsp;fancyconfirm("", {
+&nbsp;&nbsp;&nbsp;&nbsp;buttons: [{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class': "yes",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "button",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "Yes",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "1"
+&nbsp;&nbsp;&nbsp;&nbsp;}, {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class': "no",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "button",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "No",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: "0"
+&nbsp;&nbsp;&nbsp;&nbsp;}, ],
+&nbsp;&nbsp;&nbsp;&nbsp;modal: true
+&nbsp;&nbsp;},
+&nbsp;&nbsp;function(resp) {
+&nbsp;&nbsp;&nbsp;&nbsp;if(resp == 1) {
+&nbsp;&nbsp;&nbsp;&nbsp;var redeemCodeResult = redeemCode();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(redeemCodeResult == 1) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("mode").value = "Submit";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var theForm = document.getElementById("formPreview");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;theForm.submit();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert('error:' + resp);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;} else if(resp == 0) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$("#submitFormBtn").removeAttr('disabled');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$("#submitFormBtn").removeClass('disabledbtn');
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;});
+&nbsp;&nbsp;setTimeout('$("#submitFormBtn").attr("disabled","disabled");', 100);
+}
+
+$("#redemptionConfirmBox .no").on("click", function() {
+&nbsp;&nbsp;$(".scfSubmitButtonBorder2 div").css("background-color", "#000000 !important");
+&nbsp;&nbsp;$(".scfSubmitButtonBorder2 div").mouseout();
+});
+
+function fancyconfirm(msg, options, callback) {
+&nbsp;&nbsp;$.fancybox("#redemptionConfirmBox", {
+&nbsp;&nbsp;&nbsp;&nbsp;modal: options.modal,
+&nbsp;&nbsp;&nbsp;&nbsp;beforeShow: function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content.prepend("<p class=\"title\"></p>");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$("#redemptionConfirmBox .title").html(msg);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options.buttons = [{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class: "yes",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "確認",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class: "no",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title: "取消",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}];
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content.append('<div class="form_txt2" style="color:#000; font-size:16px"><strong>由工作人員輸入驗證碼:</strong></div> <input class="password" type="password"><br><div id="approvalErr" style="color:#FF0000; display:none;">驗證碼不正確</div>');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(i = 0; i < options.buttons.length; i++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content.append($("<input>", {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: "button",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class': "confirm " + options.buttons[i]['class'],
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value: options.buttons[i].title
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).data("index", i).css("margin-left", ((i > 0) ? "12px" : "")));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this.content).css("text-align", "center");
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;afterShow: function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(".confirm").on("click", function(event) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ret = options.buttons[$(event.target).data("index")].value;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!ret || jQuery.inArray($('.password').val(), arr) != -1) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//$('#Field1').val($('.password').val());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.fancybox.close();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#approvalErr').show();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;afterClose: function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.content.html("");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('#redemptionConfirmBox .title').remove();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.yes').remove();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$('.no').remove();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback.call(this, ret);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$("#submitFormBtn").removeAttr("disabled");
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;});
+}
+		</pre>
+	</div>
+</div>
+
+<script type="text/javascript">
+	layui.use(['layer','code'], function(){
+		var layer = layui.layer;
+		
+		layui.code({
+			elem: '.layui-code',
+			about: false,
+			encode: true,
+			height: "30vh",
+		})
+			
+	})
+</script>
