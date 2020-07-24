@@ -1,0 +1,91 @@
+<style type="text/css">
+	.look{
+		max-height: 70vh;
+		overflow: auto;
+	}
+	.layui-tab{
+		background: #ffffff;
+	}
+	.layui-code-ol{
+		margin-left: 0 !important;
+	}
+	
+</style>
+
+<form class="layui-form">
+	<div class="layui-card">
+		<div class="layui-card-header">
+			详情
+		</div>
+		<div class="layui-card-body">
+			<select lay-filter="template-version">
+				<option selected="" value="">请选择</option>
+				<option value="v1.5">V 1.5</option>
+				<option value="v1.6">V 1.6</option>
+			</select>
+		</div>
+	</div>
+	
+	<div class="layui-tab layui-tab-brief">
+		<ul class="layui-tab-title">
+			<li class="layui-this">预览</li>
+			<li>源码</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show look">
+				
+			</div>
+			<div class="layui-tab-item">
+				<pre class="layui-code" lay-title="html" lay-skin="notepad"></pre>
+			</div>
+		</div>
+	</div>
+	
+</form>
+		
+
+<script type="text/javascript">
+	layui.use(['form','element','code','layer'], function(){
+		var form = layui.form,
+			element = layui.element,
+			layer = layui.layer;
+		
+		layui.code({
+			elem: '.layui-code',
+			about: false,
+			encode: true,
+			height: "60vh",
+		})
+		
+		var pre_url = './dist/views/conventional/notes/email/template/';
+		//下拉列表属性切换
+		form.on('select(template-version)', function (data) {
+			if(data.value){
+				console.log(data.value);
+				$.ajax({
+					type: "get",
+					url: pre_url+data.value+'.html',
+					async: true,
+					success: function(e){
+						$('.layui-code').text(e);
+						$('.look').html(e);
+						
+						//重新渲染
+						layui.code({
+							elem: '.layui-code',
+							about: false,
+							encode: true,
+							height: "60vh"
+						})
+						
+					},
+					error: function(e){
+						console.log(e);
+					}
+				});
+				
+				
+			}
+		});
+	})
+</script>
