@@ -18,74 +18,130 @@
 			详情
 		</div>
 		<div class="layui-card-body">
-			<select lay-filter="template-version">
-				<option selected="" value="">请选择版本</option>
-				<option value="v1.5">V 1.5</option>
-				<option value="v1.6">V 1.6</option>
+			<select id="version" lay-filter="template-version" lay-search>
+				<option value="" disabled="disabled">test</option>
 			</select>
 		</div>
 	</div>
 	
-	<div class="layui-tab layui-tab-brief">
+	<div class="layui-tab layui-tab-brief" lay-filter="test">
 		<ul class="layui-tab-title">
-			<li class="layui-this">预览</li>
-			<li>源码</li>
+			<li class="layui-this">源码</li>
+			<li>预览</li>
 		</ul>
 		<div class="layui-tab-content">
-			<div class="layui-tab-item layui-show look">
-				<br /><em>请选择版本</em>
+			<div class="layui-tab-item layui-show">
+				<textarea id="editCode"></textarea>
 			</div>
-			<div class="layui-tab-item">
-				<pre class="layui-code" lay-title="html" lay-skin="notepad"></pre>
+			<div class="layui-tab-item look">
+				<br /><em>请选择版本</em>
 			</div>
 		</div>
 	</div>
-	
+
 </form>
-		
+
 
 <script type="text/javascript">
-	layui.use(['form','element','code','layer'], function(){
+	layui.use(['form','element','layer','layedit'], function(){
 		var form = layui.form,
 			element = layui.element,
-			layer = layui.layer;
+			layer = layui.layer,
+			layedit = layui.layedit;
+			
 		
-		layui.code({
-			elem: '.layui-code',
-			about: false,
-			encode: true,
-			height: "60vh",
-		})
+		layedit.set({
+			uploadImage: {
+                url: '',
+                field: 'file',//上传时的文件参数字段名
+                accept: 'image',
+                acceptMime: 'image/*',
+                exts: 'jpg|png|gif|bmp|jpeg',
+                size: 1024 * 10,
+                done: function (data) {//文件上传接口返回code为0时的回调
+                }
+           	},
+            //开发者模式 --默认为false
+            devmode: true,
+            //插入代码设置
+            codeConfig: {
+                hide: true,  //是否显示编码语言选择框
+                default: 'HTML' //hide为true时的默认语言格式
+            },
+            tool: [
+                'html', 'code', 'strong', 'italic', 'underline', 'del', 'addhr', '|', 'fontFomatt','fontfamily','fontSize', 'colorpicker','fontBackColor', 'face'
+                , '|', 'left', 'center', 'right', '|', 'link', 'unlink','images', 'image_alt', 'video', 'anchors'
+                , '|','table','preview','help',
+            ],
+            height: '500'
+        });
 		
+		var editCode = layedit.build('editCode');
 		var pre_url = './dist/views/conventional/notes/email/template/';
 		//下拉列表属性切换
 		form.on('select(template-version)', function (data) {
 			if(data.value){
-				console.log(data.value);
 				$.ajax({
 					type: "get",
 					url: pre_url+data.value+'.html',
 					async: true,
 					success: function(e){
-						$('.layui-code').text(e);
-						$('.look').html(e);
-						
-						//重新渲染
-						layui.code({
-							elem: '.layui-code',
-							about: false,
-							encode: true,
-							height: "60vh"
-						})
-						
+						$('#editCode').text(e);
+						editCode = layedit.build('editCode');
 					},
-					error: function(e){
+					error: function(e) {
 						console.log(e);
 					}
 				});
-				
-				
 			}
 		});
-	})
-</script>
+		
+		$.ajax({
+			type: "get",
+			url: "./json/notes/email&webform/template.js",
+			async: true,
+			dataType: 'json',
+			success: function(e){
+				var str = '<option selected="" value="">请选择版本</option>';
+				e.data.forEach(function(item, index){
+					str += '<optgroup label="'+ item.title +'">';
+					item.data.forEach(function(item, index){
+						if(item.disabled){
+							str += '<option disabled="disabled" value="'+ item.value +'" status="'+ item.status +'">'+ item.txt +'</option>';
+						}else{
+							str += '<option value="'+ item.value +'" status="'+ item.status +'">'+ item.txt +'</option>';
+						}
+					})
+					str += '</optgroup>';
+				})
+				$('#version').html(str);
+				form.render('select');
+				
+				$('#version option').each(function(index, item){
+					if($(item).attr('status') == 'pass'){//通过
+						$('dd[lay-value="'+$(item).val()+'"]').prepend('<i class="fa fa-check" style="color: #029789;margin-right: 10px;"></i>');
+					}else if($(item).attr('status') == 'error'){//错误
+						$('dd[lay-value="'+$(item).val()+'"]').prepend('<i class="fa fa-remove" style="color: #FF5722;margin-right: 10px;"></i>');
+					}else if($(item).attr('status') == 'warning'){//警告
+						$('dd[lay-value="'+$(item).val()+'"]').prepend('<i class="fa fa-ban" style="color: #FFB800;margin-right: 10px;"></i>');
+					}else{
+						console.log('提示：没有该状态！');
+					}
+				})
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+		
+		
+		//同步编辑器与预览项
+		element.on('tab(test)', function(data) {
+			if(data.index == 1){
+				var txt = layedit.getContent(editCode);
+				$('.look').html(txt);
+			}
+			
+		});
+
+})</script>
