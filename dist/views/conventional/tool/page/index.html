@@ -66,34 +66,35 @@
 </div>
 
 <script type="text/javascript">
-layui.use(['layer','code','layedit'], function(){
+layui.use(['layer','layedit'], function(){
 		var layer = layui.layer,
 			layedit = layui.layedit;
-			
-		layui.code({
-			elem: '.layui-code',
-			about: false,
-			encode: true,
-			height: "60vh",
-		})
 		
 		layedit.set({
-	        uploadImage: {
-	            url: '',
-	            type: 'post'
-	        },
-	        devmode: true,
-	        codeConfig: {
-	            hide: true,
-	            default: 'HTML'
-	        },
-	        tool: [
-	            'html', 'code', 'strong', 'italic', 'underline', 'del', 'addhr', '|', 'fontFomatt','fontfamily','fontSize', 'colorpicker','fontBackColor', 'face'
+			uploadImage: {
+                url: '',
+                field: 'file',//上传时的文件参数字段名
+                accept: 'image',
+                acceptMime: 'image/*',
+                exts: 'jpg|png|gif|bmp|jpeg',
+                size: 1024 * 10,
+                done: function (data) {//文件上传接口返回code为0时的回调
+                }
+           	},
+            //开发者模式 --默认为false
+            devmode: true,
+            //插入代码设置
+            codeConfig: {
+                hide: true,  //是否显示编码语言选择框
+                default: 'HTML' //hide为true时的默认语言格式
+            },
+            tool: [
+                'html', 'code', 'strong', 'italic', 'underline', 'del', 'addhr', '|', 'fontFomatt','fontfamily','fontSize', 'colorpicker','fontBackColor', 'face'
                 , '|', 'left', 'center', 'right', '|', 'link', 'unlink','images', 'image_alt', 'video', 'anchors'
                 , '|','table','preview','help',
-	        ],
-	        height: 500,
-	    });
+            ],
+            height: '500'
+        });
 		        
 		var html = layedit.build('html');
 		var js = layedit.build('js');
