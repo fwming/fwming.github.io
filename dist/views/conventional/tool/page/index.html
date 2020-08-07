@@ -73,7 +73,7 @@ $('.btn').click(function(){
 		async: true,
 		dataType: 'html',
 		success: function(e){
-			$('body').append(e);
+			$('body').append(<div id="snap-box">'+e+'</div>);
 			var css = $this.attr('style');
 			setCssToPopup(css);
 			layer.open({
@@ -96,7 +96,7 @@ $('.btn').click(function(){
 				},
 				end: function(){
 					console.log('销毁');
-					$('#edit-pop').remove();
+					$('#snap-box').remove();
 				}
 			})
 			
