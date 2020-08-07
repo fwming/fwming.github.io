@@ -10,39 +10,17 @@
 	<div class="layui-row layui-col-space15">
 		<div class="layui-col-md4">
 			<div class="layui-card">
-				<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				<div class="layui-tab layui-tab-brief">
 					<ul class="layui-tab-title">
-						<li class="layui-this">UI Builder</li>
-						<li>Responsive</li>
+						<li class="layui-this">集成插件</li>
+						<li>自定义组件</li>
 					</ul>
 					<div class="layui-tab-content">
 						<div class="layui-tab-item layui-show">
-							<ul>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-								<li>待定项1</li>
-							</ul>
+							集成插件
 						</div>
 						<div class="layui-tab-item">
-							<ul>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-								<li>待定项2</li>
-							</ul>
+							自定义组件
 						</div>
 					</div>
 				</div>
@@ -50,21 +28,75 @@
 		</div>
 		<div class="layui-col-md8">
 			<div class="layui-card">
-				<div class="layui-card-header">
-					车间
-				</div>
-				<div class="layui-card-body">
-					<button class="btn layui-btn layui-bg-red" style="text-align: center;font-size: 24px;font-style: oblique; color: #ff0000;background-color: #009688;border-top-color: #ff0000;">test</button>
-					
-					<button class="btn layui-btn layui-bg-blue" style="color: #00ff00;font-size: 24px;">test</button>
+				<div class="layui-tab layui-tab-brief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">视图</li>
+						<li>预览</li>
+						<li>HTML</li>
+						<li>脚本</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									车间
+								</div>
+								<div class="layui-card-body">
+									<button class="btn layui-btn layui-bg-red" style="text-align: center;font-size: 24px;font-style: oblique; color: #ff0000;background-color: #009688;border-top-color: #ff0000;">test</button>
+									
+									<button class="btn layui-btn layui-bg-blue" style="color: #00ff00;font-size: 24px;">test</button>
+								</div>
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<div class="look">预览</div>
+						</div>
+						<div class="layui-tab-item">
+							<textarea id="html" style="display: none;"></textarea>
+						</div>
+						<div class="layui-tab-item">
+							<textarea id="js" style="display: none;"></textarea>
+						</div>
+					</div>
 				</div>
 			</div>
-
+			
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
+layui.use(['layer','code','layedit'], function(){
+		var layer = layui.layer,
+			layedit = layui.layedit;
+			
+		layui.code({
+			elem: '.layui-code',
+			about: false,
+			encode: true,
+			height: "60vh",
+		})
+		
+		layedit.set({
+	        uploadImage: {
+	            url: '',
+	            type: 'post'
+	        },
+	        devmode: true,
+	        codeConfig: {
+	            hide: true,
+	            default: 'HTML'
+	        },
+	        tool: [
+	            'html','code','strong','underline','del','|','left','center','right','|','link','unlink','image','face'
+	        ],
+	        height: 500,
+	    });
+		        
+		var html = layedit.build('html');
+		var js = layedit.build('js');
+	})
+
 $('.btn').click(function(){
 	var $this = $(this);
 	$.ajax({
@@ -73,7 +105,7 @@ $('.btn').click(function(){
 		async: true,
 		dataType: 'html',
 		success: function(e){
-			$('body').append(<div id="snap-box">'+e+'</div>);
+			$('body').append('<div id="snap-box">'+e+'</div>');
 			var css = $this.attr('style');
 			setCssToPopup(css);
 			layer.open({
