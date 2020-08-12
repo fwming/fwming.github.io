@@ -1,0 +1,213 @@
+<style type="text/css">
+	.layui-card .layui-tab-brief .layui-tab-content{
+		padding: 20px 0 0;
+	}
+	.layui-input{
+		padding: 0 10px;
+	}
+	.layui-elem-field{
+		margin-bottom: 25px;
+	}
+	.layui-field-box{
+		padding: 15px;
+	}
+	fieldset .layui-btn{
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+	}
+	.load-img-box{
+		min-height: 50px;
+		max-height: 80vh;
+		text-align: center;
+		overflow-y: auto;
+	}
+	.load-img-box img{
+		display: inline-block;
+		float: left;
+	}
+	.colorpicker-val{
+		float: right;
+		width: calc(100% - 40px);
+	}
+	.pop-ups{
+		padding: 20px 20px 20px 10px;
+	}
+	.layui-elem-field legend{
+		font-size: 18px;
+	}
+</style>
+
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>新版EDM</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-card">
+		<div class="layui-card-header"><strong>自动化构建工具(v1.1)</strong></div>
+		<div class="layui-card-body">
+			<div class="layui-tab layui-tab-brief" lay-filter="tabChange">
+				<ul class="layui-tab-title">
+					<li lay-id="01" class="layui-this"><strong>流编辑</strong></li>
+					<li lay-id="02"><strong>预览</strong></li>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show flow-box">
+						<fieldset class="layui-elem-field">
+							<legend>EDM设置</legend>
+							<div class="layui-field-box">
+								<form class="layui-form">
+									<div class="layui-row layui-col-space15">
+										<div class="layui-col-md4">
+											<label class="layui-form-label">EDM 宽度</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input edm-width" lay-tips="EDM宽度" value="800" />
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">设计稿宽度</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input img-natural-width" lay-tips="设计稿宽度" value="1600" />
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">表格背景</label>
+											<div class="layui-input-block">
+												<div class="table-bgcolor-colorpicker" lay-tips="table背景颜色"></div>
+												<input type="text" readonly="readonly" class="table-bgcolor layui-input colorpicker-val" value="#ffffff"/>
+											</div>
+										</div>
+										
+										<div class="layui-col-md4">
+											<label class="layui-form-label">切换语言</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input lang-text" lay-tips="右上角语言切换文本" value="中文" disabled="disabled"/>
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">图片路径</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input all-img-src" lay-tips="服务器端图片src地址共同部分" value="" placeholder="https://imgsrv1.../WTJGdGNHRnBaMjVmTXpjPQ/"/>
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">字体颜色</label>
+											<div class="layui-input-block">
+												<div class="lang-color-colorpicker" lay-tips="语言字体颜色"></div>
+												<input type="text" readonly="readonly" class="lang-color layui-input colorpicker-val" value="#ffffff"/>
+											</div>
+										</div>
+										
+										<div class="layui-col-md4">
+											<label class="layui-form-label">图片链接</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input all-img-href" lay-tips="所有图片链接，单个编辑会覆盖此链接" value="" />
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">子标题</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input preheader-text" lay-tips="隐藏文字，子标题" value="" />
+											</div>
+										</div>
+										<div class="layui-col-md4">
+											<label class="layui-form-label">切换类型 <i class="fa fa-question-circle-o" lay-tips="该项表示的是链接，即点击Lang后会跳转到该项选中的页面。"></i></label>
+											<div class="layui-input-block">
+												<select class="href-type" lay-filter="category" lay-tips="链接类型">
+													<option value="WHOLEEDM">WHOLEEDM</option>
+													<option value="ALTWHOLEEDM">ALTWHOLEEDM</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="layui-col-md3">
+											<label class="layui-form-label">语言开关</label>
+											<div class="layui-input-block" lay-tips="加载切换语言项">
+												<input type="checkbox" lay-skin="switch" lay-filter="lang" lay-text="开启|关闭">
+											</div>
+										</div>
+										<div class="layui-col-md3">
+											<label class="layui-form-label">页脚部分</label>
+											<div class="layui-input-block">
+												<input type="checkbox" lay-skin="switch" lay-filter="footer" lay-text="开启|关闭">
+											</div>
+										</div>
+										<div class="layui-col-md3">
+											<label class="layui-form-label">浏览器预览</label>
+											<div class="layui-input-block" lay-tips="配合子标题使用，使用时须关闭平台的Online Version功能，存在子标题时开启该功能。">
+												<input type="checkbox" lay-skin="switch" lay-filter="look" lay-text="开启|关闭">
+											</div>
+										</div>
+										<div class="layui-col-md3">
+											<label class="layui-form-label">加载脚本</label>
+											<div class="layui-input-block">
+												<input type="checkbox" lay-skin="switch" lay-filter="loadjs" lay-text="开启|关闭">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</fieldset>
+						
+						
+						<fieldset class="layui-elem-field layui-field-title edm-online-version" style="display: none;">
+							<legend>头部在线浏览</legend>
+							<div class="layui-field-box">
+								<textarea class="layui-textarea"></textarea>
+							</div>
+						</fieldset>
+						
+						<fieldset class="layui-elem-field layui-field-title edm-footer" style="display: none;">
+							<legend>页脚部分</legend>
+							<div class="layui-field-box">
+								<textarea class="layui-textarea"></textarea>
+							</div>
+						</fieldset>
+						
+						<fieldset class="layui-elem-field layui-field-title edm-loadjs" style="display: none;">
+							<legend>加载脚本</legend>
+							<div class="layui-field-box">
+								<textarea class="layui-textarea" placeholder="无需使用script标签包裹"></textarea>
+							</div>
+						</fieldset>
+						
+						<fieldset class="layui-elem-field">
+							<legend>EDM生成操作</legend>
+							<div class="layui-field-box">
+								<div class="layui-row layui-col-space15">
+									<div class="layui-col-md4">
+										<button class="layui-btn load-img-btn">上传图片</button>
+										<input type="file" multiple="multiple" class="layui-hide" id="load-img"/>
+									</div>
+									<div class="layui-col-md4">
+										<button class="output-edm layui-btn layui-btn-checked layui-btn-disabled" disabled="disabled">生成EDM</button>
+									</div>
+									<div class="layui-col-md4">
+										<button class="copy-code layui-btn layui-btn-checked layui-btn-disabled" disabled="disabled">复制代码</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						
+						<fieldset class="layui-elem-field layui-field-title">
+							<legend>本地预览效果</legend>
+							<div class="layui-field-box load-img-box"></div>
+						</fieldset>
+						
+					</div>
+					<div class="layui-tab-item">
+						<div class="look"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+<script type="text/javascript" src="./dist/controller/edm/index-1.1_encrypted.js"></script>
