@@ -1,7 +1,7 @@
 # jesper
 
 #### Description
-个人知识管理、收集平台
+个人知识管理、收集平台。
 
 #### Software Architecture
 Software architecture description
