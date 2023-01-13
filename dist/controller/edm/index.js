@@ -114,6 +114,7 @@
 						obj_img.height = data.h;
 						obj_img.href = all_img_href;
 						obj_img.rowBgcolor = '#ffffff';
+						obj_img.alt = '';
 						allImg.push(obj_img);
 						$(val).css({
 							'width': data.w * edm_width / img_natural_width / edm_width * 100 + '%'
@@ -146,7 +147,7 @@
 			$this = $(this);
 			layer.open({
 				type: 1,
-				content: '<div class="pop-ups"><div class="layui-row layui-col-space15"><div class="layui-col-md12"><label class="layui-form-label">行背景色</label><div class="layui-input-block"><div class="row-bgcolor-colorpicker" lay-tips="语言字体颜色"></div><input type="text" readonly="readonly" class="row-bgcolor layui-input colorpicker-val" value="#ffffff"/></div></div><div class="layui-col-md12"><label class="layui-form-label">图片链接</label><div class="layui-input-block"><input type="text" class="img-href layui-input"/></div></div></div></div>',
+				content: '<div class="pop-ups"><div class="layui-row layui-col-space15"><div class="layui-col-md12"><label class="layui-form-label">行背景色</label><div class="layui-input-block"><div class="row-bgcolor-colorpicker" lay-tips="语言字体颜色"></div><input type="text" readonly="readonly" class="row-bgcolor layui-input colorpicker-val" value="#ffffff"/></div></div><div class="layui-col-md12"><label class="layui-form-label">图片链接</label><div class="layui-input-block"><input type="text" class="img-href layui-input"/></div></div><div class="layui-col-md12"><label class="layui-form-label">图片Alt值</label><div class="layui-input-block"><input type="text" class="img-alt layui-input"/></div></div></div></div>',
 				success: function(layero, index) {
 					$('.pop-ups .row-bgcolor').val(allImg[$this.index()].rowBgcolor);
 					colorpicker.render({
@@ -161,15 +162,17 @@
 							$(this.elem).next('input').val(color || '#ffffff')
 						}
 					});
-					$('.pop-ups .img-href').val(allImg[$this.index()].href)
+					$('.pop-ups .img-href').val(allImg[$this.index()].href);
+					$('.pop-ups .img-alt').val(allImg[$this.index()].alt);
 				},
 				btn: ['取消', '确定'],
 				yes: function(index, layero) {
 					layer.close(index)
 				},
 				btn2: function(index, layero) {
+					allImg[$this.index()].rowBgcolor = $('.pop-ups .row-bgcolor').val().trim();
 					allImg[$this.index()].href = $('.pop-ups .img-href').val().trim();
-					allImg[$this.index()].rowBgcolor = $('.pop-ups .row-bgcolor').val().trim()
+					allImg[$this.index()].alt = $('.pop-ups .img-alt').val().trim();
 				}
 			})
 		});
@@ -225,11 +228,11 @@
 				if (w == edm_width) {
 					edm_html += '<tr style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;"><td style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important;"><table style="border-spacing: 0px !important; border-collapse: collapse !important; margin: 0px auto !important; table-layout: fixed !important; width: 100%; background: ' + allImg[i].rowBgcolor + ';" bgcolor="' + allImg[i].rowBgcolor + '" border="0" cellspacing="0" cellpadding="0"><tbody><tr style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">';
 					if (allImg[i].href) {
-						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + allImg[i].href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></a></td>'
+						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + allImg[i].href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></a></td>'
 					} else if (all_img_href) {
-						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + all_img_href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></a></td>'
+						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + all_img_href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></a></td>'
 					} else {
-						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></td>'
+						edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></td>'
 					}
 					edm_html += '</tr></tbody></table></td></tr>';
 					temporary_width = 0
@@ -240,11 +243,11 @@
 					if (temporary_width < edm_width) {
 						temporary_width += w;
 						if (allImg[i].href) {
-							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + allImg[i].href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></a></td>'
+							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + allImg[i].href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></a></td>'
 						} else if (all_img_href) {
-							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + all_img_href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></a></td>'
+							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><a style="line-height: 0;" href="' + all_img_href + '" target="_blank"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></a></td>'
 						} else {
-							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="" width="' + w + '" align="middle" border="0" /></td>'
+							edm_html += '<td class="banner" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important; padding: 0px; text-align: center;width: ' + w / edm_width * 100 + '%;"><img style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; width: 100%; max-width: ' + w + 'px; -ms-interpolation-mode: bicubic; display: block; border: 0; margin: 0;line-height: 0;" src="' + all_img_src + allImg[i].name + '" alt="'+ allImg[i].alt +'" width="' + w + '" align="middle" border="0" /></td>'
 						}
 						if (temporary_width >= edm_width) {
 							temporary_width = 0
