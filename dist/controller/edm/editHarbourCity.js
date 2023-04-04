@@ -110,6 +110,11 @@
                     }
                 }
                 console.log(excel_datas);
+                if(excel_datas){
+                    layer.msg('上传文件成功');
+                }else{
+                    layer.msg('上传文件失败');
+                }
             }
         });
 
@@ -130,7 +135,14 @@
 			var files = document.getElementById('load-img').files;
             console.log(files);
             for(var i = 0; i < files.length; i++){
-                imgArr.push(imgUrl + files[i].name);
+                if(files[i].type.indexOf('image/') >= 0){
+                    imgArr.push(imgUrl + files[i].name);
+                }
+            }
+            if(imgArr.length == files.length){
+                layer.msg('上传图片成功');
+            }else{
+                layer.msg('请上传图片类型');
             }
 		});
 
