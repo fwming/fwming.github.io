@@ -1,8 +1,9 @@
 (function() {
-	layui.use(['layer', 'layedit', 'form', 'copy'],	function() {
+	layui.use(['upload', 'layer', 'layedit', 'form', 'copy'],	function() {
 		var layer = layui.layer,
             form = layui.form,
             copy = layui.copy,
+            upload = layui.upload
             layedit = layui.layedit;
 
         // 获取编辑模式盒子
@@ -10,10 +11,21 @@
         var $_edit_tc = $('.edit_tc');
         var $_edit_sc = $('.edit_sc');
 
-        // 获取预览模式盒子
-        var $_look_en = $('#en');
-        var $_look_tc = $('#tc');
-        var $_look_sc = $('#sc');
+        upload.render({
+            elem: '#test2',
+            url: 'https://gitee.com/fwmlc/test/upload_process/master', //此处配置你自己的上传接口即可
+            multiple: true,
+            before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
+            },
+            done: function(res){
+                console.log(res);
+                //上传完毕
+            }
+        });
 
         // 图片路径
         var imgUrl = '';
@@ -42,8 +54,9 @@
         form.on('radio(version)', function(data){
             EDM_Version = data.value;
             console.log('版本：' + EDM_Version);
-        });
-        
+        });        
+
+        // 编辑器初始化
 		layedit.set({
 			//开发者模式 --默认为false
 			devmode: true,
@@ -60,8 +73,6 @@
 			],
 			height: '578'
 		});
-
-        // 编辑器初始化
 		var index_en = layedit.build('en');
 		var index_tc = layedit.build('tc');
 		var index_sc = layedit.build('sc');
@@ -118,6 +129,7 @@
             }
         });
 
+
         // 上传图片
 		$('.load-img-btn').click(function(){            
             // 图片路径
@@ -134,6 +146,7 @@
             imgArr = [];
 			var files = document.getElementById('load-img').files;
             console.log(files);
+            
             for(var i = 0; i < files.length; i++){
                 if(files[i].type.indexOf('image/') >= 0){
                     imgArr.push(imgUrl + files[i].name);
@@ -144,7 +157,9 @@
             }else{
                 layer.msg('请上传图片类型');
             }
+            console.log(imgArr);
 		});
+
 
         // 一键生成
         $('.create-edm-btn').click(function(){
@@ -157,17 +172,20 @@
             }
         })
 
+
         // 同步模式
         $('.save-btn').click(function(){
             layer.msg("同步成功");
             Synchronize();
         })
 
+
         // 复制代码
 		$('.copy-code').click(function() {
 			var code = $('.look').html();
 			copy.copyFn(code)
 		})
+
 
         // 创建EDM函数
         function CreateEDM(resource){
@@ -184,6 +202,9 @@
             var tc_layout = '';
             var sc_layout = '';
             // 动态资源
+            var en_New_Store_Highlight = '';
+            var tc_New_Store_Highlight = '';
+            var sc_New_Store_Highlight = '';
             var en_Exclusive_Highlight = '';
             var tc_Exclusive_Highlight = '';
             var sc_Exclusive_Highlight = '';
@@ -215,6 +236,9 @@
             var sc_footer = '';
             var line = '';
             var space = '';
+            var en_newStoreHeader = '';
+            var tc_newStoreHeader = '';
+            var sc_newStoreHeader = '';
             var en_exclusiveHeader = '';
             var tc_exclusiveHeader = '';
             var sc_exclusiveHeader = '';
@@ -231,7 +255,7 @@
             var tc_imgText = '';
             var sc_imgText = '';
 
-            
+
             // 获取静态资源
             $.ajax({
 				type: "get",
@@ -258,6 +282,9 @@
                     line = e.split('<!-- line -->')[1];
                     space = e.split('<!-- space -->')[1];
 
+                    en_newStoreHeader = e.split('<!-- newStoreHeader -->')[1].split('<!-- en -->')[1];
+                    tc_newStoreHeader = e.split('<!-- newStoreHeader -->')[1].split('<!-- tc -->')[1];
+                    sc_newStoreHeader = e.split('<!-- newStoreHeader -->')[1].split('<!-- sc -->')[1];
                     en_exclusiveHeader = e.split('<!-- exclusiveHeader -->')[1].split('<!-- en -->')[1];
                     tc_exclusiveHeader = e.split('<!-- exclusiveHeader -->')[1].split('<!-- tc -->')[1];
                     sc_exclusiveHeader = e.split('<!-- exclusiveHeader -->')[1].split('<!-- sc -->')[1];
@@ -313,6 +340,47 @@
                             en_Exclusive_Highlight += space;
                             tc_Exclusive_Highlight += space;
                             sc_Exclusive_Highlight += space;
+                        }
+                    }
+
+                    // New_Store_Highlight
+                    var isHasHeader_newStore_Highlight = 0;
+                    if(resource.New_Store_Highlight.length){
+                        for(var i = 0; i < resource.New_Store_Highlight.length; i++){
+                            if(!(EDM_Version == 'Shui' && resource.New_Store_Highlight[i].BelongTo_Shui == 'no')){
+                                isHasHeader_newStore_Highlight++;
+                                if(isHasHeader_newStore_Highlight == 1){
+                                    en_New_Store_Highlight += en_newStoreHeader;
+                                    tc_New_Store_Highlight += tc_newStoreHeader;
+                                    sc_New_Store_Highlight += sc_newStoreHeader;
+                                }
+                                if(resource.New_Store_Highlight[i].Has_logo == 'yes'){
+                                    en_New_Store_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                                    tc_New_Store_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                                    sc_New_Store_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                                    imgIndex += 2;
+                                }else{
+                                    en_New_Store_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                                    tc_New_Store_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                                    sc_New_Store_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                                    imgIndex++;
+                                }
+                                // 加分割线
+                                if(i < resource.New_Store_Highlight.length - 1){
+                                    en_New_Store_Highlight += line;
+                                    tc_New_Store_Highlight += line;
+                                    sc_New_Store_Highlight += line;
+                                }
+
+                            }
+                        }
+                        // 末尾加空白间隔
+                        if(isHasHeader_newStore_Highlight){
+                            en_New_Store_Highlight += space;
+                            tc_New_Store_Highlight += space;
+                            sc_New_Store_Highlight += space;
                         }
                     }
 
@@ -383,9 +451,9 @@
                     }
 
                     // EDM拼接
-                    en_layout += en_style + en_header + en_Exclusive_Highlight + en_Event_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
-                    tc_layout += tc_style + en_header + tc_Exclusive_Highlight + tc_Event_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
-                    sc_layout += sc_style + en_header + sc_Exclusive_Highlight + sc_Event_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
+                    en_layout += en_style + en_header + en_Exclusive_Highlight + en_New_Store_Highlight + en_Event_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
+                    tc_layout += tc_style + tc_header + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_Event_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
+                    sc_layout += sc_style + sc_header + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_Event_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
 
                     // EDM渲染
                     $_edit_en.html(en_layout);
