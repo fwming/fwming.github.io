@@ -3,7 +3,7 @@
 		var layer = layui.layer,
             form = layui.form,
             copy = layui.copy,
-            upload = layui.upload
+            upload = layui.upload,
             layedit = layui.layedit;
 
         // 获取编辑模式盒子
@@ -96,15 +96,15 @@
             // 创建 FileReader 示例
             let showPreview = new FileReader();
             // 读取文件
-            showPreview.readAsBinaryString(file)
+            showPreview.readAsBinaryString(file);
             // 文件读取成功时的回调函数
             showPreview.onload = (e) => {
                 // 获取传递的表格
-                let data = e.target.result
+                let data = e.target.result;
                 // 以二进制流方式读取到整份的excel 表格对象
                 let workbook = XLSX.read(data, {
                     type: 'binary'
-                })
+                });
                 // 表格的表格范围，可用于判断表头是否数量是否正确
                 let fromTo = '';
                 console.log(fromTo);
@@ -119,7 +119,7 @@
                         // 如果只取第一张表，就取消注释这行
                         // break;
                     }
-                }
+                };
                 console.log(excel_datas);
                 if(excel_datas){
                     layer.msg('上传文件成功');
@@ -151,7 +151,7 @@
                 if(files[i].type.indexOf('image/') >= 0){
                     imgArr.push(imgUrl + files[i].name);
                 }
-            }
+            };
             if(imgArr.length == files.length){
                 layer.msg('上传图片成功');
             }else{
@@ -170,21 +170,21 @@
             }else{
                 layer.msg('请先上传文件和图片');
             }
-        })
+        });
 
 
         // 同步模式
         $('.save-btn').click(function(){
             layer.msg("同步成功");
             Synchronize();
-        })
+        });
 
 
         // 复制代码
 		$('.copy-code').click(function() {
 			var code = $('.look').html();
-			copy.copyFn(code)
-		})
+			copy.copyFn(code);
+		});
 
 
         // 创建EDM函数
@@ -334,14 +334,14 @@
                                 }
 
                             }
-                        }
+                        };
                         // 末尾加空白间隔
                         if(isHasHeader_Exclusive_Highlight){
                             en_Exclusive_Highlight += space;
                             tc_Exclusive_Highlight += space;
                             sc_Exclusive_Highlight += space;
                         }
-                    }
+                    };
 
                     // New_Store_Highlight
                     var isHasHeader_newStore_Highlight = 0;
@@ -375,14 +375,14 @@
                                 }
 
                             }
-                        }
+                        };
                         // 末尾加空白间隔
                         if(isHasHeader_newStore_Highlight){
                             en_New_Store_Highlight += space;
                             tc_New_Store_Highlight += space;
                             sc_New_Store_Highlight += space;
                         }
-                    }
+                    };
 
                     // Event_Highlight
                     var isHasHeader_Event_Highlight = 0;
@@ -415,14 +415,14 @@
                                     sc_Event_Highlight += line;
                                 }
                             }
-                        }
+                        };
                         // 末尾加空白间隔
                         if(isHasHeader_Event_Highlight){
                             en_Event_Highlight += space;
                             tc_Event_Highlight += space;
                             sc_Event_Highlight += space;
                         }
-                    }
+                    };
 
                     // Exclusive
                     if(resource.Exclusive){
@@ -435,7 +435,7 @@
                             sc_Exclusive += sc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.Exclusive[i].Brand).replace('$_itemText', resource.Exclusive[i].Items_SC).replace('$_itemRemarks', resource.Exclusive[i].Remarks).replace('$_itemDate', resource.Exclusive[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.Exclusive[i].QTY);
                             imgIndex++;
                         }
-                    }
+                    };
 
                     // All_Tier
                     if(resource.All_Tier){
@@ -448,7 +448,7 @@
                             sc_All_Tier += sc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.All_Tier[i].Brand).replace('$_itemText', resource.All_Tier[i].Items_SC).replace('$_itemRemarks', resource.All_Tier[i].Remarks).replace('$_itemDate', resource.All_Tier[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.All_Tier[i].QTY);
                             imgIndex++;
                         }
-                    }
+                    };
 
                     // EDM拼接
                     en_layout += en_style + en_header + en_Exclusive_Highlight + en_New_Store_Highlight + en_Event_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
