@@ -87,7 +87,7 @@
         // 导入Excel文件
         $('.load-file-btn').click(function(){
             $('#load-file').click();
-        })
+        });
         // 读取excel数据
         $('#load-file').change(function() {
             // 获取传递过来的内容
