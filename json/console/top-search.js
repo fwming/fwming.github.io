@@ -1,7 +1,7 @@
 {
   "code": 0
   ,"msg": ""
-  ,"count": "100"
+  ,"count": "20"
   ,"data": [{
     "keywords": "贤心是男是女"
     ,"frequency": 8520
@@ -41,6 +41,6 @@
   },{
     "keywords": "layui官方教程"
     ,"frequency": 666
-    ,"userNums": 333
+    ,"userNums": 333555
   }]
 }

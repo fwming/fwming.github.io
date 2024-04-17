@@ -246,6 +246,9 @@
             var sc_footer = '';
             var line = '';
             var space = '';
+            var en_AppExclusive = '';
+            var tc_AppExclusive = '';
+            var sc_AppExclusive = '';
             var en_newStoreHeader = '';
             var tc_newStoreHeader = '';
             var sc_newStoreHeader = '';
@@ -269,7 +272,7 @@
             // 获取静态资源
             $.ajax({
 				type: "get",
-				url: "./dist/views/conventional/tool/harbourCity/template.html",
+				url: "./dist/views/conventional/tool/harbourCity/templateMJML.html",
 				async: false,
 				dataType: 'html',
 				success: function(e) {
@@ -277,20 +280,23 @@
                     tc_style = e.split('<!-- style -->')[1].split('<!-- tc -->')[1];
                     sc_style = e.split('<!-- style -->')[1].split('<!-- sc -->')[1];
                     EDM_Version == 'Normal'? versionBg = '#BAA79C' : versionBg = '#666666';
-                    en_header = e.split('<!-- header -->')[1].split('<!-- en -->')[1].replace('$_startTime', startTime).replace('$_preSubject', en_preSubject).replace('$_versionBg',versionBg);
-                    tc_header = e.split('<!-- header -->')[1].split('<!-- tc -->')[1].replace('$_startTime', startTime).replace('$_preSubject', tc_preSubject).replace('$_versionBg',versionBg);
-                    sc_header = e.split('<!-- header -->')[1].split('<!-- sc -->')[1].replace('$_startTime', startTime).replace('$_preSubject', sc_preSubject).replace('$_versionBg',versionBg);
+                    en_header = e.split('<!-- header -->')[1].split('<!-- en -->')[1].replaceAll('$_startTime', startTime).replaceAll('$_preSubject', en_preSubject).replaceAll('$_versionBg',versionBg);
+                    tc_header = e.split('<!-- header -->')[1].split('<!-- tc -->')[1].replaceAll('$_startTime', startTime).replaceAll('$_preSubject', tc_preSubject).replaceAll('$_versionBg',versionBg);
+                    sc_header = e.split('<!-- header -->')[1].split('<!-- sc -->')[1].replaceAll('$_startTime', startTime).replaceAll('$_preSubject', sc_preSubject).replaceAll('$_versionBg',versionBg);
                     en_gift1 = e.split('<!-- gift1 -->')[1].split('<!-- en -->')[1];
                     tc_gift1 = e.split('<!-- gift1 -->')[1].split('<!-- tc -->')[1];
                     sc_gift1 = e.split('<!-- gift1 -->')[1].split('<!-- sc -->')[1];
                     en_gift2 = e.split('<!-- gift2 -->')[1].split('<!-- en -->')[1];
                     tc_gift2 = e.split('<!-- gift2 -->')[1].split('<!-- tc -->')[1];
                     sc_gift2 = e.split('<!-- gift2 -->')[1].split('<!-- sc -->')[1];
-                    en_footer = e.split('<!-- footer -->')[1].split('<!-- en -->')[1].replace('$_remarks',resource.Remarks[0].Remarks_EN.replace(/\n/g, '<br>'));
-                    tc_footer = e.split('<!-- footer -->')[1].split('<!-- tc -->')[1].replace('$_remarks',resource.Remarks[0].Remarks_TC.replace(/\n/g, '<br>'));
-                    sc_footer = e.split('<!-- footer -->')[1].split('<!-- sc -->')[1].replace('$_remarks',resource.Remarks[0].Remarks_SC.replace(/\n/g, '<br>'));
+                    en_footer = e.split('<!-- footer -->')[1].split('<!-- en -->')[1].replaceAll('$_remarks',resource.Remarks[0].Remarks_EN.replaceAll(/\n/g, '<br>'));
+                    tc_footer = e.split('<!-- footer -->')[1].split('<!-- tc -->')[1].replaceAll('$_remarks',resource.Remarks[0].Remarks_TC.replaceAll(/\n/g, '<br>'));
+                    sc_footer = e.split('<!-- footer -->')[1].split('<!-- sc -->')[1].replaceAll('$_remarks',resource.Remarks[0].Remarks_SC.replaceAll(/\n/g, '<br>'));
                     line = e.split('<!-- line -->')[1];
                     space = e.split('<!-- space -->')[1];
+                    en_AppExclusive = e.split('<!-- AppExclusive -->')[1].split('<!-- en -->')[1];
+                    tc_AppExclusive = e.split('<!-- AppExclusive -->')[1].split('<!-- tc -->')[1];
+                    sc_AppExclusive = e.split('<!-- AppExclusive -->')[1].split('<!-- sc -->')[1];
 
                     en_newStoreHeader = e.split('<!-- newStoreHeader -->')[1].split('<!-- en -->')[1];
                     tc_newStoreHeader = e.split('<!-- newStoreHeader -->')[1].split('<!-- tc -->')[1];
@@ -310,7 +316,6 @@
                     en_imgText = e.split('<!-- imgText -->')[1].split('<!-- en -->')[1];
                     tc_imgText = e.split('<!-- imgText -->')[1].split('<!-- tc -->')[1];
                     sc_imgText = e.split('<!-- imgText -->')[1].split('<!-- sc -->')[1];
-
                     
                     
                     // Event_Highlight
@@ -325,15 +330,15 @@
                                     sc_Event_Highlight += sc_eventHeader;
                                 }                                
                                 if(resource.Event_Highlight[i].Has_logo == 'yes'){
-                                    en_Event_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_Event_Highlight += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
 
                                     imgIndex += 2;
                                 }else{
-                                    en_Event_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_Event_Highlight += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
 
                                     imgIndex++;
                                 }
@@ -365,15 +370,15 @@
                                     sc_Exclusive_Highlight += sc_exclusiveHeader;
                                 }
                                 if(resource.Exclusive_Highlight[i].Has_logo == 'yes'){
-                                    en_Exclusive_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Exclusive_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Exclusive_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_Exclusive_Highlight += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Exclusive_Highlight += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Exclusive_Highlight += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
                                     
                                     imgIndex += 2;
                                 }else{
-                                    en_Exclusive_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Exclusive_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Exclusive_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_Exclusive_Highlight += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Exclusive_Highlight += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Exclusive_Highlight += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
 
                                     imgIndex++;
                                 }
@@ -406,15 +411,15 @@
                                     sc_New_Store_Highlight += sc_newStoreHeader;
                                 }
                                 if(resource.New_Store_Highlight[i].Has_logo == 'yes'){
-                                    en_New_Store_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_New_Store_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_New_Store_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_New_Store_Highlight += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_New_Store_Highlight += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_New_Store_Highlight += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
 
                                     imgIndex += 2;
                                 }else{
-                                    en_New_Store_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_New_Store_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_New_Store_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                                    en_New_Store_Highlight += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_New_Store_Highlight += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_New_Store_Highlight += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
 
                                     imgIndex++;
                                 }
@@ -437,26 +442,36 @@
 
                     // Exclusive
                     if(resource.Exclusive){
-                        var itemDir = 'dir="ltr"';
+                        var itemDir = 'direction="ltr"';
                         for(var i = 0; i < resource.Exclusive.length; i++){
-                            i % 2 ? itemDir = 'dir="ltr"' : itemDir = 'dir="rtl"';
+                            i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
                             EDM_Version == 'Normal' ? Points = resource.Exclusive[i].Points_Normal : Points = resource.Exclusive[i].Points_Shui;
-                            en_Exclusive += en_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.Exclusive[i].Brand).replace('$_itemText', resource.Exclusive[i].Items_EN).replace('$_itemRemarks', resource.Exclusive[i].Remarks).replace('$_itemDate', resource.Exclusive[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.Exclusive[i].QTY);
-                            tc_Exclusive += tc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.Exclusive[i].Brand).replace('$_itemText', resource.Exclusive[i].Items_TC).replace('$_itemRemarks', resource.Exclusive[i].Remarks).replace('$_itemDate', resource.Exclusive[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.Exclusive[i].QTY);
-                            sc_Exclusive += sc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.Exclusive[i].Brand).replace('$_itemText', resource.Exclusive[i].Items_SC).replace('$_itemRemarks', resource.Exclusive[i].Remarks).replace('$_itemDate', resource.Exclusive[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.Exclusive[i].QTY);
+                            if(resource.Exclusive[i].Has_AppExclusive == 'yes'){
+                                en_All_Tier += en_AppExclusive;
+                                tc_All_Tier += tc_AppExclusive;
+                                sc_All_Tier += sc_AppExclusive;
+                            }
+                            en_Exclusive += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_EN).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
+                            tc_Exclusive += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_TC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
+                            sc_Exclusive += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_SC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
                             imgIndex++;
                         }
                     }
 
                     // All_Tier
                     if(resource.All_Tier){
-                        var itemDir = 'dir="ltr"';
+                        var itemDir = 'direction="ltr"';
                         for(var i = 0; i < resource.All_Tier.length; i++){
-                            i % 2 ? itemDir = 'dir="ltr"' : itemDir = 'dir="rtl"';
+                            i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
                             EDM_Version == 'Normal' ? Points = resource.All_Tier[i].Points_Normal : Points = resource.All_Tier[i].Points_Shui;
-                            en_All_Tier += en_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.All_Tier[i].Brand).replace('$_itemText', resource.All_Tier[i].Items_EN).replace('$_itemRemarks', resource.All_Tier[i].Remarks).replace('$_itemDate', resource.All_Tier[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.All_Tier[i].QTY);
-                            tc_All_Tier += tc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.All_Tier[i].Brand).replace('$_itemText', resource.All_Tier[i].Items_TC).replace('$_itemRemarks', resource.All_Tier[i].Remarks).replace('$_itemDate', resource.All_Tier[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.All_Tier[i].QTY);
-                            sc_All_Tier += sc_imgText.replace('$_itemDir', itemDir).replace('$_itemImgSrc', imgArr[imgIndex]).replace('$_itemTitle', resource.All_Tier[i].Brand).replace('$_itemText', resource.All_Tier[i].Items_SC).replace('$_itemRemarks', resource.All_Tier[i].Remarks).replace('$_itemDate', resource.All_Tier[i].Redemption_Date).replace('$_itemPoints', Points).replace('$_itemQty', resource.All_Tier[i].QTY);
+                            if(resource.All_Tier[i].Has_AppExclusive == 'yes'){
+                                en_All_Tier += en_AppExclusive;
+                                tc_All_Tier += tc_AppExclusive;
+                                sc_All_Tier += sc_AppExclusive;
+                            }
+                            en_All_Tier += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_EN).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
+                            tc_All_Tier += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_TC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
+                            sc_All_Tier += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_SC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
                             imgIndex++;
                         }
                     }

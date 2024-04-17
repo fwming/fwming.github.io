@@ -37,6 +37,10 @@
             });
         });
 
+        // 模块顺序
+        var moduleSorting = ['NewStore','Exclusive','Event'];
+        console.log(moduleSorting);
+
         // 图片路径
         var imgUrl = '';
         // 保存加载图片名称
@@ -49,6 +53,10 @@
         var d = data.getDate();
         if(d > 15){
             m++;
+            if(m > 12){
+                y++;
+                m = '1';
+            }
             d = '1';
         }else{
             d = '15';
@@ -311,48 +319,9 @@
                     tc_imgText = e.split('<!-- imgText -->')[1].split('<!-- tc -->')[1];
                     sc_imgText = e.split('<!-- imgText -->')[1].split('<!-- sc -->')[1];
 
-                    
-                    
-                    // Event_Highlight
-                    var isHasHeader_Event_Highlight = 0;
-                    if(resource.Event_Highlight.length){
-                        for(var i = 0; i < resource.Event_Highlight.length; i++){
-                            if(!(EDM_Version == 'Shui' && resource.Event_Highlight[i].BelongTo_Shui == 'no')){
-                                isHasHeader_Event_Highlight++;
-                                if(isHasHeader_Event_Highlight == 1){
-                                    en_Event_Highlight += en_eventHeader;
-                                    tc_Event_Highlight += tc_eventHeader;
-                                    sc_Event_Highlight += sc_eventHeader;
-                                }                                
-                                if(resource.Event_Highlight[i].Has_logo == 'yes'){
-                                    en_Event_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                    for(var i = 0; i < Array.length; i++){
 
-                                    imgIndex += 2;
-                                }else{
-                                    en_Event_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
-
-                                    imgIndex++;
-                                }
-                                // 加分割线
-                                if(i < resource.Event_Highlight.length - 1){
-                                    en_Event_Highlight += line;
-                                    tc_Event_Highlight += line;
-                                    sc_Event_Highlight += line;
-                                }
-                            }
-                        }
-                        // 末尾加空白间隔
-                        if(isHasHeader_Event_Highlight){
-                            en_Event_Highlight += space;
-                            tc_Event_Highlight += space;
-                            sc_Event_Highlight += space;
-                        }
                     }
-                    
                     // Exclusive_Highlight
                     var isHasHeader_Exclusive_Highlight = 0;
                     if(resource.Exclusive_Highlight.length){
@@ -393,6 +362,46 @@
                             sc_Exclusive_Highlight += space;
                         }
                     };
+
+                    // Event_Highlight
+                    var isHasHeader_Event_Highlight = 0;
+                    if(resource.Event_Highlight.length){
+                        for(var i = 0; i < resource.Event_Highlight.length; i++){
+                            if(!(EDM_Version == 'Shui' && resource.Event_Highlight[i].BelongTo_Shui == 'no')){
+                                isHasHeader_Event_Highlight++;
+                                if(isHasHeader_Event_Highlight == 1){
+                                    en_Event_Highlight += en_eventHeader;
+                                    tc_Event_Highlight += tc_eventHeader;
+                                    sc_Event_Highlight += sc_eventHeader;
+                                }                                
+                                if(resource.Event_Highlight[i].Has_logo == 'yes'){
+                                    en_Event_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                                    imgIndex += 2;
+                                }else{
+                                    en_Event_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                                    imgIndex++;
+                                }
+                                // 加分割线
+                                if(i < resource.Event_Highlight.length - 1){
+                                    en_Event_Highlight += line;
+                                    tc_Event_Highlight += line;
+                                    sc_Event_Highlight += line;
+                                }
+                            }
+                        }
+                        // 末尾加空白间隔
+                        if(isHasHeader_Event_Highlight){
+                            en_Event_Highlight += space;
+                            tc_Event_Highlight += space;
+                            sc_Event_Highlight += space;
+                        }
+                    }
                     
                     // New_Store_Highlight
                     var isHasHeader_newStore_Highlight = 0;
@@ -462,9 +471,9 @@
                     }
 
                     // EDM拼接
-                    en_layout += en_style + en_header + en_Event_Highlight + en_Exclusive_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
-                    tc_layout += tc_style + tc_header + tc_Event_Highlight + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
-                    sc_layout += sc_style + sc_header + sc_Event_Highlight + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
+                    en_layout += en_style + en_header + en_Exclusive_Highlight + en_Event_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
+                    tc_layout += tc_style + tc_header + tc_Exclusive_Highlight + tc_Event_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
+                    sc_layout += sc_style + sc_header + sc_Exclusive_Highlight + sc_Event_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
 
                     // EDM渲染
                     $_edit_en.html(en_layout);
@@ -477,5 +486,167 @@
 				}
 			});
         }
+
+
+
+        // Exclusive_Highlight
+        function createExclusive_Highlight(resource){
+            var en_Exclusive_Highlight = '';
+            var tc_Exclusive_Highlight = '';
+            var sc_Exclusive_Highlight = '';
+            var isHasHeader_Exclusive_Highlight = 0;
+            var Exclusive_Highlight = {};
+
+            if(resource.Exclusive_Highlight.length){
+                for(var i = 0; i < resource.Exclusive_Highlight.length; i++){
+                    if(!(EDM_Version == 'Shui' && resource.Exclusive_Highlight[i].BelongTo_Shui == 'no')){
+                        isHasHeader_Exclusive_Highlight++;
+                        if(isHasHeader_Exclusive_Highlight == 1){
+                            en_Exclusive_Highlight += en_exclusiveHeader;
+                            tc_Exclusive_Highlight += tc_exclusiveHeader;
+                            sc_Exclusive_Highlight += sc_exclusiveHeader;
+                        }
+                        if(resource.Exclusive_Highlight[i].Has_logo == 'yes'){
+                            en_Exclusive_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_Exclusive_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_Exclusive_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+                            
+                            imgIndex += 2;
+                        }else{
+                            en_Exclusive_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_Exclusive_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_Exclusive_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                            imgIndex++;
+                        }
+                        // 加分割线
+                        if(i < resource.Exclusive_Highlight.length - 1){
+                            en_Exclusive_Highlight += line;
+                            tc_Exclusive_Highlight += line;
+                            sc_Exclusive_Highlight += line;
+                        }
+
+                    }
+                }
+                // 末尾加空白间隔
+                if(isHasHeader_Exclusive_Highlight){
+                    en_Exclusive_Highlight += space;
+                    tc_Exclusive_Highlight += space;
+                    sc_Exclusive_Highlight += space;
+                }
+            }
+            Exclusive_Highlight.en = en_Exclusive_Highlight;
+            Exclusive_Highlight.tc = tc_Exclusive_Highlight;
+            Exclusive_Highlight.sc = sc_Exclusive_Highlight;
+
+            return Exclusive_Highlight;
+        }
+
+        // Event_Highlight
+        function createEvent_Highlight(resource){
+            var en_Event_Highlight = '';
+            var tc_Event_Highlight = '';
+            var sc_Event_Highlight = '';
+            var isHasHeader_Event_Highlight = 0;
+            var Event_Highlight = {};
+
+            if(resource.Event_Highlight.length){
+                for(var i = 0; i < resource.Event_Highlight.length; i++){
+                    if(!(EDM_Version == 'Shui' && resource.Event_Highlight[i].BelongTo_Shui == 'no')){
+                        isHasHeader_Event_Highlight++;
+                        if(isHasHeader_Event_Highlight == 1){
+                            en_Event_Highlight += en_eventHeader;
+                            tc_Event_Highlight += tc_eventHeader;
+                            sc_Event_Highlight += sc_eventHeader;
+                        }                                
+                        if(resource.Event_Highlight[i].Has_logo == 'yes'){
+                            en_Event_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_Event_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_Event_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                            imgIndex += 2;
+                        }else{
+                            en_Event_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_Event_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_Event_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                            imgIndex++;
+                        }
+                        // 加分割线
+                        if(i < resource.Event_Highlight.length - 1){
+                            en_Event_Highlight += line;
+                            tc_Event_Highlight += line;
+                            sc_Event_Highlight += line;
+                        }
+                    }
+                }
+                // 末尾加空白间隔
+                if(isHasHeader_Event_Highlight){
+                    en_Event_Highlight += space;
+                    tc_Event_Highlight += space;
+                    sc_Event_Highlight += space;
+                }
+            }
+            Event_Highlight.en = en_Event_Highlight;
+            Event_Highlight.tc = tc_Event_Highlight;
+            Event_Highlight.sc = sc_Event_Highlight;
+
+            return Event_Highlight;
+        }
+
+        // New_Store_Highlight
+        function createNew_Store_Highlight(resource){
+            var en_New_Store_Highlight = '';
+            var tc_New_Store_Highlight = '';
+            var sc_New_Store_Highlight = '';
+            var isHasHeader_newStore_Highlight = 0;
+            var New_Store_Highlight = {};
+
+            if(resource.New_Store_Highlight.length){
+                for(var i = 0; i < resource.New_Store_Highlight.length; i++){
+                    if(!(EDM_Version == 'Shui' && resource.New_Store_Highlight[i].BelongTo_Shui == 'no')){
+                        isHasHeader_newStore_Highlight++;
+                        if(isHasHeader_newStore_Highlight == 1){
+                            en_New_Store_Highlight += en_newStoreHeader;
+                            tc_New_Store_Highlight += tc_newStoreHeader;
+                            sc_New_Store_Highlight += sc_newStoreHeader;
+                        }
+                        if(resource.New_Store_Highlight[i].Has_logo == 'yes'){
+                            en_New_Store_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_New_Store_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_New_Store_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                            imgIndex += 2;
+                        }else{
+                            en_New_Store_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
+                            tc_New_Store_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
+                            sc_New_Store_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
+
+                            imgIndex++;
+                        }
+                        // 加分割线
+                        if(i < resource.New_Store_Highlight.length - 1){
+                            en_New_Store_Highlight += line;
+                            tc_New_Store_Highlight += line;
+                            sc_New_Store_Highlight += line;
+                        }
+
+                    }
+                }
+                // 末尾加空白间隔
+                if(isHasHeader_newStore_Highlight){
+                    en_New_Store_Highlight += space;
+                    tc_New_Store_Highlight += space;
+                    sc_New_Store_Highlight += space;
+                }
+            }
+            New_Store_Highlight.en = en_New_Store_Highlight;
+            New_Store_Highlight.tc = tc_New_Store_Highlight;
+            New_Store_Highlight.sc = sc_New_Store_Highlight;
+
+            return New_Store_Highlight;
+        }
+        
+
 	})
 })($)

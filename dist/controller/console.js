@@ -17,7 +17,8 @@ layui.define(function(e) {
 				anim: a.data("anim")
 			})
 		}), a.render("progress")
-	}), layui.use(["admin", "carousel", "echarts"], function() {
+	});
+	layui.use(["admin", "carousel", "echarts"], function() {
 		var e = layui.$,
 			t = layui.admin,
 			a = layui.carousel,
@@ -152,7 +153,8 @@ layui.define(function(e) {
 				layui.router().path.join("") || o(d)
 			})
 		}
-	}), layui.use("table", function() {
+	}); 
+	layui.use("table", function() {
 		var e = (layui.$, layui.table);
 		e.render({
 			elem: "#LAY-index-topSearch",
@@ -207,5 +209,6 @@ layui.define(function(e) {
 			],
 			skin: "line"
 		})
-	}), e("console", {})
+	});
+	e("console", {})
 });

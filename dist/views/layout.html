@@ -41,7 +41,7 @@
 		<!--头部右侧-->
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item" lay-unselect="">
-				<a href="javascript:;" layadmin-event="refresh" title="刷新">
+				<a href="javascript:;" id="refresh" layadmin-event="refresh" title="刷新">
 					<i class="layui-icon layui-icon-refresh-3"></i>
 				</a>
 			</li>
@@ -83,7 +83,7 @@
 
 			<!--常规管理-->
 			<ul class="layui-nav layui-nav-tree" lay-shrink="all" id="routine_management">
-				<!--<li data-name="template" class="layui-nav-item">
+				<li data-name="template" class="layui-nav-item">
 					<a href="javascript:;" lay-tips="个人资料" lay-direction="2">
 						<i class="fa fa-diamond"></i>
 						<cite>个人资料</cite>
@@ -92,11 +92,14 @@
 						<dd class="">
 							<a lay-href="conventional/personal/personalpage">个人主页</a>
 						</dd>
+						<dd class="">
+							<a lay-href="conventional/personal/works">作品展示</a>
+						</dd>
 					</dl>
-				</li>-->
+				</li>
 				<li data-name="template" class="layui-nav-item">
 					<a href="javascript:;" lay-tips="实用工具" lay-direction="2">
-						<i class="fa fa-legal"></i>
+						<i class="fa fa-wrench"></i>
 						<cite>实用工具</cite>
 						<span class="layui-nav-more"></span></a>
 					<dl class="layui-nav-child">
@@ -110,13 +113,19 @@
 							<a lay-href="conventional/tool/harbourCity/">海港城vic</a>
 						</dd>
                         <dd class="">
+							<a lay-href="conventional/tool/harbourCity/indexBuilder">海港城vicBuilder</a>
+						</dd>
+                        <dd class="">
+							<a lay-href="conventional/tool/harbourCity/indexMJML">海港城vic MJML</a>
+						</dd>
+                        <dd class="">
 							<a lay-href="conventional/tool/page/">页面工厂</a>
 						</dd>
 					</dl>
 				</li>
 				<li data-name="template" class="layui-nav-item">
 					<a href="javascript:;" lay-tips="心得笔记" lay-direction="2">
-						<i class="fa fa-pencil"></i>
+						<i class="fa fa-paint-brush"></i>
 						<cite>随手笔记</cite>
 						<span class="layui-nav-more"></span></a>
 					<dl class="layui-nav-child">
@@ -131,6 +140,20 @@
 						</dd>
 						<dd class="">
 							<a lay-href="conventional/notes/test/">test</a>
+						</dd>
+					</dl>
+				</li>
+				<li data-name="template" class="layui-nav-item">
+					<a href="javascript:;" lay-tips="动画特效" lay-direction="2">
+						<i class="fa fa-magic"></i>
+						<cite>动画特效</cite>
+						<span class="layui-nav-more"></span></a>
+					<dl class="layui-nav-child">
+						<dd class="">
+							<a lay-href="conventional/animation/btn/">按钮组</a>
+						</dd>
+						<dd class="">
+							<a lay-href="conventional/animation/tips/">提示组</a>
 						</dd>
 					</dl>
 				</li>

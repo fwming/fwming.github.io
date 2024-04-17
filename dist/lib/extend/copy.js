@@ -22,7 +22,6 @@ layui.define(['layer','jquery','element'], function(e){
 			$('#copy_box').text(e);
 			obj.copy2('copy_box');
 		}
-		
 	}
 	
 	e("copy", obj)
