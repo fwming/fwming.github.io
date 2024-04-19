@@ -8,7 +8,7 @@ layui.define(['layer','jquery','element'], function(e){
 			if(typeof(e) == 'string') e = document.getElementById(e);
 			e.select();
 			if(document.execCommand('copy')) {
-				layer.msg('复制成功！');
+				// layer.msg('复制成功！');
 				return true;
 			}
 			if(e.setSelectionRange) { // 标准浏览器

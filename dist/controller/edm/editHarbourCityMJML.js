@@ -1,41 +1,13 @@
 (function() {
-	layui.use(['upload', 'layer', 'layedit', 'form', 'copy'],	function() {
+	layui.use(['layer', 'form', 'copy'],	function() {
 		var layer = layui.layer,
             form = layui.form,
-            copy = layui.copy,
-            upload = layui.upload,
-            layedit = layui.layedit;
+            copy = layui.copy;
 
         // 获取编辑模式盒子
         var $_edit_en = $('.edit_en');
         var $_edit_tc = $('.edit_tc');
         var $_edit_sc = $('.edit_sc');
-
-        upload.render({
-            elem: '#test2',
-            url: 'https://gitee.com/fwmlc/test/upload_process/master', //此处配置你自己的上传接口即可
-            multiple: true,
-            before: function(obj){
-                //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
-                });
-            },
-            done: function(res){
-                console.log(res);
-                //上传完毕
-            }
-        });
-
-        $('.module-sorting>div').each(function(){
-            $(this).drag({
-                times: '300',
-                isRealTime: false,
-                lockX: false,
-                lockY: true,
-                zIndex: 999
-            });
-        });
 
         // 图片路径
         var imgUrl = '';
@@ -64,35 +36,8 @@
         form.on('radio(version)', function(data){
             EDM_Version = data.value;
             console.log('版本：' + EDM_Version);
-        });        
+        });
 
-        // 编辑器初始化
-		layedit.set({
-			//开发者模式 --默认为false
-			devmode: true,
-			//插入代码设置
-			codeConfig: {
-				//hide: true,  //是否显示编码语言选择框
-				//default: 'HTML' //hide为true时的默认语言格式
-			},
-			tool: [
-				'html', 'code', 'strong', 'italic', 'underline', 'del', 'addhr', '|', 
-				'fontFomatt', 'fontfamily', 'fontSize', 'colorpicker', 'fontBackColor', 'face', '|', 
-				'left', 'center', 'right', '|', 'link', 'unlink', 'images', 'image_alt', 'video', 'anchors', '|', 
-				'table', 'preview', 'help',
-			],
-			height: '578'
-		});
-		var index_en = layedit.build('en');
-		var index_tc = layedit.build('tc');
-		var index_sc = layedit.build('sc');
-
-        // 同步编辑模式与微调模式
-        function Synchronize(){
-            layedit.setContent(index_en, $_edit_en.html(), false);
-            layedit.setContent(index_tc, $_edit_tc.html(), false);
-            layedit.setContent(index_sc, $_edit_sc.html(), false);
-        };
 
         // 导入Excel文件
         $('.load-file-btn').click(function(){
@@ -183,18 +128,23 @@
         });
 
 
-        // 同步模式
-        $('.save-btn').click(function(){
-            layer.msg("同步成功");
-            Synchronize();
-        });
-
-
         // 复制代码
-		$('.copy-code').click(function() {
-			var code = $('.look').html();
-			copy.copyFn(code);
-		});
+        var layout_code_en = "";
+        var layout_code_tc = "";
+        var layout_code_sc = "";
+
+        $('.copy-btn-en').click(function(){
+            layer.msg("复制英文版源码成功");
+            copy.copyFn(layout_code_en);
+        });
+        $('.copy-btn-tc').click(function(){
+            layer.msg("复制繁体版源码成功");
+            copy.copyFn(layout_code_tc);
+        });
+        $('.copy-btn-sc').click(function(){
+            layer.msg("复制简体版源码成功");
+            copy.copyFn(layout_code_sc);
+        });
 
 
         // 创建EDM函数
@@ -485,6 +435,11 @@
                     $_edit_en.html(en_layout);
                     $_edit_tc.html(tc_layout);
                     $_edit_sc.html(sc_layout);
+
+                    // 暴露源码
+                    layout_code_en = en_layout;
+                    layout_code_tc = tc_layout;
+                    layout_code_sc = sc_layout;
 				},
 				error: function(e) {
 					console.log(e);

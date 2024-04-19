@@ -18,6 +18,19 @@
 		scrollbar-shadow-color: #f0f0ee;
 		scrollbar-track-color: #f5f5f5;
 	}
+	.ace_line_group{
+		display: inline-block !important;
+	}
+	.ace_layer{
+		word-wrap: break-word;
+    	white-space: nowrap;
+	}
+	.ace_text.ace_xml{
+		display: inline-block;
+	}
+	.ace_text.ace_tag-whitespace.ace_xml{
+		width: 10px;
+	}
 
 	table.en,
 	table.tc,
@@ -66,7 +79,6 @@
 				<div class="layui-tab layui-tab-brief">
 					<ul class="layui-tab-title">
 						<li class="layui-this">编辑模式</li>
-						<li>预览微调</li>
 					</ul>
 					<div class="layui-tab-content">
 						<div class="layui-tab-item layui-show">
@@ -89,26 +101,6 @@
                                 </div>
                             </div>
 						</div>
-						<div class="layui-tab-item">
-							<div class="layui-tab layui-tab-brief" style="position: relative;">
-								<ul class="layui-tab-title">
-									<li class="layui-this">EN</li>
-									<li>TC</li>
-									<li>SC</li>
-								</ul>
-								<div class="layui-tab-content">
-									<div class="layui-tab-item layui-show">
-										<div id="en">EN</div>
-									</div>
-									<div class="layui-tab-item">
-										<div id="tc">TC</div>
-									</div>
-									<div class="layui-tab-item">
-										<div id="sc">SC</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -128,20 +120,6 @@
                                     <div class="layui-input-block">
                                         <input lay-filter="version" type="radio" name="version" value="Normal" title="Normal" checked>
                                         <input lay-filter="version" type="radio" name="version" value="Shui" title="Shui">
-                                    </div>
-                                </div>
-                                <div class="layui-form-item">
-                                    <label class="layui-form-label">模块顺序</label>
-                                    <div class="layui-input-block module-sorting lock">
-										<div class="layui-col-xs4">
-											<button type="button" class="layui-btn layui-bg-blue" lay-tips="NewStore" lay-direction="1"><span class="layui-badge">1</span></button>
-										</div>
-										<div class="layui-col-xs4">
-											<button type="button" class="layui-btn layui-bg-blue" lay-tips="Exclusive" lay-direction="1"><span class="layui-badge">2</span></button>
-										</div>
-										<div class="layui-col-xs4">
-											<button type="button" class="layui-btn layui-bg-blue" lay-tips="Event" lay-direction="1"><span class="layui-badge">3</span></button>
-										</div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -188,13 +166,13 @@
                                             <button type="button" class="layui-btn create-edm-btn layui-bg-orange"><i class="layui-icon layui-icon-release"></i>一键生成</button>
                                         </div>
                                         <div class="layui-col-xs4">
-                                            <button type="button" class="layui-btn save-btn layui-bg-green"><i class="layui-icon layui-icon-transfer"></i>同步模式</button>
+                                            <button type="button" class="layui-btn copy-btn-en layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>英文源码</button>
                                         </div>
                                         <div class="layui-col-xs4">
-                                            <button type="button" class="layui-btn layui-bg-green"><a style="color: #ffffff;" href="https://gitee.com/fwmlc/jesper/raw/master/dist/views/conventional/tool/harbourCity/demo.zip"><i class="layui-icon layui-icon-download-circle"></i>演示文件</a></button>
+                                            <button type="button" class="layui-btn copy-btn-tc layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>繁体源码</button>
                                         </div>
                                         <div class="layui-col-xs4">
-                                            <button type="button" id="test2" class="layui-btn layui-bg-orange"><i class="layui-icon layui-icon-picture"></i>测试按钮</button>
+                                            <button type="button" class="layui-btn copy-btn-sc layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>简体源码</button>
                                         </div>
                                     </div>
                                 </div>
@@ -211,6 +189,5 @@
 		</div>
 	</div>
 </div>
-<script src="./dist/controller/edm/drag.js"></script>
 <script src="./dist/controller/edm/xlsx.core.min.js"></script>
 <script src="./dist/controller/edm/editHarbourCityMJML.js"></script>
