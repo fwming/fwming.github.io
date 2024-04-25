@@ -393,36 +393,48 @@
                     // Exclusive
                     if(resource.Exclusive){
                         var itemDir = 'direction="ltr"';
+                        var itemDir_i = 0;
                         for(var i = 0; i < resource.Exclusive.length; i++){
-                            i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
+                            itemDir_i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
                             EDM_Version == 'Normal' ? Points = resource.Exclusive[i].Points_Normal : Points = resource.Exclusive[i].Points_Shui;
-                            if(resource.Exclusive[i].Has_AppExclusive == 'yes'){
-                                en_All_Tier += en_AppExclusive;
-                                tc_All_Tier += tc_AppExclusive;
-                                sc_All_Tier += sc_AppExclusive;
+                            if(Points){
+                                if(resource.Exclusive[i].Has_AppExclusive == 'yes'){
+                                    en_All_Tier += en_AppExclusive;
+                                    tc_All_Tier += tc_AppExclusive;
+                                    sc_All_Tier += sc_AppExclusive;
+                                }
+                                en_Exclusive += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_EN).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
+                                tc_Exclusive += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_TC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
+                                sc_Exclusive += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_SC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
+                                imgIndex++;
+                                itemDir_i++;
+                            }else{
+                                imgIndex++;
                             }
-                            en_Exclusive += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_EN).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
-                            tc_Exclusive += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_TC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
-                            sc_Exclusive += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.Exclusive[i].Brand).replaceAll('$_itemText', resource.Exclusive[i].Items_SC).replaceAll('$_itemRemarks', resource.Exclusive[i].Remarks).replaceAll('$_itemDate', resource.Exclusive[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.Exclusive[i].QTY);
-                            imgIndex++;
                         }
                     }
 
                     // All_Tier
                     if(resource.All_Tier){
                         var itemDir = 'direction="ltr"';
+                        var itemDir_i = 0;
                         for(var i = 0; i < resource.All_Tier.length; i++){
-                            i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
+                            itemDir_i % 2 ? itemDir = 'direction="ltr"' : itemDir = 'direction="rtl"';
                             EDM_Version == 'Normal' ? Points = resource.All_Tier[i].Points_Normal : Points = resource.All_Tier[i].Points_Shui;
-                            if(resource.All_Tier[i].Has_AppExclusive == 'yes'){
-                                en_All_Tier += en_AppExclusive;
-                                tc_All_Tier += tc_AppExclusive;
-                                sc_All_Tier += sc_AppExclusive;
+                            if(Points){
+                                if(resource.All_Tier[i].Has_AppExclusive == 'yes'){
+                                    en_All_Tier += en_AppExclusive;
+                                    tc_All_Tier += tc_AppExclusive;
+                                    sc_All_Tier += sc_AppExclusive;
+                                }
+                                en_All_Tier += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_EN).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
+                                tc_All_Tier += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_TC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
+                                sc_All_Tier += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_SC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
+                                imgIndex++;
+                                itemDir_i++;
+                            }else{
+                                imgIndex++;
                             }
-                            en_All_Tier += en_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_EN).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
-                            tc_All_Tier += tc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_TC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
-                            sc_All_Tier += sc_imgText.replaceAll('$_itemDir', itemDir).replaceAll('$_itemImgSrc', imgArr[imgIndex]).replaceAll('$_itemTitle', resource.All_Tier[i].Brand).replaceAll('$_itemText', resource.All_Tier[i].Items_SC).replaceAll('$_itemRemarks', resource.All_Tier[i].Remarks).replaceAll('$_itemDate', resource.All_Tier[i].Redemption_Date).replaceAll('$_itemPoints', Points).replaceAll('$_itemQty', resource.All_Tier[i].QTY);
-                            imgIndex++;
                         }
                     }
 
