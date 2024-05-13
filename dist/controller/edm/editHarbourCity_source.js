@@ -26,19 +26,6 @@
                 //上传完毕
             }
         });
-<<<<<<< HEAD:dist/controller/edm/editHarbourCity.js
-
-        $('.module-sorting>div').each(function(){
-            $(this).drag({
-                times: '300',
-                isRealTime: false,
-                lockX: false,
-                lockY: true,
-                zIndex: 999
-            });
-        });
-=======
->>>>>>> 5cbf9426dc237eabf822377449afdeba19ef9d2a:dist/controller/edm/editHarbourCity_source.js
 
         // 图片路径
         var imgUrl = '';
@@ -314,10 +301,6 @@
                     tc_imgText = e.split('<!-- imgText -->')[1].split('<!-- tc -->')[1];
                     sc_imgText = e.split('<!-- imgText -->')[1].split('<!-- sc -->')[1];
 
-<<<<<<< HEAD:dist/controller/edm/editHarbourCity.js
-                    
-                    
-=======
 
                     // New_Store_Highlight
                     var isHasHeader_newStore_Highlight = 0;
@@ -401,7 +384,6 @@
                         }
                     };
 
->>>>>>> 5cbf9426dc237eabf822377449afdeba19ef9d2a:dist/controller/edm/editHarbourCity_source.js
                     // Event_Highlight
                     var isHasHeader_Event_Highlight = 0;
                     if(resource.Event_Highlight.length){
@@ -440,93 +422,7 @@
                             tc_Event_Highlight += space;
                             sc_Event_Highlight += space;
                         }
-<<<<<<< HEAD:dist/controller/edm/editHarbourCity.js
-                    }
-                    
-                    // Exclusive_Highlight
-                    var isHasHeader_Exclusive_Highlight = 0;
-                    if(resource.Exclusive_Highlight.length){
-                        for(var i = 0; i < resource.Exclusive_Highlight.length; i++){
-                            if(!(EDM_Version == 'Shui' && resource.Exclusive_Highlight[i].BelongTo_Shui == 'no')){
-                                isHasHeader_Exclusive_Highlight++;
-                                if(isHasHeader_Exclusive_Highlight == 1){
-                                    en_Exclusive_Highlight += en_exclusiveHeader;
-                                    tc_Exclusive_Highlight += tc_exclusiveHeader;
-                                    sc_Exclusive_Highlight += sc_exclusiveHeader;
-                                }
-                                if(resource.Exclusive_Highlight[i].Has_logo == 'yes'){
-                                    en_Exclusive_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Exclusive_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Exclusive_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
-                                    
-                                    imgIndex += 2;
-                                }else{
-                                    en_Exclusive_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_Exclusive_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_Exclusive_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.Exclusive_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
-
-                                    imgIndex++;
-                                }
-                                // 加分割线
-                                if(i < resource.Exclusive_Highlight.length - 1){
-                                    en_Exclusive_Highlight += line;
-                                    tc_Exclusive_Highlight += line;
-                                    sc_Exclusive_Highlight += line;
-                                }
-
-                            }
-                        }
-                        // 末尾加空白间隔
-                        if(isHasHeader_Exclusive_Highlight){
-                            en_Exclusive_Highlight += space;
-                            tc_Exclusive_Highlight += space;
-                            sc_Exclusive_Highlight += space;
-                        }
                     };
-                    
-                    // New_Store_Highlight
-                    var isHasHeader_newStore_Highlight = 0;
-                    if(resource.New_Store_Highlight.length){
-                        for(var i = 0; i < resource.New_Store_Highlight.length; i++){
-                            if(!(EDM_Version == 'Shui' && resource.New_Store_Highlight[i].BelongTo_Shui == 'no')){
-                                isHasHeader_newStore_Highlight++;
-                                if(isHasHeader_newStore_Highlight == 1){
-                                    en_New_Store_Highlight += en_newStoreHeader;
-                                    tc_New_Store_Highlight += tc_newStoreHeader;
-                                    sc_New_Store_Highlight += sc_newStoreHeader;
-                                }
-                                if(resource.New_Store_Highlight[i].Has_logo == 'yes'){
-                                    en_New_Store_Highlight += en_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_New_Store_Highlight += tc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_New_Store_Highlight += sc_hasLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_logoImgSrc', imgArr[(imgIndex+1)]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
-
-                                    imgIndex += 2;
-                                }else{
-                                    en_New_Store_Highlight += en_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_EN.replace(/\n/g, '<br>'));
-                                    tc_New_Store_Highlight += tc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_TC.replace(/\n/g, '<br>'));
-                                    sc_New_Store_Highlight += sc_noLogo.replace('$_bannerImgSrc', imgArr[imgIndex]).replace('$_dynamicText', resource.New_Store_Highlight[i].Offer_SC.replace(/\n/g, '<br>'));
-
-                                    imgIndex++;
-                                }
-                                // 加分割线
-                                if(i < resource.New_Store_Highlight.length - 1){
-                                    en_New_Store_Highlight += line;
-                                    tc_New_Store_Highlight += line;
-                                    sc_New_Store_Highlight += line;
-                                }
-
-                            }
-                        }
-                        // 末尾加空白间隔
-                        if(isHasHeader_newStore_Highlight){
-                            en_New_Store_Highlight += space;
-                            tc_New_Store_Highlight += space;
-                            sc_New_Store_Highlight += space;
-                        }
-                    }
-=======
-                    };
->>>>>>> 5cbf9426dc237eabf822377449afdeba19ef9d2a:dist/controller/edm/editHarbourCity_source.js
 
                     // Exclusive
                     if(resource.Exclusive){
@@ -555,15 +451,9 @@
                     };
 
                     // EDM拼接
-<<<<<<< HEAD:dist/controller/edm/editHarbourCity.js
-                    en_layout += en_style + en_header + en_Event_Highlight + en_Exclusive_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
-                    tc_layout += tc_style + tc_header + tc_Event_Highlight + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
-                    sc_layout += sc_style + sc_header + sc_Event_Highlight + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
-=======
                     en_layout += en_style + en_header + en_New_Store_Highlight + en_Exclusive_Highlight + en_Event_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
                     tc_layout += tc_style + tc_header + tc_New_Store_Highlight + tc_Exclusive_Highlight + tc_Event_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
                     sc_layout += sc_style + sc_header + sc_New_Store_Highlight + sc_Exclusive_Highlight + sc_Event_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
->>>>>>> 5cbf9426dc237eabf822377449afdeba19ef9d2a:dist/controller/edm/editHarbourCity_source.js
 
                     // EDM渲染
                     $_edit_en.html(en_layout);

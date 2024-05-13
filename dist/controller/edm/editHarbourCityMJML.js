@@ -162,6 +162,9 @@
             var tc_layout = '';
             var sc_layout = '';
             // 动态资源
+            var en_Top_Banner = '';
+            var tc_Top_Banner = '';
+            var sc_Top_Banner = '';
             var en_New_Store_Highlight = '';
             var tc_New_Store_Highlight = '';
             var sc_New_Store_Highlight = '';
@@ -267,7 +270,36 @@
                     tc_imgText = e.split('<!-- imgText -->')[1].split('<!-- tc -->')[1];
                     sc_imgText = e.split('<!-- imgText -->')[1].split('<!-- sc -->')[1];
                     
-                    
+                    // Top_Banner
+                    if(resource.Top_Banner.length){
+                        for(var i = 0; i < resource.Top_Banner.length; i++){
+                            if(!(EDM_Version == 'Shui' && resource.Top_Banner[i].BelongTo_Shui == 'no')){
+                                if(resource.Top_Banner[i].Has_logo == 'yes'){
+                                    en_Top_Banner += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Top_Banner += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Top_Banner += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_SC.replaceAll(/\n/g, '<br>'));
+
+                                    imgIndex += 2;
+                                }else{
+                                    en_Top_Banner += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Top_Banner += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Top_Banner += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Top_Banner[i].Offer_SC.replaceAll(/\n/g, '<br>'));
+
+                                    imgIndex++;
+                                }
+                                // 加分割线
+                                if(i < resource.Top_Banner.length - 1){
+                                    en_Top_Banner += line;
+                                    tc_Top_Banner += line;
+                                    sc_Top_Banner += line;
+                                }
+                            }
+                        }
+                        en_Top_Banner += space;
+                        tc_Top_Banner += space;
+                        sc_Top_Banner += space;
+                    }
+
                     // Event_Highlight
                     var isHasHeader_Event_Highlight = 0;
                     if(resource.Event_Highlight.length){
@@ -439,9 +471,9 @@
                     }
 
                     // EDM拼接
-                    en_layout += en_style + en_header + en_Event_Highlight + en_Exclusive_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
-                    tc_layout += tc_style + tc_header + tc_Event_Highlight + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
-                    sc_layout += sc_style + sc_header + sc_Event_Highlight + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
+                    en_layout += en_style + en_header + en_Top_Banner + en_Event_Highlight + en_Exclusive_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
+                    tc_layout += tc_style + tc_header + tc_Top_Banner + tc_Event_Highlight + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
+                    sc_layout += sc_style + sc_header + sc_Top_Banner + sc_Event_Highlight + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
 
                     // EDM渲染
                     $_edit_en.html(en_layout);
