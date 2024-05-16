@@ -1,0 +1,22 @@
+<style type="text/css">
+	.layui-card .layui-tab-brief .layui-tab-content {
+		padding: 15px 0;
+	}
+    .layui-fluid{position: static;padding: 15px 0;}
+    #canvasBox{position: absolute;top: 50px;right: 0;bottom: 0;left: 0;}
+    #canvas{display: block;background: #fff;margin: 0px auto;box-shadow: 2px 2px 5px #ccc;}
+</style>
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>游戏集</cite></a><span lay-separator="">/</span>
+		<a><cite>五子棋</cite></a>
+	</div>
+</div>
+
+<div id="canvasBox" class="layui-fluid" style="font-family: monospace;">
+    <canvas id="canvas">当前浏览器不支持Canvas，请更换浏览器再试试！</canvas>
+</div>
+<script src="./dist/controller/games/gobang/draw.js"></script>
+<script src="./dist/controller/games/gobang/ai.js"></script>
