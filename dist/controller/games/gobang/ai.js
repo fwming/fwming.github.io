@@ -16,8 +16,6 @@ var wins = [];
 var count = 0;
 wins = initWins(xNum, yNum).wins;
 count = initWins(xNum, yNum).count;
-console.log('赢法数组:'+wins);
-console.log('赢法总共有:'+count+'种！');
 // 统计所有赢法，x:行数，y:竖数
 function initWins(x, y){
     var count = 0;
@@ -49,7 +47,6 @@ function initWins(x, y){
             count++;
         }
     }
-    console.log(wins)
     // 竖向
     for(var i = 0; i < y; i++){
         for(var j = 0; j < (x-4); j++){
@@ -88,7 +85,6 @@ function initWins(x, y){
             count++;
         }
     }
-    console.log(wins)
     return {wins: wins, count: count};
 }
 
@@ -118,7 +114,6 @@ canvas.addEventListener('click', function(e){
     var j = Math.floor(x / aWidth);
     // 该点为空白方可下子
     if(chessBoardData[i][j] == 0){
-        console.log('我方落子点:('+i+','+j+')');
         drawChess(context, i, j, isMe);
         chessBoardData[i][j] = 1;
         
@@ -204,8 +199,6 @@ function computerAI(){
             }
         }
     }
-    // console.log(myScore, computerScore);
-    console.log('AI落子点:('+u+','+v+')');
     if(chessBoardData[u][v] == 0){
         drawChess(context, u, v, false);
         chessBoardData[u][v] = 2;
@@ -226,6 +219,5 @@ function computerAI(){
     }else{
         layer.msg('平局了！');
         over = true;
-        console.log(chessBoardData);
     }
 }

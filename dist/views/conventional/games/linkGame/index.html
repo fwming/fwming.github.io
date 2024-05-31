@@ -1,0 +1,61 @@
+<style type="text/css">
+    .layui-fluid{padding: 0;}
+</style>
+<link rel="stylesheet" href="./dist/style/game/linkGame/index.css">
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>游戏集</cite></a><span lay-separator="">/</span>
+		<a><cite>连连看</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+    <div class="wrapper">
+        <!-- 开始界面 -->
+        <div class="init-box">
+            <div class="start-btn"></div>
+        </div>
+        <!-- 游戏主区域 -->
+        <div class="game-box hidden">
+            <!-- 头部统计区域 -->
+            <div class="toolbar">
+                <img class="toolbar-bg" src="img/game/linkGame/layout/toolbar5.png" alt="">
+                <div class="time-box">
+                    <img src="img/game/linkGame/layout/time.png" alt=""><span class="time"></span>
+                </div>
+                <div class="level-box">
+                    <img src="img/game/linkGame/layout/level.png" alt=""><span class="level"></span>
+                </div>
+                <div class="disorder-box">
+                    <img src="img/game/linkGame/layout/refresh.png" alt="">
+                    <div class="disorder"></div>
+                </div>
+                <div class="scoring-box">
+                    <img src="img/game/linkGame/layout/score.png" alt=""><span class="scoring"></span>
+                </div>
+            </div>
+            <!-- 游戏区域 -->
+            <div class="game-area">
+                <table id="game">
+                <canvas id="canvas" class="hidden"></canvas>
+                </table>
+            </div>
+        </div>
+        <!-- 游戏结束结算得分界面 -->
+        <div class="game-over hidden">
+            <div class="game-over-content">
+                <img src="img/game/linkGame/layout/game-over.png" alt="">
+                <div class="current-score"></div>
+                <div class="history-score"></div>
+                <div class="replay-btn"></div>
+            </div>
+        </div>
+        <!-- 背景音乐 -->
+        <audio class="hidden" src="http://mp3.9ku.com/hot/2010/10-19/400027.mp3" loop="loop"></audio>
+    </div>
+</div>
+<script src="./dist/controller/games/linkGame/zepto.min.js"></script>
+<script src="./dist/controller/games/linkGame/linkGame.js"></script>
+<script src="./dist/controller/games/linkGame/index.js"></script>
