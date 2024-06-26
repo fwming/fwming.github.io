@@ -1,0 +1,136 @@
+<style type="text/css">
+	.layui-card .layui-tab-brief .layui-tab-content{
+		padding: 20px 0 0;
+	}
+	.layui-input{
+		padding: 0 10px;
+	}
+	.layui-elem-field{
+		margin-bottom: 25px;
+	}
+	.layui-field-box{
+		padding: 15px;
+	}
+	fieldset .layui-btn{
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+	}
+	.load-img-box{
+		min-height: 50px;
+		max-height: 80vh;
+		text-align: center;
+		overflow-y: auto;
+	}
+	.load-img-box img{
+		display: inline-block;
+		float: left;
+        cursor: pointer;
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+	}
+    .load-img-box img:hover{
+        opacity: .9;
+    }
+	.colorpicker-val{
+		float: right;
+		width: calc(100% - 40px);
+	}
+	.pop-ups{
+		padding: 20px 20px 20px 10px;
+	}
+	.layui-elem-field legend{
+		font-size: 18px;
+	}
+</style>
+
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>新版EDM</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-card">
+		<div class="layui-card-header"><strong>自动化构建工具(v1.1)</strong></div>
+		<div class="layui-card-body">
+			<div class="layui-tab layui-tab-brief" lay-filter="tabChange">
+				<ul class="layui-tab-title">
+					<li lay-id="01" class="layui-this"><strong>流编辑</strong></li>
+					<li lay-id="02"><strong>预览</strong></li>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show flow-box">
+						<fieldset class="layui-elem-field">
+							<legend>EDM设置</legend>
+							<div class="layui-field-box">
+								<form class="layui-form">
+									<div class="layui-row layui-col-space15">
+										<div class="layui-col-md6">
+											<label class="layui-form-label">EDM 宽度</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input edm-width" lay-tips="EDM宽度" value="800" />
+											</div>
+										</div>
+										<div class="layui-col-md6">
+											<label class="layui-form-label">设计稿宽度</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input img-natural-width" lay-tips="设计稿宽度" value="1600" />
+											</div>
+										</div>
+										
+										<div class="layui-col-md6">
+											<label class="layui-form-label">图片路径</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input all-img-src" lay-tips="服务器端图片src地址共同部分" value="" placeholder="https://imgsrv1.../WTJGdGNHRnBaMjVmTXpjPQ/"/>
+											</div>
+										</div>
+										
+										<div class="layui-col-md6">
+											<label class="layui-form-label">图片链接</label>
+											<div class="layui-input-block">
+												<input type="text" class="layui-input all-img-href" lay-tips="所有图片链接，单个编辑会覆盖此链接" value="" />
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</fieldset>
+						
+						
+						<fieldset class="layui-elem-field">
+							<legend>EDM生成操作</legend>
+							<div class="layui-field-box">
+								<div class="layui-row layui-col-space15">
+									<div class="layui-col-md4">
+										<button class="layui-btn load-img-btn">上传图片</button>
+										<input type="file" multiple="multiple" class="layui-hide" id="load-img"/>
+									</div>
+									<div class="layui-col-md4">
+										<button class="output-edm layui-btn layui-btn-checked layui-btn-disabled" disabled="disabled">生成EDM</button>
+									</div>
+									<div class="layui-col-md4">
+										<button class="copy-code layui-btn layui-btn-checked layui-btn-disabled" disabled="disabled">复制代码</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						
+						<fieldset class="layui-elem-field layui-field-title">
+							<legend>本地预览效果</legend>
+							<div class="layui-field-box load-img-box"></div>
+						</fieldset>
+						
+					</div>
+					<div class="layui-tab-item">
+						<div class="look"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="./dist/controller/edm/index_mjml.js"></script>
+<!-- <script type="text/javascript" src="./dist/controller/edm/index-1.1_encrypted.js"></script> -->

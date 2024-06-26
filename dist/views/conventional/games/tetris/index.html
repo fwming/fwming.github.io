@@ -18,5 +18,14 @@
 <div id="canvasBox" class="layui-fluid" style="font-family: monospace;">
     <canvas id="canvas">当前浏览器不支持Canvas，请更换浏览器再试试！</canvas>
 </div>
-<script src="./dist/controller/games/tetris/init.js"></script>
-<script src="./dist/controller/games/tetris/start_v2.js"></script>
+<!-- <script src="./dist/controller/games/tetris/init.js"></script>
+<script src="./dist/controller/games/tetris/start.js"></script> -->
+<script src="./dist/controller/games/tetris/main.js"></script>
+<script>
+	// 传入游戏载体，开始运行游戏
+	var canvas = document.getElementById('canvas');
+	new Tetris({
+		gameBox: canvas,
+		xNum: 20,
+	}).init();
+</script>
