@@ -132,10 +132,6 @@ Tetris.prototype = {
             }
         }, 1000)
     },
-    // 计时器
-    times: function(){
-
-    },
     // 绘制
     drawChessBoard: function(cxt){
         cxt.lineWidth = 1;
@@ -372,6 +368,9 @@ Tetris.prototype = {
     },
     // 旋转
     rotate: function(block){
+        if(this.rows <= 1){
+            return block;
+        }
         var kbs = [];
         for(var i = 0; i < block.length; i++){
             kbs[i] = block[i];

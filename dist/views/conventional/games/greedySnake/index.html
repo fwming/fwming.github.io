@@ -1,0 +1,110 @@
+<style type="text/css">
+    #LAY_app_body{z-index: 999999999999999;}
+	.layui-card .layui-tab-brief .layui-tab-content {
+		padding: 15px 0;
+	}
+    .layui-fluid{position: static;padding: 15px; height: calc(100% - 80px);}
+    .layui-fluid .layadmin-header{margin: 0 auto;}
+    #snakeBox{width: 100%; height: calc(100% - 50px);background: #ddd;position: relative;--cell-width: 20px;margin: 0 auto;}
+    #snakeBox span{position: absolute;width: var(--cell-width);height: var(--cell-width);}
+    #snakeBox span img{display: block;width: 100%;}
+    #snakeBox span.foods{border-radius: 50px;background: #ff5758;}
+    #snakeBox span.header{z-index: 9;transform: translateX(180deg);}
+</style>
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>游戏集</cite></a><span lay-separator="">/</span>
+		<a><cite>贪吃蛇</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+    <div class="layui-card layadmin-header">
+        <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;display: flex;justify-content: space-between;">
+            <strong>吞吃数量：<span class="eatingNum">0</span></strong>
+            <strong>耗时：<span class="times">00:00:00</span></strong>
+            <strong>得分：<span class="score">0</span></strong>
+            <strong class="setting" style="cursor: pointer;"><i class="layui-icon layui-icon-more-vertical"></i></strong>
+        </div>
+    </div>
+    <div id="snakeBox"></div>
+    <!-- 游戏结束结果页 -->
+    <div id="gameOver">
+        <div class="gameOver">
+            <div class="title"></div>
+            
+        </div>
+    </div>
+    <!-- 游戏设置页 -->
+    <div id="gameSetting" style="display: none;">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">游戏模式：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="gameMode" lay-filter="filter" value="不死模式" title="不死模式" checked="">
+                    <input type="radio" name="gameMode" lay-filter="filter" value="撞墙模式" title="撞墙模式">
+                    <input type="radio" name="gameMode" lay-filter="filter" value="自杀模式" title="自杀模式">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">背景音乐：</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="switch" lay-skin="switch" lay-filter="switchTest" lay-text="开启|关闭">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 背景音乐 -->
+    <audio id="myAudio" class="hidden" src="./video/中国风古韵纯乐.mp3" loop="loop"></audio>
+</div>
+
+
+<script src="./dist/controller/games/greedySnake/main.js"></script>
+<script>
+    layui.use(['form','layer'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听游戏模式
+        form.on('radio(filter)', function(data){
+            console.log(data.value); //被点击的radio的value值
+
+
+        });
+        //监听背景音乐
+        var audio = document.getElementById('myAudio');
+        form.on('switch(switchTest)', function(data){
+            console.log(data.elem.checked); //开关是否开启，true或者false
+            if(data.elem.checked){
+                audio.play();
+            }else{
+                audio.pause();
+            }
+        });
+    })
+
+    // 弹出设置框
+    $('.setting').click(function(){
+        layer.open({
+            type: 1,
+            title: '游戏设置',
+            shade: 0,
+            content: $('#gameSetting')
+        })
+    })
+    
+    // 调节合理尺寸
+    var numX = Math.floor(($('.layui-body').width() - 30) / 20);
+    var numY = Math.floor(($('.layui-body').height() - 130) / 20);
+    $('.layui-fluid .layadmin-header').css({'width': numX*20+'px'});
+    $('#snakeBox').css({'width': numX*20+'px', 'height': numY*20+'px'});
+
+    
+	// 传入游戏载体，开始运行游戏
+	var snakeBox = document.getElementById('snakeBox');
+	new GreedySnake({
+		gameBox: snakeBox,
+	}).init();
+</script>

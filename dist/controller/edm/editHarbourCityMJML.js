@@ -299,46 +299,6 @@
                         tc_Top_Banner += space;
                         sc_Top_Banner += space;
                     }
-
-                    // Event_Highlight
-                    var isHasHeader_Event_Highlight = 0;
-                    if(resource.Event_Highlight.length){
-                        for(var i = 0; i < resource.Event_Highlight.length; i++){
-                            if(!(EDM_Version == 'Shui' && resource.Event_Highlight[i].BelongTo_Shui == 'no')){
-                                isHasHeader_Event_Highlight++;
-                                if(isHasHeader_Event_Highlight == 1){
-                                    en_Event_Highlight += en_eventHeader;
-                                    tc_Event_Highlight += tc_eventHeader;
-                                    sc_Event_Highlight += sc_eventHeader;
-                                }                                
-                                if(resource.Event_Highlight[i].Has_logo == 'yes'){
-                                    en_Event_Highlight += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
-
-                                    imgIndex += 2;
-                                }else{
-                                    en_Event_Highlight += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
-                                    tc_Event_Highlight += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
-                                    sc_Event_Highlight += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
-
-                                    imgIndex++;
-                                }
-                                // 加分割线
-                                if(i < resource.Event_Highlight.length - 1){
-                                    en_Event_Highlight += line;
-                                    tc_Event_Highlight += line;
-                                    sc_Event_Highlight += line;
-                                }
-                            }
-                        }
-                        // 末尾加空白间隔
-                        if(isHasHeader_Event_Highlight){
-                            en_Event_Highlight += space;
-                            tc_Event_Highlight += space;
-                            sc_Event_Highlight += space;
-                        }
-                    }
                     
                     // Exclusive_Highlight
                     var isHasHeader_Exclusive_Highlight = 0;
@@ -380,6 +340,46 @@
                             sc_Exclusive_Highlight += space;
                         }
                     };
+
+                    // Event_Highlight
+                    var isHasHeader_Event_Highlight = 0;
+                    if(resource.Event_Highlight.length){
+                        for(var i = 0; i < resource.Event_Highlight.length; i++){
+                            if(!(EDM_Version == 'Shui' && resource.Event_Highlight[i].BelongTo_Shui == 'no')){
+                                isHasHeader_Event_Highlight++;
+                                if(isHasHeader_Event_Highlight == 1){
+                                    en_Event_Highlight += en_eventHeader;
+                                    tc_Event_Highlight += tc_eventHeader;
+                                    sc_Event_Highlight += sc_eventHeader;
+                                }                                
+                                if(resource.Event_Highlight[i].Has_logo == 'yes'){
+                                    en_Event_Highlight += en_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_hasLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_logoImgSrc', imgArr[(imgIndex+1)]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
+
+                                    imgIndex += 2;
+                                }else{
+                                    en_Event_Highlight += en_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_EN.replaceAll(/\n/g, '<br>'));
+                                    tc_Event_Highlight += tc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_TC.replaceAll(/\n/g, '<br>'));
+                                    sc_Event_Highlight += sc_noLogo.replaceAll('$_bannerImgSrc', imgArr[imgIndex]).replaceAll('$_dynamicText', resource.Event_Highlight[i].Offer_SC.replaceAll(/\n/g, '<br>'));
+
+                                    imgIndex++;
+                                }
+                                // 加分割线
+                                if(i < resource.Event_Highlight.length - 1){
+                                    en_Event_Highlight += line;
+                                    tc_Event_Highlight += line;
+                                    sc_Event_Highlight += line;
+                                }
+                            }
+                        }
+                        // 末尾加空白间隔
+                        if(isHasHeader_Event_Highlight){
+                            en_Event_Highlight += space;
+                            tc_Event_Highlight += space;
+                            sc_Event_Highlight += space;
+                        }
+                    }
                     
                     // New_Store_Highlight
                     var isHasHeader_newStore_Highlight = 0;
@@ -471,9 +471,9 @@
                     }
 
                     // EDM拼接
-                    en_layout += en_style + en_header + en_Top_Banner + en_Event_Highlight + en_Exclusive_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
-                    tc_layout += tc_style + tc_header + tc_Top_Banner + tc_Event_Highlight + tc_Exclusive_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
-                    sc_layout += sc_style + sc_header + sc_Top_Banner + sc_Event_Highlight + sc_Exclusive_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
+                    en_layout += en_style + en_header + en_Top_Banner + en_Exclusive_Highlight + en_Event_Highlight + en_New_Store_Highlight + en_gift1 + en_Exclusive + en_gift2 + en_All_Tier + en_footer;
+                    tc_layout += tc_style + tc_header + tc_Top_Banner + tc_Exclusive_Highlight + tc_Event_Highlight + tc_New_Store_Highlight + tc_gift1 + tc_Exclusive + tc_gift2 + tc_All_Tier + tc_footer;
+                    sc_layout += sc_style + sc_header + sc_Top_Banner + sc_Exclusive_Highlight + sc_Event_Highlight + sc_New_Store_Highlight + sc_gift1 + sc_Exclusive + sc_gift2 + sc_All_Tier + sc_footer;
 
                     // EDM渲染
                     $_edit_en.html(en_layout);
