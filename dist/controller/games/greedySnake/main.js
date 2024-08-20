@@ -102,7 +102,7 @@ GreedySnake.prototype = {
         }
         // 判断是否超出游戏界面
         if(snakeX < 0 || snakeX >= $(this.gameBox).width() || snakeY < 0 || snakeY >= $(this.gameBox).height()){
-            // this.gameOver();
+            this.gameOver();
             return;
         }
         // 蛇体移动
@@ -129,6 +129,12 @@ GreedySnake.prototype = {
     gameOver: function(){
         clearInterval(this.timers);
         clearInterval(this.timers2);
+        layer.open({
+            type: 1,
+            title: '游戏结束',
+            shade: 0,
+            content: $('#gameOver')
+        })
     },
     // 计时器
     times: function(){

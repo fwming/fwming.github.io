@@ -60,7 +60,6 @@
     <audio id="myAudio" class="hidden" src="./video/中国风古韵纯乐.mp3" loop="loop"></audio>
 </div>
 
-
 <script src="./dist/controller/games/greedySnake/main.js"></script>
 <script>
     layui.use(['form','layer'], function(){
@@ -70,8 +69,6 @@
         //监听游戏模式
         form.on('radio(filter)', function(data){
             console.log(data.value); //被点击的radio的value值
-
-
         });
         //监听背景音乐
         var audio = document.getElementById('myAudio');

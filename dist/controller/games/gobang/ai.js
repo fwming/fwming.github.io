@@ -159,7 +159,7 @@ function computerAI(){
                         }else if(myWins[k] == 2){
                             myScore[i][j] += 400;
                         }else if(myWins[k] == 3){
-                            myScore[i][j] += 1000;
+                            myScore[i][j] += 2000;
                         }else if(myWins[k] == 4){
                             myScore[i][j] += 10000;
                         }
