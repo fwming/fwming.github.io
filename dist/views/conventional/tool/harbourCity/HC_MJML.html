@@ -1,0 +1,180 @@
+<style type="text/css">
+	.layui-card .layui-tab-brief .layui-tab-content {
+		padding: 15px;
+	}
+	.edit{
+		width: 100%;
+		height: calc(100vh - 205px);
+		background-color: #fff;
+		color: #000;
+		line-height: 1.3;
+		overflow-y: auto;
+		scrollbar-3dlight-color: #f0f0ee;
+		scrollbar-arrow-color: #676662;
+		scrollbar-base-color: #f0f0ee;
+		scrollbar-darkshadow-color: #ddd;
+		scrollbar-face-color: #e0e0dd;
+		scrollbar-highlight-color: #f0f0ee;
+		scrollbar-shadow-color: #f0f0ee;
+		scrollbar-track-color: #f5f5f5;
+	}
+	.ace_line_group{
+		display: inline-block !important;
+	}
+	.ace_layer{
+		word-wrap: break-word;
+    	white-space: nowrap;
+	}
+	.ace_text.ace_xml{
+		display: inline-block;
+	}
+	.ace_text.ace_tag-whitespace.ace_xml{
+		width: 10px;
+	}
+
+	table.en,
+	table.tc,
+	table.sc{
+		width: 600px;
+		margin: 0 auto;
+	}
+	.layui-form-label{
+		text-align: justify;
+	}
+	.module-sorting button{
+		cursor: move;
+	}
+	.module-sorting>div{
+		position: absolute;
+		width: auto !important;
+		top: 0;
+		margin-right: 15px;
+	}
+	.module-sorting.lock>div:nth-of-type(1){
+		left: 0;
+		top: 0;
+	}
+	.module-sorting.lock>div:nth-of-type(2){
+		left: 75px;
+		top: 0;
+	}
+	.module-sorting.lock>div:nth-of-type(3){
+		left: 150px;
+		top: 0;
+	}
+</style>
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>海港城HC专属(MJML)</cite></a>
+	</div>
+</div>
+
+<div class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md8">
+			<div class="layui-card">
+				<div class="layui-tab layui-tab-brief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">编辑模式</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+                            <div class="layui-tab layui-tab-brief">
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this">EN</li>
+                                    <li>TC</li>
+                                    <li>SC</li>
+                                </ul>
+                                <div class="layui-tab-content" style="max-height: 70vh; overflow: auto;">
+                                    <div class="layui-tab-item layui-show edit_en">
+                                        <span>EN</span>
+                                    </div>
+                                    <div class="layui-tab-item edit_tc">
+                                        <span>TC</span>
+                                    </div>
+                                    <div class="layui-tab-item edit_sc">
+                                        <span>SC</span>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md4">
+			<div class="layui-card">
+				<div class="layui-tab layui-tab-brief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">常规编辑</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+                            <form class="layui-form" action="" >
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">图片路径</label>
+                                    <div class="layui-input-block">
+                                        <input lay-tips="图片路径前缀，名称前面部分" placeholder="https://imgsrv1.../WTJGdGNHRnBaMjVmTVRNNU9BPT/" value="https://imgsrv1.mailer08.net/images/dGVuYW50MjcxYWRtaW4_/WTJGdGNHRnBaMjVmTVRNNU9BPT/" class="layui-input imgUrl">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">开始时间</label>
+                                    <div class="layui-input-block">
+                                        <input lay-tips="活动开始时间" placeholder="15.7.2022" class="layui-input startTime">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">小标题</label>
+                                    <div class="layui-input-block">
+                                        <input lay-tips="小标题(EN)" placeholder="小标题(EN)" class="layui-input en_preSubject">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"></label>
+                                    <div class="layui-input-block">
+                                        <input lay-tips="小标题(TC)" placeholder="小标题(TC)" class="layui-input tc_preSubject">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"></label>
+                                    <div class="layui-input-block">
+                                        <input lay-tips="小标题(SC)" placeholder="小标题(SC)" class="layui-input sc_preSubject">
+                                    </div>
+                                </div>
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-btn-container">
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="导入excel模板" class="layui-btn load-file-btn layui-bg-orange"><i class="layui-icon layui-icon-upload "></i>导入文件</button>
+                                            <input type="file" class="layui-hide" id="load-file">
+                                        </div>
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="选中所有图片导入" class="layui-btn load-img-btn layui-bg-orange"><i class="layui-icon layui-icon-picture"></i>加载图片</button>
+                                            <input type="file" multiple="multiple" class="layui-hide" id="load-img">
+                                        </div>
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="一键生成三个版本" class="layui-btn create-edm-btn layui-bg-orange"><i class="layui-icon layui-icon-release"></i>一键生成</button>
+                                        </div>
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="点击复制英文源码" class="layui-btn copy-btn-en layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>英文源码</button>
+                                        </div>
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="点击复制繁体源码" class="layui-btn copy-btn-tc layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>繁体源码</button>
+                                        </div>
+                                        <div class="layui-col-xs4">
+                                            <button type="button" lay-tips="点击复制简体源码" class="layui-btn copy-btn-sc layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>简体源码</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="./dist/controller/edm/xlsx.core.min.js"></script>
+<script src="./dist/controller/edm/editHarbourCity_hc_MJML.js"></script>
