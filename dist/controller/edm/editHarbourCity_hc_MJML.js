@@ -278,7 +278,7 @@
 
                             imgIndex += 2;
                         }else{
-                            if(en_ExcelData[i].Belonging != Belonging){
+                            if(en_ExcelData[i].Belonging && en_ExcelData[i].Belonging != Belonging){
                                 Belonging = en_ExcelData[i].Belonging;
                                 en_layout += en_BelongingTitle.replaceAll('$_belongTitle', en_ExcelData[i].Belonging);
                                 tc_layout += tc_BelongingTitle.replaceAll('$_belongTitle', tc_ExcelData[i].Belonging);
