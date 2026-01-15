@@ -238,51 +238,51 @@
                             // 添加日期字段，如果有的话
                             if(en_ExcelData[i].Content_Date){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加时间字段，如果有的话
                             if(en_ExcelData[i].Content_Time){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加地址字段，如果有的话
                             if(en_ExcelData[i].Content_Address){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加查询字段，如果有的话
                             if(en_ExcelData[i].Content_Query){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加按钮字段，如果有的话
                             if(en_ExcelData[i].Link){
                                 // 链接参数
-                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag;
-                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link + linkUat);
-                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link + linkUat);
-                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link + linkUat);
+                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
+                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
                             }
 
-                            en_layout += en_topBanner.replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
-                            tc_layout += tc_topBanner.replaceAll('$_dynamicTitle', tc_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', tc_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', tc_teamInColumn).replaceAll('$_bgColor', bgColor);
-                            sc_layout += sc_topBanner.replaceAll('$_dynamicTitle', sc_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', sc_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', sc_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            en_layout += en_topBanner.replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            tc_layout += tc_topBanner.replaceAll('$_dynamicTitle', tc_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', tc_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', tc_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            sc_layout += sc_topBanner.replaceAll('$_dynamicTitle', sc_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', sc_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', sc_teamInColumn).replaceAll('$_bgColor', bgColor);
 
                             imgIndex += 2;
                         }else{
                             if(en_ExcelData[i].Belonging && en_ExcelData[i].Belonging != Belonging){
                                 Belonging = en_ExcelData[i].Belonging;
-                                en_layout += en_BelongingTitle.replaceAll('$_belongTitle', en_ExcelData[i].Belonging);
-                                tc_layout += tc_BelongingTitle.replaceAll('$_belongTitle', tc_ExcelData[i].Belonging);
-                                sc_layout += sc_BelongingTitle.replaceAll('$_belongTitle', sc_ExcelData[i].Belonging);
+                                en_layout += en_BelongingTitle.replaceAll('$_belongTitle', en_ExcelData[i].Belonging.trim());
+                                tc_layout += tc_BelongingTitle.replaceAll('$_belongTitle', tc_ExcelData[i].Belonging.trim());
+                                sc_layout += sc_BelongingTitle.replaceAll('$_belongTitle', sc_ExcelData[i].Belonging.trim());
                             }
                             var en_imgPart = '';
                             var tc_imgPart = '';
@@ -294,51 +294,51 @@
                             // 添加日期字段，如果有的话
                             if(en_ExcelData[i].Content_Date){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加时间字段，如果有的话
                             if(en_ExcelData[i].Content_Time){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加地址字段，如果有的话
                             if(en_ExcelData[i].Content_Address){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加查询字段，如果有的话
                             if(en_ExcelData[i].Content_Query){
                                 topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.replaceAll(/\n/g, '<br>'));
+                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
                             }
                             // 添加按钮字段，如果有的话
                             if(en_ExcelData[i].Link){
                                 // 链接参数
-                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag;
-                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link + linkUat);
-                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link + linkUat);
-                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link + linkUat);
+                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
+                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
 
-                                en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', en_ExcelData[i].Link + linkUat);
-                                tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', tc_ExcelData[i].Link + linkUat);
-                                sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', sc_ExcelData[i].Link + linkUat);
+                                en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', sc_ExcelData[i].Link.trim() + linkUat);
                             }else{
                                 en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
                                 tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
                                 sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
                             }
 
-                            en_layout += en_general.replaceAll('$_imgPart', en_imgPart).replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
-                            tc_layout += tc_general.replaceAll('$_imgPart', tc_imgPart).replaceAll('$_dynamicTitle', tc_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', tc_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', tc_teamInColumn).replaceAll('$_bgColor', bgColor);
-                            sc_layout += sc_general.replaceAll('$_imgPart', sc_imgPart).replaceAll('$_dynamicTitle', sc_ExcelData[i].Content_Title.replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', sc_ExcelData[i].Content_Txt.replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', sc_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            en_layout += en_general.replaceAll('$_imgPart', en_imgPart).replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            tc_layout += tc_general.replaceAll('$_imgPart', tc_imgPart).replaceAll('$_dynamicTitle', tc_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', tc_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', tc_teamInColumn).replaceAll('$_bgColor', bgColor);
+                            sc_layout += sc_general.replaceAll('$_imgPart', sc_imgPart).replaceAll('$_dynamicTitle', sc_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', sc_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', sc_teamInColumn).replaceAll('$_bgColor', bgColor);
 
                             imgIndex ++;
                         }
