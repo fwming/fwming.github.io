@@ -110,9 +110,9 @@
         // 一键生成
         $('.create-edm-btn').click(function(){
             if(imgArr.length>0 && excel_datas){
-                console.time('CreateEDM');
+                console.time('一键生成耗时：');
                 CreateEDM(excel_datas);
-                console.timeEnd('CreateEDM');
+                console.timeEnd('一键生成耗时：');
             }else{
                 layer.msg('请先上传文件和图片');
             }
@@ -237,39 +237,73 @@
                             var topPadding = '';
                             // 添加日期字段，如果有的话
                             if(en_ExcelData[i].Content_Date){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[日期字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加时间字段，如果有的话
                             if(en_ExcelData[i].Content_Time){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[时间字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加地址字段，如果有的话
                             if(en_ExcelData[i].Content_Address){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[地址字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加查询字段，如果有的话
                             if(en_ExcelData[i].Content_Query){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[查询字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加按钮字段，如果有的话
                             if(en_ExcelData[i].Link){
                                 // 链接参数
-                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
-                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
-                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
-                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
+                                if(!en_ExcelData[i].Utm_Tag){
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[链接参数-Utm_Tag字段]</strong>，繁、简体是否与英文版同步！');
+                                    return false;
+                                }
+                                try {
+                                    var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
+                                    en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                    tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                    sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[链接字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
 
                             en_layout += en_topBanner.replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_bannerImgBigSrc', imgArr[imgIndex]).replaceAll('$_bannerImgSmallSrc', imgArr[imgIndex+1]).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
@@ -293,47 +327,81 @@
                             var topPadding = '';
                             // 添加日期字段，如果有的话
                             if(en_ExcelData[i].Content_Date){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Date:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '日期：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Date.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[日期字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加时间字段，如果有的话
                             if(en_ExcelData[i].Content_Time){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Time:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '時間：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '时间：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Time.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[时间字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加地址字段，如果有的话
                             if(en_ExcelData[i].Content_Address){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Venue:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地點：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '地点：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Address.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[地址字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加查询字段，如果有的话
                             if(en_ExcelData[i].Content_Query){
-                                topPadding = en_teamInColumn ? '5px': '20px';
-                                en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
-                                tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
-                                sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                try {
+                                    topPadding = en_teamInColumn ? '5px': '20px';
+                                    en_teamInColumn += en_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', 'Enquiries:').replaceAll('$_detailsValue', en_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                    tc_teamInColumn += tc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查詢：').replaceAll('$_detailsValue', tc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                    sc_teamInColumn += sc_detailsPart.replaceAll('$_topPadding', topPadding).replaceAll('$_detailsName', '查询：').replaceAll('$_detailsValue', sc_ExcelData[i].Content_Query.trim().replaceAll(/\n/g, '<br>'));
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[查询字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }
                             // 添加按钮字段，如果有的话
                             if(en_ExcelData[i].Link){
                                 // 链接参数
-                                var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
-                                en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
-                                tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
-                                sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
+                                if(!en_ExcelData[i].Utm_Tag){
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[链接参数-Utm_Tag字段]</strong>，繁、简体是否与英文版同步！');
+                                    return false;
+                                }
+                                try {
+                                    var linkUat = '?utm_medium=edm&utm_campaign=$_utm_campaign&utm_source=xgate&utm_content={$extid}&utm_tag='+en_ExcelData[i].Utm_Tag.trim();
+                                    en_teamInColumn += en_btn_hasUrl.replaceAll('$_btnUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                    tc_teamInColumn += tc_btn_hasUrl.replaceAll('$_btnUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                    sc_teamInColumn += sc_btn_hasUrl.replaceAll('$_btnUrl', sc_ExcelData[i].Link.trim() + linkUat);
 
-                                en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', en_ExcelData[i].Link.trim() + linkUat);
-                                tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', tc_ExcelData[i].Link.trim() + linkUat);
-                                sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', sc_ExcelData[i].Link.trim() + linkUat);
+                                    en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', en_ExcelData[i].Link.trim() + linkUat);
+                                    tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', tc_ExcelData[i].Link.trim() + linkUat);
+                                    sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]).replaceAll('$_imgUrl', sc_ExcelData[i].Link.trim() + linkUat);
+                                } catch (error) {
+                                    layer.alert('请检查Excel表格模板中 <strong style="color: #ff5722;">['+en_ExcelData[i].Belonging+']</strong> - <strong style="color: #ffb800;">['+en_ExcelData[i].Content_Title+']</strong> - <strong style="color: #31bdec;">[链接字段]</strong>，繁、简体是否与英文版同步！');
+                                    console.log(error);
+                                    return false;
+                                }
                             }else{
-                                en_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
-                                tc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
-                                sc_imgPart = img_hasUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
+                                en_imgPart = img_noUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
+                                tc_imgPart = img_noUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
+                                sc_imgPart = img_noUrl.replaceAll('$_imgSrc', imgArr[imgIndex]);
                             }
 
                             en_layout += en_general.replaceAll('$_imgPart', en_imgPart).replaceAll('$_dynamicTitle', en_ExcelData[i].Content_Title.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_dynamicText', en_ExcelData[i].Content_Txt.trim().replaceAll(/\n/g, '<br>')).replaceAll('$_teamInColumn', en_teamInColumn).replaceAll('$_bgColor', bgColor);
