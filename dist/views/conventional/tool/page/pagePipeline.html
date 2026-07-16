@@ -1,0 +1,373 @@
+<!-- 引入AI编辑器 type="module" IE浏览器不支持次形式引入 -->
+<script type="module">
+    import {AiEditor} from './dist/aieditor/index.js'
+    new AiEditor({
+        element: "#aiEditor",
+        placeholder: "点击输入内容...",
+        content: 'AiEditor 是一个面向 AI 的下一代富文本编辑器。',
+        ai: {
+            models: {
+                spark: {
+                    appId: "***",
+                    apiKey: "***",
+                    apiSecret: "***",
+                }
+            }
+        },
+    })
+</script>
+
+<style>
+    .layui-form-label{
+        padding-left: 0;
+        text-align: left;
+        width: 100px;
+    }
+    .layui-input-block{
+        margin-left: 130px;
+    }
+    .layui-tab-content{
+        height: calc(100vh - 172px);
+        overflow-y: auto;
+    }
+    .look{
+        height: calc(100vh - 174px);
+        overflow-y: auto;
+        border: 1px dashed #ccc;
+    }
+    .look>div{
+        border: 1px dashed #ccc;
+        margin-bottom: 1px;
+        position: relative;
+    }
+    .look>div:hover{
+        border: 1px dashed red;
+        cursor: move;
+    }
+    .look>div .tips{
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        width: 30px;
+        background: #2F9688;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .look>div .tips i{
+        color: #fff;
+        cursor: pointer;
+    }
+    .layui-colla-title{
+        background: transparent;
+    }
+    #aiEditor{
+        height: calc(100vh - 204px);
+    }
+</style>
+
+<style>
+    .sortable{display: flex;align-items: center;justify-content: space-between;flex-wrap: wrap;}
+    .sortable>div{width: 48%;display: flex;align-items: center;justify-content: center;background: #ccc;border-radius: 5px;height: 60px;margin-bottom: 5px;cursor: move;}
+    .sortable>div>i{cursor: pointer;padding-left: 10px;}
+    .ui-sortable-placeholder{height: 50px !important;}
+</style>
+
+<!-- 组件样式集 -->
+<style>
+    /* 公共样式 */
+    .look *{margin: 0;padding: 0;box-sizing: border-box;}
+    body{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+    .btn{font-size: 14px;line-height: 1.5em;text-align:center;padding: 8px 10px;border: 1px solid #123;border-radius: 8px;display: block;width: 80%;max-width: 160px;margin: 20px auto 0;cursor: pointer;color: #123;}
+    .btn:hover{color: #fff;background: #123;}
+    .look,.pageBox{width: 100%;max-width: 800px;margin: 0 auto;background: #eee;position: relative;}
+
+    .title{font-size: 24px;line-height: 1.5em;font-weight: bolder;text-align: center;}
+    .txt{font-size: 14px;line-height: 1.5em;text-align: left;padding-top: 16px;}
+
+    /* logo1 */
+    .logo1{display: flex;justify-content: center;align-items: center;padding: 16px 20px;}
+    .logo1 img{display: block;width: 30%;max-width: 136px;}
+    /* logo2 */
+    .logo2{display: flex;justify-content: center;align-items: center;padding: 16px 20px;}
+    .logo2 img{display: block;width: 30%;max-width: 136px;}
+    .logo2 .language{display: flex;justify-content: center;align-items: center;position: absolute;right: 20px;font-size: 12px;}
+    /* logo3 */
+    .logo3{display: flex;justify-content: left;align-items: center;padding: 16px 20px;}
+    .logo3 img{display: block;width: 30%;max-width: 136px;}
+    .logo3 .language{display: flex;justify-content: center;align-items: center;position: absolute;right: 20px;font-size: 12px;}
+    /* banner */
+    .banner{display: block;width: 100%;}
+    .banner img{display: block;width: 100%;}
+    /* swiper */
+    .swiper-slide img{display: block;width: 100%;}
+    /* video */
+    video{display: block;width: 100%;}
+    /* txt */
+    .paragraph{padding: 16px;}
+    /* txt-img-left */
+    .img-txt-box1{display: flex;justify-content: space-between;padding-bottom: 16px;}
+    .img-txt-box1:nth-of-type(2n){flex-flow: row-reverse;}
+    .img-txt-box1>div{width: 50%;box-sizing: border-box;}
+    .img-txt-box1>div img,
+    .img-txt-box2>div img{display: block;width: 100%;}
+    .img-txt-box1 .txt-box,
+    .img-txt-box2 .txt-box{display: flex;flex-direction: column;justify-content: center;}
+    /* txt-img-top */
+    .img-txt-box2{display: flex;justify-content: space-between;padding: 0 16px 16px;}
+    .img-txt-box2>div{width: 32%;box-sizing: border-box;border: 1px solid #ccc;border-radius: 8px;overflow: hidden;margin-bottom: 16px;}
+    /* form */
+    .form-box{width: 100%;max-width: 600px;margin: 0 auto;padding: 0 16px 32px;}
+    .form-item{display: flex;align-items: center;padding-bottom: 30px;}
+    .form-item label{width: 80px;text-align: right;padding-right: 10px;font-size: 14px;}
+    .form-item .input-group{position: relative;flex: 1;}
+    .form-item .input-group input,
+    .form-item .input-group select{display: block;width: 100%;outline: none;border: none;font-size: 14px;line-height: 1.5em;padding: 8px 10px;box-sizing: border-box;color: #666;}
+    ::placeholder{color: #666;}
+    .form-item .input-group select{padding: 10px 6px 9px;}
+    .form-item .input-group .input-box{display: flex;align-items: center;border-bottom: 1px solid #ccc;}
+    .form-item #areaCode{width: 60px;}
+    .form-item .input-group .error-msg{position: absolute;left: 3px;bottom: -16px;font-size: 12px;line-height: 1em;color: red;display: none;}
+    /* form-tnc */
+    .form-item.tnc{align-items: flex-start;}
+    .form-item.tnc label{flex: 1;font-size: 14px;line-height: 1.5em;text-align: left;}
+    .form-item.tnc input{display: block;width: 18px;height: 18px;margin-left: 50px;margin-right: 10px;}
+    .form-item.tnc .input-box{align-items: flex-start;border: none;}
+
+
+
+    
+    @keyframes breathing {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .loading-button {
+        animation: breathing 3s infinite; /* 无限循环呼吸效果 */
+    }
+
+
+
+    @media screen and (max-width: 640px) {
+        .img-txt-box1,.img-txt-box2{display: block;}
+        .img-txt-box1>div,.img-txt-box2>div{width: 100%;}
+    }
+</style>
+
+<div class="layui-card layadmin-header">
+	<div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+		<a><cite>常规管理</cite></a><span lay-separator="">/</span>
+		<a><cite>实用工具</cite></a><span lay-separator="">/</span>
+		<a><cite>页面工厂</cite></a>
+	</div>
+</div>
+
+<div id="vue_app" class="layui-fluid" style="font-family: monospace;">
+	<div class="layui-row layui-col-space15">
+		<div class="layui-col-md8">
+			<div class="layui-card">
+				<div class="layui-tab layui-tab-brief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">预览</li>
+						<li style="display: none;">源码</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<div class="look" id="look"></div>
+						</div>
+						<div class="layui-tab-item" style="display: none;">
+                            <div id="aiEditor"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md4">
+			<div class="layui-card">
+				<div class="layui-tab layui-tab-brief">
+					<ul class="layui-tab-title">
+						<li class="layui-this">基础设置</li>
+						<li>组件集</li>
+					</ul>
+					<div class="layui-tab-content" style="overflow-y: auto;">
+						<div class="layui-tab-item layui-show">
+							<form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">页面最大宽度</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">页面最大宽度</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">序列号</label>
+                                    <div class="layui-input-block">
+                                        <select name="" id="">
+                                            <option value="01">序列1 -- 2026-03-27 14:43</option>
+                                            <option value="01">序列1 -- 2026-03-27 14:43</option>
+                                            <option value="01">序列1 -- 2026-03-27 14:43</option>
+                                            <option value="01">序列1 -- 2026-03-27 14:43</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <button type="button" class="layui-btn copy-btn layui-bg-blue"><i class="layui-icon layui-icon-heart-fill"></i>序列号</button>
+                                    <button type="button" class="layui-btn copy-btn layui-bg-green"><i class="layui-icon layui-icon-fonts-code"></i>复制源码</button>
+                                </div>
+                            </form>
+						</div>
+						<div class="layui-tab-item">
+                            <div class="layui-collapse" lay-filter="filter-collapse">
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">LOGO组<i class="layui-icon layui-icon-right layui-colla-icon"></i></h2>
+                                    <div class="layui-colla-content">
+                                        <div class="sortable">
+                                            <div target="logo/01">款式一<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="logo/02">款式二<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="logo/03">款式三<i class="layui-icon layui-icon-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">BANNER组<i class="layui-icon layui-icon-right layui-colla-icon"></i></h2>
+                                    <div class="layui-colla-content">
+                                        <div class="sortable">
+                                            <div target="banner/01">纯图<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="banner/02">轮播<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="banner/03">视频<i class="layui-icon layui-icon-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">图文组<i class="layui-icon layui-icon-right layui-colla-icon"></i></h2>
+                                    <div class="layui-colla-content">
+                                        <div class="sortable">
+                                            <div target="text/01">纯文字<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="text/02">左右结构<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="text/03">上下结构<i class="layui-icon layui-icon-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">表单组<i class="layui-icon layui-icon-right layui-colla-icon"></i></h2>
+                                    <div class="layui-colla-content">
+                                        <div class="sortable">
+                                            <div target="form/01">表单大全<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="form/02">vue结构<i class="layui-icon layui-icon-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-colla-item">
+                                    <h2 class="layui-colla-title">特殊组<i class="layui-icon layui-icon-right layui-colla-icon"></i></h2>
+                                    <div class="layui-colla-content">
+                                        <div class="sortable">
+                                            <div target="special/01">卡片类<i class="layui-icon layui-icon-eye"></i></div>
+                                            <div target="special/02">vue结构<i class="layui-icon layui-icon-eye"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+layui.use(['element', 'layer', 'copy'], function(){
+    var element = layui.element,
+        copy = layui.copy;
+        layer = layui.layer;
+    element.render('collapse', 'filter-collapse');
+
+    // 被拖拽区域目标
+    $('.sortable>div').draggable({
+        cursor: 'move',
+        connectToSortable: '#look',
+        // helper: 'clone',
+        helper: function(event, ui){
+            return '<div style="background: #faf;width: 150px;height: 60px;">'+event.currentTarget.innerHTML+'</div>'
+        },
+        revert: 'invalid',
+    });
+    // 放置区域
+    $("#look").sortable({
+        receive: function(event, ui) {
+            // 标记有新元素加入
+            $(this).data('newItem', true);
+        },
+        update: function(event, ui) {
+            console.log(event, ui)
+            // 检查标记，确保只对新加入的元素生效
+            if ($(this).data('newItem')) {
+                // 根据target属性通过ajax获取对应的源码并替换
+                $.ajax({
+                    type: "get",
+                    url: "./dist/views/conventional/tool/page/source/"+ui.item.attr('target')+'.html',
+                    async: false,
+                    dataType: 'html',
+                    success: function(e) {
+                        // 修改新放入的元素内容
+                        // ui.item.replaceWith('<div>'+e+'</div>');
+                        ui.item.replaceWith(e);
+                        $(this).data('newItem', false); // 重置标记
+                    }
+                })
+            }
+        }
+    });
+    // 小眼睛预览
+    $('.sortable>div i').click(function(){
+        $.ajax({
+            type: 'get',
+            url: "./dist/views/conventional/tool/page/source/"+$(this).parent().attr('target')+'.html',
+            saync: false,
+            dataType: 'html',
+            success: function(e){
+                layer.open({
+                    type: 1, // page 层类型
+                    area: ['500px', '300px'],
+                    title: '预览',
+                    shade: 0.6, // 遮罩透明度
+                    shadeClose: true, // 点击遮罩区域，关闭弹层
+                    maxmin: true, // 允许全屏最小化
+                    anim: 0, // 0-6 的动画形式，-1 不开启
+                    content: e, //放置加载过来的内容e
+                });
+            }
+        })
+    })
+    // 鼠标进入或离去时显示或隐藏操作列表
+    $('.look').on('mouseenter', '>div', function(e){
+        $(this).append('<div class="tips"><i class="layui-icon layui-icon-delete"></i></div>');
+    }).on('mouseleave', '>div', function(){
+        $('.tips').remove();
+    })
+    // 删除项
+    $('.look').on('click','.tips>i.layui-icon-delete', function(){
+        layer.msg('成功删除');
+        $(this).parent().parent().remove();
+    })
+
+    // 复制
+    $('.copy-btn').click(function(){
+        layer.msg("复制简体版源码成功");
+        var source = $('#look').html();
+        copy.copyFn(source);
+    });
+
+
+})
+</script>
+
+
