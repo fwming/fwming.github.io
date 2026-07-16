@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.css">
+
+<div class="swiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://imgsrv1.mailer08.net/images/dGVuYW50MTM5YWRtaW4_/WTJGdGNHRnBaMjVmTWpBdw/1.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="https://imgsrv1.mailer08.net/images/dGVuYW50MTM5YWRtaW4_/WTJGdGNHRnBaMjVmTWpBdw/2.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="https://imgsrv1.mailer08.net/images/dGVuYW50MTM5YWRtaW4_/WTJGdGNHRnBaMjVmTWpBdw/2.jpg" alt=""></div>
+    </div>
+
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- 如果需要导航按钮 -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+
+<script src="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper', {
+        // direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+        autoplay: true,//可选选项，自动滑动
+        
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        
+    })
+</script>
